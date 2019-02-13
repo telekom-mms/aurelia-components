@@ -1,5 +1,5 @@
 # Aurelia components
-Common useful components for the Aurelia Framework (https://aurelio.io)
+Common useful components for the Aurelia Framework (https://aurelia.io)
 
 ## Install
 
