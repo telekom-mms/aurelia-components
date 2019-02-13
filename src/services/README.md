@@ -11,7 +11,7 @@ import {HttpClient} from 'aurelia-fetch-client';
 @autoinject()
 export class ViewModel {
     constructor(
-        private _cacheService:CacheService,
+        private _cacheService: CacheService,
         private _httpClient: HttpClient
     ) {
         
@@ -20,7 +20,7 @@ export class ViewModel {
     loadSomething() {
         
         const loadingLambda = () => {
-            return  this._httpClient.fetch('http://example.com/anything.json');
+            return this._httpClient.fetch('http://example.com/anything.json');
         };
         
         this._cacheService.getForKeyWithLoadingFunction('cache-id', loadingLambda)

@@ -1,6 +1,6 @@
 /**
  * Caches the response of any promise value of a loading function
- * @author Mike Reiche <mike.reiche@t-sytems.com>
+ * @author Mike Reiche <mike.reiche@t-systems.com>
  */
 export class CacheService {
     private _cacheContainer = {};
