@@ -1,0 +1,25 @@
+<template>
+    <svg
+        height="${radius * 2}"
+        width="${radius * 2}"
+    >
+        <circle
+            stroke="${color}"
+            stroke-dasharray="${_circumference} ${_circumference}"
+            style="stroke-dashoffset:${_circumference}"
+            stroke-width="${stroke}"
+            fill="transparent"
+            r="${_normalizedRadius}"
+            cx="${radius}"
+            cy="${radius}"
+        />
+    </svg>
+
+    <style>
+        circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+</template>
