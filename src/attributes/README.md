@@ -2,6 +2,8 @@
 
 ## moment-custom-attribute
 
+Formats and updates relative dates 
+
 ### Template
 ```html
 <span moment.bind="unixTimeStampOrFormattedDateString">&nbsp;</span>
@@ -32,3 +34,18 @@ export class App {
     }
 }
 ```
+
+## become-visible-custom-attribute
+
+### Template
+```html
+<div visible.delegate="elementVisibility($event)" become-visible>
+```
+
+### ViewModel
+```typescript
+elementVisiblity($event) {
+    console.log("element visible:", $event.detail);
+}
+```
+
