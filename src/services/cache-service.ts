@@ -13,18 +13,24 @@ export class CacheService {
         key:string,
         loadingFunction:Function
     ):Promise<any> {
+
         let cacheEntry = this._cacheContainer[key];
+
         if (cacheEntry !== undefined) {
             if (cacheEntry[0] >= (Date.now()/1000) - this._defaultCacheTtlSeconds) {
-                return new Promise((resolve, reject) => {
-                    resolve(cacheEntry[1]);
-                });
+                return cacheEntry[1];
             }
         }
-        return loadingFunction().then(object=>{
-            this._cacheContainer[key] = [Date.now()/1000, object];
-            return object;
-        });
+
+        this._cacheContainer[key] = [
+            Date.now()/1000,
+            loadingFunction().then(object=>{
+                return this._cacheContainer[key][1] = new Promise((resolve, reject)=>{
+                    return resolve(object);
+                });
+            })
+        ];
+        return this._cacheContainer[key][1];
     }
 
     set defaultCacheTtl(seconds:number) {
