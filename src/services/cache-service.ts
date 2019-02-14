@@ -1,5 +1,5 @@
 /**
- * Caches the response of any promise value of a loading function
+ * Caches the response of any promise value of a loading function and prevents duplicate calls
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
 export class CacheService {
