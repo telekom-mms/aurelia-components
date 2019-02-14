@@ -37,6 +37,8 @@ export class App {
 
 ## become-visible-custom-attribute
 
+Fires an event when an element became visible in the viewport.
+
 ### Template
 ```html
 <div visible.delegate="elementVisibility($event)" become-visible>
