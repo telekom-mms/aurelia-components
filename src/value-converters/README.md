@@ -11,6 +11,9 @@ Default format is "LLL".
 ```
 
 ## highlight-text-value-converter
+
+Highlights text by adding <mark></mark> tags.
+
 ### Template
 ```html
 <input type="text" value.bind="_searchString" change.delegate="updateHighlight()"/>
