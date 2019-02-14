@@ -12,14 +12,16 @@ yarn add t-systems-aurelia-components
 Since this package is no official distributable package yet and contains only typescript sources, you may change your webpack configuration.
 
 `webpack.config.js`
-```json
-{
-  test: /\.ts$/,
-  loader: "ts-loader",
-  options: {
-    allowTsInNodeModules: true
-  }
-}
+```js
+rules: [
+    {
+      test: /\.ts$/,
+      loader: "ts-loader",
+      options: {
+        allowTsInNodeModules: true
+      }
+    }
+]
 ```
 
 `tsconfig.json`
