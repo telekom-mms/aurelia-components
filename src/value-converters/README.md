@@ -2,9 +2,12 @@
 
 ## date-format-value-converter
 
+Formats a unix timestamp or formatted date string to a localized date format using moment.
+Default format is "LLL".
+
 ### Template
 ```html
-<span>${unixTimeStampOrFormattedDateString|dateFormat:"LLL"}</span>
+<span>${unixTimeStampOrFormattedDateString|dateFormat:"L"}</span>
 ```
 
 ## highlight-text-value-converter
