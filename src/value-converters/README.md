@@ -31,3 +31,9 @@ export class ViewModel {
     }
 }
 ```
+
+## repeat-string-value-converter
+### Template
+```html
+<span>${"."|repeatString:10}</span>
+```
