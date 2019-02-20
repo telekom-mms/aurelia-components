@@ -37,3 +37,10 @@ export class ViewModel {
 ```html
 <span>${"."|repeatString:10}</span>
 ```
+
+## sort-value-converter
+### Template
+Sort by property `name` descending
+```html
+<span repeat.for="item of list|sort:'name':-1"></span>
+```
