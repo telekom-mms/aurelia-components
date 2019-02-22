@@ -11,14 +11,20 @@ import {TrashBin} from 'trash-bin';
 const itemList = [
     {
         name: "Something",
-        deleted:false,
+        deleted: false,
+        deletable: false,
     }
 ];
 
 const trashBin = TrashBin.create<any>();
 trashBin.source(itemList);
-trashBin.onTrash(item=>{
-    item.deleted = true;      
+trashBin.onTrash(item => {
+    // Prevent deletion
+    if (item.deletable === false) {
+        return false;
+    } else {
+        item.deleted = true;
+    }
 });
 trashBin.onRestore(item=>{
     item.deleted = false;
@@ -32,4 +38,6 @@ console.log(trashBin.trashItems.length); // 1
 trashBin.restore(item);
 console.log(trashBin.sourceItems.length); // 1
 console.log(trashBin.trashItems.length); // 0
+
+trashBin.empty();
 ```
