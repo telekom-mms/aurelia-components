@@ -4,11 +4,16 @@
  * Usage: ${list|sort:'property.otherproperty':-1}
  */
 export class SortValueConverter {
-    toView(array:any[], propertyName, factor:number=1) {
+    toView(array:any[], propertyName:string, factor:number=1) {
         if (array instanceof Array === false) {
             return [];
         }
-        const propertyPath = propertyName.split('.');
+        let propertyPath;
+        if (propertyName) {
+            propertyPath = propertyName.split('.');
+        } else {
+            propertyPath = [];
+        }
         return array.sort((a, b) => {
             const aVal = SortValueConverter.getPropertyByPath(a, propertyPath);
             const bVal = SortValueConverter.getPropertyByPath(b, propertyPath);
