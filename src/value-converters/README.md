@@ -40,7 +40,7 @@ export class ViewModel {
 
 ## sort-value-converter
 ### Template
-Sort by property `name` descending
+Sort by property `users.name` descending
 ```html
-<span repeat.for="item of list|sort:'name':-1"></span>
+<span repeat.for="item of list|sort:'user.name':-1"></span>
 ```
