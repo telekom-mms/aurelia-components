@@ -44,3 +44,9 @@ Sort by property `users.name` descending
 ```html
 <span repeat.for="item of list|sort:'user.name':-1"></span>
 ```
+
+## object-keys-value-converter
+### Template
+```html
+<span repeat.for="key of objects|objectKeys"></span>
+```
