@@ -27,3 +27,12 @@ A circular progress indicator
 ```html
 <progress-ring stroke="2" radius="20" color="green" progress.bind="progress"></progress-ring>
 ```
+
+## switch
+
+Checkbox based switch
+
+### Template
+```html
+<switch disabled="false" switched.bind="_switched"></switch>
+```
