@@ -50,3 +50,15 @@ Sort by property `users.name` descending
 ```html
 <span repeat.for="key of objects|objectKeys"></span>
 ```
+
+## number-value-converter
+### Template
+```html
+<span>${number|number:2}</span>
+```
+
+## currency-value-converter
+### Template
+```html
+<span>${amount|currency:'EUR':3}</span>
+```
