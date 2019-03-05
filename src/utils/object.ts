@@ -18,3 +18,13 @@ export function createChecksum(object:any, objects:any[]=[]) {
     }
     return string+"]";
 }
+
+/**
+ * lodash cloneDeep only clones enumerable properties
+ * @see https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore/issues/121
+ * @author Mike Reiche <mike.reiche@t-systems.com>
+ * @param object
+ */
+export function clone(object:any) {
+    return Object.create(null, Object.getOwnPropertyDescriptors(object));
+}
