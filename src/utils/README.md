@@ -41,3 +41,9 @@ console.log(trashBin.trashItems.length); // 0
 
 trashBin.empty();
 ```
+
+## objects
+```typescript
+import {createChecksum} from 'objects';
+
+console.log(createChecksum(myObject));
