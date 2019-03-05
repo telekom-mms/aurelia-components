@@ -47,3 +47,9 @@ trashBin.empty();
 import {createChecksum} from 'objects';
 
 console.log(createChecksum(myObject));
+```
+
+## bootstrap4-form-validation-renderer
+```typescript
+validationController.addRenderer(new Bootstrap4ValidationFormRenderer());
+```
