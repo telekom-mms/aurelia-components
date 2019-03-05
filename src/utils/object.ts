@@ -4,11 +4,12 @@
  * @param object
  * @param objects
  */
-export function createChecksum(object:any, objects:any[]=[]) {
+export function createChecksum(object:object|[], objects:any[]=[]) {
     let string="[";
     objects.push(object);
     for (let key of Object.getOwnPropertyNames(object).filter(name=>name!=="__observers__").sort()) {
-        if (typeof object[key] === 'object'
+        if (object[key]
+            && typeof object[key] === 'object'
             && objects.indexOf(object[key]) === -1
         ) {
             string += key+':'+createChecksum(object[key], objects);
