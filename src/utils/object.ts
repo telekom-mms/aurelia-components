@@ -7,9 +7,15 @@
 export function createChecksum(object:object|[], objects:any[]=[]) {
     let string="[";
     objects.push(object);
-    for (let key of Object.getOwnPropertyNames(object).filter(name=>name!=="__observers__").sort()) {
-        if (object[key]
-            && typeof object[key] === 'object'
+    const filteredProps = Object.getOwnPropertyNames(object).filter(name=>name.indexOf("__")!==0);
+    for (let key of filteredProps.sort()) {
+        if (object[key]===null
+            || object[key]===undefined
+        ) continue;
+
+        //console.log(key, typeof  object[key]);
+
+        if (typeof object[key] === 'object'
             && objects.indexOf(object[key]) === -1
         ) {
             string += key+':'+createChecksum(object[key], objects);
