@@ -62,7 +62,7 @@ export class TrashBin<T> {
     }
 
     public empty() {
-        this._trashItems = [];
+        this._trashItems.splice(0);
         return this;
     }
 
