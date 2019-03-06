@@ -11,11 +11,9 @@ export function createChecksum(object:object|[], objects:any[]=[]) {
     for (let key of filteredProps.sort()) {
         if (object[key]===null
             || object[key]===undefined
-        ) continue;
-
-        //console.log(key, typeof  object[key]);
-
-        if (typeof object[key] === 'object'
+        ) {
+            string += key+':null';
+        } else if (typeof object[key] === 'object'
             && objects.indexOf(object[key]) === -1
         ) {
             string += key+':'+createChecksum(object[key], objects);
