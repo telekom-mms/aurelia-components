@@ -33,7 +33,18 @@ export class CacheService {
         return this._cacheContainer[key][1];
     }
 
-    set defaultCacheTtl(seconds:number) {
+    setDefaultCacheTtl(seconds:number) {
         this._defaultCacheTtlSeconds = seconds;
+        return this;
+    }
+
+    invalidate(key:string) {
+        delete this._cacheContainer[key];
+        return this;
+    }
+
+    invalidateAll() {
+        this._cacheContainer = {};
+        return this;
     }
 }

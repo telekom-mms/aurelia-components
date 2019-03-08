@@ -14,11 +14,10 @@ export class ViewModel {
         private _cacheService: CacheService,
         private _httpClient: HttpClient
     ) {
-        
+        this._cacheService.setDefaultCacheTtl(60);
     }
     
     loadSomething() {
-        
         const loadingLambda = () => {
             return this._httpClient.fetch('http://example.com/anything.json');
         };
@@ -27,6 +26,11 @@ export class ViewModel {
             .then(response=>{
                 console.log(response);
             });
+    }
+    
+    clearCache() {
+        this._cacheService.invalidate("cache-id");
+        this._cacheService.invalidateAll();
     }
 }
 ```
