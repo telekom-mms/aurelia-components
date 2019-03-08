@@ -8,7 +8,6 @@ export class FalseOnClickCustomAttribute {
     private _listener:EventListener;
     constructor() {
         this._listener = (event) => {
-            console.log("set to false");
             this.value = false;
         };
     }
