@@ -41,13 +41,43 @@ Fires an event when an element became visible in the viewport.
 
 ### Template
 ```html
-<div visible.delegate="elementVisibility($event)" become-visible>
+<div visible.delegate="_elementVisibility($event)" become-visible>
 ```
 
 ### ViewModel
 ```typescript
-elementVisiblity($event) {
+private _elementVisiblity($event:Event) {
     console.log("element visible:", $event.detail);
 }
 ```
+
+## false-on-click-custom-attribute
+
+You can use this attribute to close dropdowns or menus on mouse click.
+
+### Template
+```html
+<div class="dropdown-menu"
+    class.bind="_showMenu?'show':'hide'"
+    false-on-click.two-way="_showMenu">
+</div>
+```
+
+If you dont want to close on click, then just prevent event delegation.
+```html
+<div class="dropdown-menu"
+    class.bind="_showMenu?'show':'hide'"
+    false-on-click.two-way="_showMenu">
+    <button click.delegate="_preventClick($event)">Click me</button>
+</div>
+```
+
+### ViewModel
+```typescript
+private _preventClick($event:Event) {
+    $event.stopPropagation();
+}
+```
+
+
 
