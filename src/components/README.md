@@ -36,3 +36,18 @@ Checkbox based switch
 ```html
 <switch disabled="false" switched.bind="_switched"></switch>
 ```
+
+### Smaller style
+```css
+switch label.switch {
+  width: 48px;
+  height: 22px;
+}
+
+switch label span.slider:before {
+  bottom: 2px;
+  left: 2px;
+  height: 18px;
+  width: 18px;
+}
+```
