@@ -1,6 +1,6 @@
 {
   "name": "t-systems-aurelia-components",
-  "version": "0.0.21",
+  "version": "0.0.23",
   "description": "Common useful components for the Aurelia framework",
   "main": "index.js",
   "repository": "https://github.com/T-Systems-MMS/aurelia-components.git",
