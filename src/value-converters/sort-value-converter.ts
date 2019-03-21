@@ -14,7 +14,7 @@ export class SortValueConverter {
         } else {
             propertyPath = [];
         }
-        return array.sort((a, b) => {
+        return array.slice(0).sort((a, b) => {
             const aVal = SortValueConverter.getPropertyByPath(a, propertyPath);
             const bVal = SortValueConverter.getPropertyByPath(b, propertyPath);
             if (typeof aVal === 'number') {
