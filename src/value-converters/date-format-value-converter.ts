@@ -7,13 +7,13 @@ import * as moment from "moment";
  */
 export class DateFormatValueConverter {
 
-    static DEFAULT_TIME_FORMAT="LLL";
+    static DEFAULT_TIME_FORMAT = "LLL";
 
     toView(value, format): string {
-        return DateFormatValueConverter.format(value,format);
+        return DateFormatValueConverter.format(value, format);
     }
 
-    static format(value:any,format:string=undefined):string {
+    static format(value: any, format: string = undefined): string {
         if (format === undefined) {
             format = this.DEFAULT_TIME_FORMAT;
         }
@@ -23,10 +23,6 @@ export class DateFormatValueConverter {
     }
 
     static momentFromTimeValue(value) {
-        if (typeof value === 'number') {
-            return moment.unix(value);
-        } else {
-            return moment(value);
-        }
+        return moment(value);
     }
 }

@@ -2,7 +2,7 @@
 
 ## date-format-value-converter
 
-Formats a unix timestamp or formatted date string to a localized date format using moment.
+Formats a unix timestamp as milliseconds or formatted date string to a localized date format using moment.
 Default format is "LLL".
 
 ### Template
