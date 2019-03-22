@@ -52,7 +52,7 @@ export class Placement {
                 sourceElement.style.left = (rect.left) + "px";
                 break;
             case HorizontalAlign.RIGHT_RIGHT:
-                sourceElement.style.left = (rect.left - rect.width) + "px";
+                sourceElement.style.left = (rect.left - (sourceElement.offsetWidth-rect.width)) + "px";
                 break;
             case HorizontalAlign.CENTER:
             default:
