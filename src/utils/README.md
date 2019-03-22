@@ -53,3 +53,31 @@ console.log(createChecksum(myObject));
 ```typescript
 validationController.addRenderer(new Bootstrap4ValidationFormRenderer());
 ```
+
+## placement
+
+Places HTML elements by fixed coordinates
+
+### Template
+```html
+<button click.delegate="_toggleDropDown($event)">Open Drop Down</button>
+<div class="dropdown-menu"
+     id="dropDownContainer"
+     class.bind="_dropDownVisible?'show':'hide'"
+     false-on-click.two-way="_dropDownVisible">
+    <a class="dropdown-item">Do something</a>
+</div>
+```
+
+### ViewModel
+```typescript
+import {Placement, VerticalAlign, HorizontalAlign} from 'placement';
+
+private _toggleDropDown($event:Event) {
+    this._dropDownVisible = true;
+    window.setTimeout(()=>{
+        Placement.placeRelative("#dropDownContainer", $event.target as HTMLElement, VerticalAlign.TOP_BOTTOM, HorizontalAlign.LEFT_LEFT);
+    });
+}
+```
+ 
