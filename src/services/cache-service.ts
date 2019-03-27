@@ -14,17 +14,16 @@ export class CacheService {
         key:string,
         loadingFunction:ICacheServiceLoadingFunction
     ):Promise<any> {
-
         let cacheEntry = this._cacheContainer[key];
-
+        const now = (Date.now()/1000);
         if (cacheEntry !== undefined) {
-            if (cacheEntry[0] >= (Date.now()/1000) - this._defaultCacheTtlSeconds) {
+            if (cacheEntry[0] >= now - this._defaultCacheTtlSeconds) {
                 return cacheEntry[1];
             }
         }
 
         this._cacheContainer[key] = [
-            Date.now()/1000,
+            now,
             loadingFunction().then(object=>{
                 return this._cacheContainer[key][1] = Promise.resolve(object);
             })
@@ -37,9 +36,24 @@ export class CacheService {
         return this;
     }
 
-    invalidate(key:string) {
-        delete this._cacheContainer[key];
+    invalidate(keys:string[]) {
+        for (let key of keys) {
+            delete this._cacheContainer[key];
+        }
         return this;
+    }
+
+    get outdatedKeys() {
+        const now = (Date.now()/1000);
+        let cacheEntry;
+        const keys = [];
+        for (let key in this._cacheContainer) {
+            cacheEntry = this._cacheContainer[key];
+            if (cacheEntry[0] < now - this._defaultCacheTtlSeconds) {
+                keys.push(key);
+            }
+        }
+        return keys;
     }
 
     invalidateAll() {
