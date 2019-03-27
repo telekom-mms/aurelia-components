@@ -9,15 +9,11 @@ export class DateFormatValueConverter {
 
     static DEFAULT_TIME_FORMAT = "LLL";
 
-    toView(value, format): string {
+    toView(value, format:string = DateFormatValueConverter.DEFAULT_TIME_FORMAT): string {
         return DateFormatValueConverter.format(value, format);
     }
 
     static format(value: any, format: string = undefined): string {
-        if (format === undefined) {
-            format = this.DEFAULT_TIME_FORMAT;
-        }
-
         let moment = this.momentFromTimeValue(value);
         return moment.format(format);
     }
