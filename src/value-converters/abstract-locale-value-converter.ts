@@ -1,6 +1,5 @@
 import {autoinject} from "aurelia-dependency-injection";
 import {EventAggregator} from "aurelia-event-aggregator";
-import {ChangeLocaleEvent} from "../events/change-locale-event";
 
 @autoinject()
 export class AbstractLocaleValueConverter {
@@ -13,8 +12,8 @@ export class AbstractLocaleValueConverter {
     constructor(
         private _eventAggregator:EventAggregator,
     ) {
-        this._eventAggregator.subscribe(ChangeLocaleEvent.NAME, (event:ChangeLocaleEvent)=>{
-            AbstractLocaleValueConverter._locale = event.locale;
+        this._eventAggregator.subscribe('i18n:locale:changed', payload => {
+            AbstractLocaleValueConverter._locale = payload.newValue;
         });
     }
 }
