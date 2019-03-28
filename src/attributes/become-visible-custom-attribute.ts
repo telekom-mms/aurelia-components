@@ -9,17 +9,28 @@ import {autoinject} from "aurelia-dependency-injection";
 export class BecomeVisibleCustomAttribute {
 
     private _visible:Boolean = false;
+    private _checkVisibility:EventListener;
 
     constructor(
         private _element:Element
     ) {
-
+        this._checkVisibility = (ev:Event) => {
+            let isVisible = BecomeVisibleCustomAttribute.elementInViewport(this._element as HTMLElement);
+            if (this._visible !== isVisible) {
+                this._visible = isVisible;
+                const ev = new CustomEvent('visible', {
+                    detail: this._visible,
+                    bubbles: true
+                });
+                this._element.dispatchEvent(ev);
+            }
+        }
     }
 
     /**
      * @see https://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
      */
-    static elementInViewport2(el) {
+    static elementInViewport(el) {
         let top = el.offsetTop;
         let left = el.offsetLeft;
         let width = el.offsetWidth;
@@ -39,23 +50,13 @@ export class BecomeVisibleCustomAttribute {
         );
     }
 
-    handleEvent(event) {
-        let isVisible = BecomeVisibleCustomAttribute.elementInViewport2(this._element as HTMLElement);
-        if (this._visible !== isVisible) {
-            this._visible = isVisible;
-            const ev = new CustomEvent('visible', {
-                detail: this._visible,
-                bubbles: true
-            });
-            this._element.dispatchEvent(ev);
-        }
+    attached() {
+        this._checkVisibility(null);
+        window.addEventListener("scroll", this._checkVisibility)
     }
 
-    bind() {
-        window.addEventListener("scroll", this, false)
-    }
-
-    unbind() {
-        window.removeEventListener("scroll", this)
+    detached() {
+        this._checkVisibility(null);
+        window.removeEventListener("scroll", this._checkVisibility)
     }
 }
