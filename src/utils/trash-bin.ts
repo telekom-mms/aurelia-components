@@ -4,7 +4,7 @@
  */
 export class TrashBin<T> {
     private _trashItems:T[]=[];
-    private _sourceItems:T[];
+    private _sourceItems:T[]=[];
     private _onTrash:Function=null;
     private _onRestore:Function=null;
     static create<T>() {
