@@ -34,7 +34,11 @@ Checkbox based switch
 
 ### Template
 ```html
-<switch disabled="false" switched.bind="_switched"></switch>
+<switch disabled="false"
+        switched.bind="_switched"
+        use-id="mySwitch"
+        use-name="mySwitch"
+></switch>
 ```
 
 ### Smaller style

@@ -1,6 +1,6 @@
 <template>
     <label class="switch">
-        <input type="checkbox" checked.bind="switched" disabled.bind="disabled"/>
+        <input type="checkbox" checked.bind="switched" disabled.bind="disabled" id="${useId}" name="${useName}"/>
         <span class="slider round" class.bind="disabled?'disabled':''"></span>
     </label>
 </template>

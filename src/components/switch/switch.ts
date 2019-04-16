@@ -8,6 +8,15 @@ import {bindable, bindingMode} from "aurelia-framework";
 export class Switch {
     @bindable({
         defaultBindingMode: bindingMode.twoWay,
-    }) switched;
-    @bindable() disabled=false;
+    })
+    switched;
+
+    @bindable()
+    disabled=false;
+
+    @bindable()
+    useId:string;
+
+    @bindable()
+    useName:string;
 }
