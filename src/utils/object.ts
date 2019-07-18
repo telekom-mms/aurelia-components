@@ -4,24 +4,41 @@
  * @param object
  * @param objects
  */
-export function createChecksum(object:object|[], objects:any[]=[]) {
-    let string="[";
-    objects.push(object);
-    const filteredProps = Object.getOwnPropertyNames(object).filter(name=>name.indexOf("__")!==0);
-    for (let key of filteredProps.sort()) {
-        if (object[key]===null
-            || object[key]===undefined
-        ) {
-            string += key+':null';
-        } else if (typeof object[key] === 'object'
-            && objects.indexOf(object[key]) === -1
-        ) {
-            string += key+':'+createChecksum(object[key], objects);
-        } else {
-            string += key+':'+object[key];
-        }
+export function createChecksum(object: object | [], objects: any[] = []): string {
+    const md5 = require('md5');
+
+    if(!object){
+        return ""
     }
-    return string+"]";
+
+    let sorted_object = recursiveObjectSort(object)
+
+    return md5(JSON.stringify(sorted_object));
+}
+
+/**
+ * Method for sorting an object recursively by key (arrays are not sorted)
+ * @author Andreas Geyer <andreas.geyer@t-systems.com>
+ * @param object
+ */
+export function recursiveObjectSort(object: object): object {
+    let sorted_object: object = {};
+    let sorted_objects: Array<object> = [];
+
+    if (Array.isArray(object)) {
+        object.forEach(obj => {
+            sorted_objects.push(recursiveObjectSort(obj));
+        })
+        return sorted_objects;
+    } else if (object && typeof object === "object") {
+        let keysSorted = Object.keys(object).sort();
+        keysSorted.forEach(key => {
+            sorted_object[key] = recursiveObjectSort(object[key]);
+        });
+        return sorted_object;
+    }
+
+    return object
 }
 
 /**
@@ -30,6 +47,6 @@ export function createChecksum(object:object|[], objects:any[]=[]) {
  * @author Mike Reiche <mike.reiche@t-systems.com>
  * @param object
  */
-export function clone(object:any) {
+export function clone(object: any) {
     return Object.create(null, Object.getOwnPropertyDescriptors(object));
 }
