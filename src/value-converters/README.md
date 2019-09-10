@@ -45,6 +45,13 @@ Sort by property `users.name` descending
 <span repeat.for="item of list|sort:'user.name':-1"></span>
 ```
 
+## reverse-value-converter
+### Template
+Reverse an array
+```html
+<span repeat.for="item of list|reverse"></span>
+```
+
 ## object-keys-value-converter
 ### Template
 ```html
