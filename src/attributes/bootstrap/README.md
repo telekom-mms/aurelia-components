@@ -46,3 +46,14 @@
 <div class="dropdown-menu">
 </div>
 ```
+
+## popover-custom-attribute
+
+```html
+<a href="#"
+   title="Popover title"
+   data-content="This is the content of the popover"
+   data-placement="top"
+   popover
+>Tooltip</a>
+```
