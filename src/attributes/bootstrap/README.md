@@ -57,3 +57,4 @@
    popover
 >Tooltip</a>
 ```
+Note that for a "dismissable" popover using the attribute `data-trigger="focus"`, the element having the popover attached must be able to receive focus. (See this [StackOverflow answer](https://stackoverflow.com/a/1600194) on which elements can receive focus)
