@@ -46,3 +46,15 @@
 <div class="dropdown-menu">
 </div>
 ```
+
+## popover-custom-attribute
+
+```html
+<a href="#"
+   title="Popover title"
+   data-content="This is the content of the popover"
+   data-placement="top"
+   popover
+>Tooltip</a>
+```
+Note that for a "dismissable" popover using the attribute `data-trigger="focus"`, the element having the popover attached must be able to receive focus. (See this [StackOverflow answer](https://stackoverflow.com/a/1600194) on which elements can receive focus)
