@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import 'bootstrap/js/src/tooltip';
+import 'bootstrap/js/src/popover';
 import {autoinject} from "aurelia-dependency-injection";
 
 /**
@@ -13,7 +13,7 @@ export class PopoverCustomAttribute {
 
     }
     bind() {
-        $(this._element).popover('show');
+        $(this._element).popover();
     }
     unbind() {
         $(this._element).popover('dispose');
