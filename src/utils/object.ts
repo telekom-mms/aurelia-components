@@ -1,3 +1,5 @@
+import * as md5 from 'md5';
+
 /**
  * Method for generating simple object checksums
  * @author Mike Reiche <mike.reiche@t-systems.com>
@@ -5,8 +7,6 @@
  * @param objects
  */
 export function createChecksum(object: object | [], objects: any[] = []): string {
-    const md5 = require('md5');
-
     if(!object){
         return ""
     }
