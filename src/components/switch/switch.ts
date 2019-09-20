@@ -1,5 +1,6 @@
 import './switch.css';
-import {bindable, bindingMode} from "aurelia-framework";
+import {bindable} from 'aurelia-templating';
+import {bindingMode} from 'aurelia-binding';
 
 /**
  * @author Mike Reiche <mike.reiche@t-systems.com>

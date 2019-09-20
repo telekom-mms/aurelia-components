@@ -1,4 +1,4 @@
-import {autoinject} from 'aurelia-framework';
+import {autoinject} from 'aurelia-dependency-injection';
 import * as moment from "moment";
 import {EventAggregator, Subscription} from 'aurelia-event-aggregator';
 import {UiUpdateEvent} from "../events/ui-update-event";
