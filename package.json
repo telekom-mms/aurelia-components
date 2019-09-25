@@ -1,18 +1,9 @@
 {
   "name": "t-systems-aurelia-components",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "Common useful components for the Aurelia framework",
   "repository": "https://github.com/T-Systems-MMS/aurelia-components.git",
   "author": "Mike Reiche <mike.reiche@t-systems.com>",
   "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "dependencies": {
-    "aurelia-binding": "^2.5.0",
-    "aurelia-event-aggregator": "^1.0.3",
-    "aurelia-validation": "^1.5.0",
-    "jquery": "^3.4.1",
-    "md5": "^2.2.1",
-    "moment": "^2.24.0"
-  }
+  "dependencies": {}
 }
