@@ -1,4 +1,4 @@
-import * as md5 from 'md5';
+import {Md5} from 'ts-md5/dist/md5';
 
 /**
  * Method for generating simple object checksums
@@ -11,9 +11,9 @@ export function createChecksum(object: object | [], objects: any[] = []): string
         return ""
     }
 
-    let sorted_object = recursiveObjectSort(object)
+    let sorted_object = recursiveObjectSort(object);
 
-    return md5(JSON.stringify(sorted_object));
+    return Md5.hashStr(JSON.stringify(sorted_object)) as string;
 }
 
 /**
