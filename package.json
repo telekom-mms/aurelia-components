@@ -5,5 +5,13 @@
   "repository": "https://github.com/T-Systems-MMS/aurelia-components.git",
   "author": "Mike Reiche <mike.reiche@t-systems.com>",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "aurelia-dependency-injection": "^1.5.1",
+    "aurelia-event-aggregator": "^1.0.3",
+    "aurelia-templating": "^1.10.2",
+    "aurelia-validation": "^1.5.0",
+    "jquery": "^3.4.1",
+    "md5": "^2.2.1",
+    "moment": "^2.24.0"
+  }
 }

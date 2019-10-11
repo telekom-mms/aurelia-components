@@ -4,7 +4,7 @@ Common useful components for the Aurelia Framework (https://aurelia.io)
 ## Install
 
 ```shell script
-yarn add t-systems-aurelia-components
+pnpm install t-systems-aurelia-components
 ```
 
 ## Usage
