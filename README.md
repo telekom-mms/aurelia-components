@@ -10,7 +10,7 @@ pnpm install t-systems-aurelia-components
 ## Publish
 
 ```shell script
-pnpm start build
+pnpm run build
 pnpm publish
 ```
 
