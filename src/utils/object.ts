@@ -7,7 +7,7 @@ import {Md5} from 'ts-md5/dist/md5';
  * @param objects
  */
 export function createChecksum(object: object | [], objects: any[] = []): string {
-    if(!object){
+    if (!object) {
         return ""
     }
 
@@ -28,12 +28,19 @@ export function recursiveObjectSort(object: object): object {
     if (Array.isArray(object)) {
         object.forEach(obj => {
             sorted_objects.push(recursiveObjectSort(obj));
-        })
+        });
         return sorted_objects;
     } else if (object && typeof object === "object") {
-        let keysSorted = Object.keys(object).sort();
+        let keysSorted = Object.getOwnPropertyNames(object)
+            .filter(propertyName => {
+                return !(propertyName.startsWith("__"))
+            })
+            .sort();
+
         keysSorted.forEach(key => {
-            sorted_object[key] = recursiveObjectSort(object[key]);
+            if (object[key]) {
+                sorted_object[key] = recursiveObjectSort(object[key]);
+            }
         });
         return sorted_object;
     }
