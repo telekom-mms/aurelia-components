@@ -42,11 +42,28 @@ console.log(trashBin.trashItems.length); // 0
 trashBin.empty();
 ```
 
-## objects
+## object
 ```typescript
 import {createChecksum} from 'objects';
 
 console.log(createChecksum(myObject));
+```
+
+## bootstrap4-form-validation-renderer
+```typescript
+validationController.addRenderer(new Bootstrap4ValidationFormRenderer());
+```
+
+## object-storage
+Allows setting objects to an implementation of a Storage interface
+```typescript
+import {ObjectStorage} from "object-storage";
+
+const objectStorage = new ObjectStorage();
+objectStorage.setStorage(localStorage);
+
+objectStorage.setItem("my-object", {});
+const object = objectStorage.getItem("my-object");
 ```
 
 ## bootstrap4-form-validation-renderer

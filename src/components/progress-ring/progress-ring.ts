@@ -1,4 +1,5 @@
-import {bindable, autoinject} from 'aurelia-framework';
+import {bindable} from 'aurelia-templating';
+import {autoinject} from 'aurelia-dependency-injection';
 
 /**
  * Implementation of ProgressRing

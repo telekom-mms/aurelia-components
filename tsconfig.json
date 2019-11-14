@@ -1,26 +1,25 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
-    "emitDecoratorMetadata": true,
+    "target": "es6",
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": false,
+    "esModuleInterop": true,
+    "stripInternal": true,
+    "preserveConstEnums": true,
+    "skipLibCheck": false,
+    "declaration": true,
+    "removeComments": true,
+    "lib": ["es2017", "dom"],
+    /*
+      Required for moment()
+      import moment = require('moment');
+      @see https://momentjscom.readthedocs.io/en/latest/moment/00-use-it/09-typescript/
+    */
     "moduleResolution": "node",
-    "sourceRoot": "src",
-    "sourceMap": true,
-    "allowJs": true,
-    "baseUrl": "src",
-    "skipLibCheck": true,
-    "lib": [
-      "es2017", "dom"
-    ]
+    "outDir": "dist"
   },
-  "include": [
-    "./src/**/*.ts",
-    "./test/**/*.ts",
-    "./custom_typings/**/*.d.ts"
-  ],
-  "atom": {
-    "rewriteTsconfig": false
-  }
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

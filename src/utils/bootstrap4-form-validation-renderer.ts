@@ -1,9 +1,6 @@
 import {
     RenderInstruction,
-    ValidateResult, validateTrigger,
-    ValidationController,
-    ValidationControllerFactory,
-    ValidationRules
+    ValidateResult
 } from "aurelia-validation";
 
 /**
