@@ -18,4 +18,9 @@ export class ObjectStorage {
         this._storage.setItem(key, JSON.stringify(val));
         return this;
     }
+
+    removeItem(key:string) {
+        this._storage.removeItem(key);
+        return this;
+    }
 }
