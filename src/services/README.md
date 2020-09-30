@@ -6,7 +6,7 @@ Use this service to cache network responses or any other object for a several am
 
 Note: This services doesn't invalidate cached items on its own.
 
-### ViewModel
+**ViewModel**
 ```typescript
 import {CacheService} from "cache-service";
 import {autoinject} from 'aurelia-framework';

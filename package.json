@@ -11,22 +11,21 @@
 		"webpack": "webpack --mode=production"
 	},
 	"license": "MIT",
-	"dependencies": {
-		"aurelia-binding": "^2.5.0",
-		"aurelia-dependency-injection": "^1.5.1",
-		"aurelia-event-aggregator": "^1.0.3",
-		"aurelia-templating": "^1.10.2",
-		"aurelia-validation": "^1.5.0",
-		"jquery": "^3.4.1",
-		"moment": "^2.24.0",
-		"ts-md5": "^1.2.6"
-	},
+	"dependencies": {},
 	"devDependencies": {
+		"aurelia-binding": "^2.5.4",
 		"aurelia-bootstrapper": "^2.3.3",
+		"aurelia-dependency-injection": "^1.5.2",
+		"aurelia-event-aggregator": "^1.0.3",
 		"aurelia-loader-webpack": "^2.2.1",
+		"aurelia-templating": "^1.10.4",
+		"aurelia-validation": "^1.6.0",
 		"aurelia-webpack-plugin": "^4.0.0",
-		"typescript": "^3.6.4",
-		"webpack": "^4.41.1",
-		"webpack-cli": "^3.3.9"
+		"jquery": "^3.5.1",
+		"moment": "^2.29.0",
+		"ts-md5": "^1.2.7",
+		"typescript": "^3.9.7",
+		"webpack": "^4.44.2",
+		"webpack-cli": "^3.3.12"
 	}
 }

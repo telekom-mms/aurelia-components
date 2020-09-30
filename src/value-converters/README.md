@@ -2,25 +2,35 @@
 
 ## date-format-value-converter
 
-Formats a unix timestamp as milliseconds or formatted date string to a localized date format using moment.
+Formats a unix timestamp as milliseconds or formatted date string to a localized date format using *momentjs*.
 Default format is "LLL".
 
-### Template
+You may need to update your `tsconfig.json`.
+```json
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true
+  }
+}
+```
+
+**Template**
 ```html
 <span>${unixTimeStampOrFormattedDateString|dateFormat:"L"}</span>
 ```
+
 
 ## highlight-text-value-converter
 
 Highlights text by adding `<mark></mark>` tags.
 
-### Template
+**Template**
 ```html
 <input type="text" value.bind="_searchString" change.delegate="updateHighlight()"/>
 <span innerhtml="${property|highlightText:_regexpOrString}">&nbsp;</span>
 ```
 
-### ViewModel
+**ViewModel**
 ```typescript
 export class ViewModel {
     private _searchString:string;
@@ -33,39 +43,39 @@ export class ViewModel {
 ```
 
 ## repeat-string-value-converter
-### Template
+**Template**
 ```html
 <span>${"."|repeatString:10}</span>
 ```
 
 ## sort-value-converter
-### Template
+**Template**
 Sort by property `users.name` descending
 ```html
 <span repeat.for="item of list|sort:'user.name':-1"></span>
 ```
 
 ## reverse-value-converter
-### Template
+**Template**
 Reverse an array
 ```html
 <span repeat.for="item of list|reverse"></span>
 ```
 
 ## object-keys-value-converter
-### Template
+**Template**
 ```html
 <span repeat.for="key of objects|objectKeys"></span>
 ```
 
 ## number-value-converter
-### Template
+**Template**
 ```html
 <span>${number|number:2}</span>
 ```
 
 ## currency-value-converter
-### Template
+**Template**
 ```html
 <span>${amount|currency:'EUR':3}</span>
 ```

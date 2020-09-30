@@ -4,7 +4,7 @@
 
 Implements the behaviour of a trash bin.
 
-### TypeScript
+**TypeScript**
 ```typescript
 import {TrashBin} from 'trash-bin';
 
@@ -75,7 +75,7 @@ validationController.addRenderer(new Bootstrap4ValidationFormRenderer());
 
 Places HTML elements by fixed coordinates
 
-### Template
+**Template**
 ```html
 <button click.delegate="_toggleDropDown($event)">Open Drop Down</button>
 <div class="dropdown-menu"
@@ -86,7 +86,7 @@ Places HTML elements by fixed coordinates
 </div>
 ```
 
-### ViewModel
+**ViewModel**
 ```typescript
 import {Placement, VerticalAlign, HorizontalAlign} from 'placement';
 

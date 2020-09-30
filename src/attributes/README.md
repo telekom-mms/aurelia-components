@@ -2,14 +2,14 @@
 
 ## moment-custom-attribute
 
-Formats and updates relative dates 
+Formats and updates relative dates in a global timer loop.
 
-### Template
+**Template**
 ```html
 <span moment.bind="unixTimeStampOrFormattedDateString">&nbsp;</span>
 ```
 
-### ViewModel
+**ViewModel**
 ```typescript
 import {UiUpdateEvent} from '../events/ui-update-event'
 import {EventAggregator} from 'aurelia-event-aggregator';
@@ -39,12 +39,12 @@ export class App {
 
 Fires an event when an element became visible in the viewport.
 
-### Template
+**Template**
 ```html
 <div visible.delegate="_elementVisibility($event)" become-visible>
 ```
 
-### ViewModel
+**ViewModel**
 ```typescript
 private _elementVisiblity($event:Event) {
     console.log("element visible:", $event.detail);

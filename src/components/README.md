@@ -2,7 +2,9 @@
 
 ## empty
 
-### ViewModel
+Is just an empty view. You may need it for empty default routes.
+
+**ViewModel**
 ```typescript
 import {Router, RouterConfiguration} from "aurelia-router";
 import {PLATFORM} from 'aurelia-framework';
@@ -23,7 +25,7 @@ export class ViewModel {
 
 A circular progress indicator
 
-### Template
+**Template**
 ```html
 <progress-ring stroke="2" radius="20" color="green" progress.bind="progress"></progress-ring>
 ```
@@ -32,7 +34,7 @@ A circular progress indicator
 
 Checkbox based switch
 
-### Template
+**Template**
 ```html
 <switch disabled="false"
         switched.bind="_switched"
@@ -41,7 +43,7 @@ Checkbox based switch
 ></switch>
 ```
 
-### Smaller style
+**Smaller style**
 ```css
 switch label.switch {
   width: 48px;
