@@ -1,6 +1,16 @@
 # Aurelia components
 Common useful components for the Aurelia Framework (https://aurelia.io)
 
+## Documentation
+
+You can find the documentation within the source.
+
+* [Attributes](src/attributes/README.md)
+* [Components](src/components/README.md)
+* [Services](src/services/README.md)
+* [Utils](src/utils/README.md)
+* [Value converters](src/value-converters/README.md)
+
 ## Install
 
 ```bash
