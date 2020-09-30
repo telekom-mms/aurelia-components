@@ -4,14 +4,14 @@ Common useful components for the Aurelia Framework (https://aurelia.io)
 ## Install
 
 ```shell script
-pnpm install t-systems-aurelia-components
+npm install t-systems-aurelia-components --save
 ```
 
 ## Publish
 
 ```shell script
-pnpm run build
-pnpm publish
+npm run build
+npm publish
 ```
 
 ## References
