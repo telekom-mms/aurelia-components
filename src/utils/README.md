@@ -1,5 +1,10 @@
 # Utilities
 
+## bootstrap4-form-validation-renderer
+```typescript
+validationController.addRenderer(new Bootstrap4ValidationFormRenderer());
+```
+
 ## trash-bin
 
 Implements the behaviour of a trash bin.
@@ -49,11 +54,6 @@ import {createChecksum} from 'objects';
 console.log(createChecksum(myObject));
 ```
 
-## bootstrap4-form-validation-renderer
-```typescript
-validationController.addRenderer(new Bootstrap4ValidationFormRenderer());
-```
-
 ## object-storage
 Allows setting objects to an implementation of a Storage interface
 ```typescript
@@ -64,11 +64,6 @@ objectStorage.setStorage(localStorage);
 
 objectStorage.setItem("my-object", {});
 const object = objectStorage.getItem("my-object");
-```
-
-## bootstrap4-form-validation-renderer
-```typescript
-validationController.addRenderer(new Bootstrap4ValidationFormRenderer());
 ```
 
 ## placement
