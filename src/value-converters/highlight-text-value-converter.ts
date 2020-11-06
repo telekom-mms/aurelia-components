@@ -6,6 +6,7 @@
 export class HighlightTextValueConverter {
 
     toView(value, text) {
+        if (!value) return value;
         let regExp;
         if (text instanceof RegExp) {
             regExp = text;
