@@ -1,5 +1,18 @@
 # Value Converters
 
+## byte-format-value-converter
+
+**Template**
+```html
+<span>${bytes|byteFormat:2}</span>
+```
+
+## currency-value-converter
+**Template**
+```html
+<span>${amount|currency:'EUR':3}</span>
+```
+
 ## date-format-value-converter
 
 Formats a unix timestamp as milliseconds or formatted date string to a localized date format using *momentjs*.
@@ -19,6 +32,12 @@ You may need to update your `tsconfig.json`.
 <span>${unixTimeStampOrFormattedDateString|dateFormat:"L"}</span>
 ```
 
+## duration-format-value-converter
+
+**Template**
+```html
+<span>${milliSeconds|durationFormat:"h[h] m[min] s[s]"}</span>
+```
 
 ## highlight-text-value-converter
 
@@ -72,10 +91,4 @@ Reverse an array
 **Template**
 ```html
 <span>${number|number:2}</span>
-```
-
-## currency-value-converter
-**Template**
-```html
-<span>${amount|currency:'EUR':3}</span>
 ```
