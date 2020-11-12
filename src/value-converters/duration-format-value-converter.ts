@@ -8,6 +8,7 @@ export class DurationFormatValueConverter {
         if (!format) {
             format = "h[h] m[min] s[s]";
         }
+        // @ts-ignore
         return duration.format(format);
     }
 

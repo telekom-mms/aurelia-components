@@ -1,6 +1,6 @@
 {
 	"name": "t-systems-aurelia-components",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Common useful components for the Aurelia framework",
 	"repository": "https://github.com/T-Systems-MMS/aurelia-components.git",
 	"author": "Mike Reiche <mike.reiche@t-systems.com>",
@@ -22,7 +22,7 @@
 		"aurelia-validation": "^1.6.0",
 		"aurelia-webpack-plugin": "^4.0.0",
 		"jquery": "^3.5.1",
-		"moment": "^2.29.0",
+		"moment": "^2.29.1",
 		"moment-duration-format": "^2.3.2",
 		"ts-md5": "^1.2.7",
 		"typescript": "^3.9.7",
