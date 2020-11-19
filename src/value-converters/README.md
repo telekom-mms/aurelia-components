@@ -87,6 +87,12 @@ Reverse an array
 <span repeat.for="key of objects|objectKeys"></span>
 ```
 
+## object-values-value-converter
+**Template**
+```html
+<span repeat.for="value of objects|objectValues"></span>
+```
+
 ## number-value-converter
 **Template**
 ```html
