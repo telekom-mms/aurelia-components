@@ -1,7 +1,3 @@
-interface ICacheServiceLoadingFunction {
-    ():Promise<any>,
-}
-
 /**
  * Caches the response of any promise value of a loading function and prevents duplicate calls
  * @author Mike Reiche <mike.reiche@t-systems.com>
@@ -10,10 +6,10 @@ export class CacheService {
     private _cacheContainer = {};
     private _defaultCacheTtlSeconds = 10;
 
-    getForKeyWithLoadingFunction(
+    getForKeyWithLoadingFunction <T> (
         key:string,
-        loadingFunction:ICacheServiceLoadingFunction
-    ):Promise<any> {
+        loadingFunction:() => Promise<T>
+    ):Promise<T> {
         let cacheEntry = this._cacheContainer[key];
         const now = (Date.now()/1000);
         if (cacheEntry !== undefined) {
