@@ -4,8 +4,6 @@
 	"description": "Common useful components for the Aurelia framework",
 	"repository": "https://github.com/T-Systems-MMS/aurelia-components.git",
 	"author": "Mike Reiche <mike.reiche@t-systems.com>",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
 	"scripts": {
 		"build": "tsc",
 		"webpack": "webpack --mode=production"
