@@ -38,7 +38,7 @@ export class MomentCustomAttribute {
             let daysDiff = now.diff(referenceTime, 'days');
             if (daysDiff >= 1) {
                 relativeTimeString = referenceTime.calendar(now, {
-                    sameElse: DateFormatValueConverter.DEFAULT_TIME_FORMAT
+                    sameElse: DateFormatValueConverter.getDefaultFormat()
                 });
             } else {
                 relativeTimeString = referenceTime.fromNow();

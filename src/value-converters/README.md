@@ -32,11 +32,21 @@ You may need to update your `tsconfig.json`.
 <span>${unixTimeStampOrFormattedDateString|dateFormat:"L"}</span>
 ```
 
+**API**
+```typescript
+DateFormatValueConverter.setDefaultFormat("LLL");
+```
+
 ## duration-format-value-converter
 
 **Template**
 ```html
 <span>${milliSeconds|durationFormat:"h[h] m[min] s[s]"}</span>
+```
+
+**API**
+```typescript
+DurationFormatValueConverter.setDefaultFormat("h[h] m[min] s[s]");
 ```
 
 ## highlight-text-value-converter
