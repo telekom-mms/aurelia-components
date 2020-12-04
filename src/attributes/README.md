@@ -46,8 +46,30 @@ Fires an event when an element became visible in the viewport.
 
 **ViewModel**
 ```typescript
-private _elementVisiblity($event:Event) {
+private _elementVisiblity($event:CustomEvent) {
     console.log("element visible:", $event.detail);
 }
 ```
 
+## top-position-custom-attribute
+
+Fires an event when an element reaches a specified top position. You can use this to implement sticky containers (headers for example).
+
+**Template**
+```html
+<div reached.delegate="_elementReached($event)" class.bind="_sticky?'sticky':''" top-position="offset:10">
+```
+
+**ViewModel**
+```typescript
+private _elementReached($event:CustomEvent) {
+    this._sticky = $event.detail;
+}
+```
+**Style**
+```css
+.sticky {
+    position: fixed;
+    top: 10px;
+}
+```
