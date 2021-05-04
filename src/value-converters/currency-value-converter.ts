@@ -10,6 +10,9 @@ import {AbstractLocaleValueConverter} from "./abstract-locale-value-converter";
 export class CurrencyValueConverter extends AbstractLocaleValueConverter {
 
     toView(value, currencyCode:string, precision:number=2): string {
+        while (value < 1/Math.pow(10, precision)) {
+            precision += precision;
+        }
         return new Intl.NumberFormat(CurrencyValueConverter.locale,{
             style: 'currency',
             currency: currencyCode,
