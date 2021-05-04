@@ -15,7 +15,8 @@ export class CurrencyValueConverter extends AbstractLocaleValueConverter {
         }
 
         let realPrecision = precision;
-        while (value > 0 && value < 1/Math.pow(10, realPrecision)) {
+        const absValue = Math.abs(value);
+        while (absValue > 0 && absValue < 1/Math.pow(10, realPrecision)) {
             realPrecision += precision;
         }
 
