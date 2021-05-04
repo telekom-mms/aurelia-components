@@ -21,10 +21,9 @@ npm install t-systems-aurelia-components --save
 
 Open `main.ts`
 ```typescript
-aurelia
-    .use
+aurelia.use
     .globalResources([
-      PLATFORM.moduleName('t-systems-aurelia-components/src/value-converters/date-format-value-converter'),
+        PLATFORM.moduleName('t-systems-aurelia-components/src/value-converters/date-format-value-converter'),
     ])
 ```
 
