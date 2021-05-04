@@ -3,6 +3,7 @@
 ## moment-custom-attribute
 
 Formats and updates relative dates in a global timer loop.
+You have to trigger the update loop by publishing the `UiUpdateEvent` on your on.
 
 **Template**
 ```html
@@ -26,7 +27,7 @@ export class App {
     
     bind() {
          this._uiUpdateInterval = window.setInterval(()=>{
-            this._eventAggregator.publish(UiUpdateEvent.NAME, UiUpdateEvent.create());
+            this._eventAggregator.publish(UiUpdateEvent.NAME, new UiUpdateEvent());
         }, 10000);
     }
     unbind() {

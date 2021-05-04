@@ -2,16 +2,26 @@
 
 ## byte-format-value-converter
 
+Formats bytes into the next higher byte form with a given precision.
+
 **Template**
 ```html
 <span>${bytes|byteFormat:2}</span>
 ```
+Examples:
+* `${1024|byteFormat}` -> `1 kiB`
 
 ## currency-value-converter
+
+Formats a number to a given currency and a precision. If the number is smaller as the precision, it doubles the precision.
+
 **Template**
 ```html
 <span>${amount|currency:'EUR':3}</span>
 ```
+Examples:
+* `${0.0055|currency:"EUR":2}` -> `0,0055 €`
+* `${0.036|currency:"USD":2}` -> `$ 0,04`
 
 ## date-format-value-converter
 
@@ -37,16 +47,28 @@ You may need to update your `tsconfig.json`.
 DateFormatValueConverter.setDefaultFormat("LLL");
 ```
 
+**Requires**
+```shell
+npm install moment --save
+```
+
 ## duration-format-value-converter
 
 **Template**
 ```html
 <span>${milliSeconds|durationFormat:"h[h] m[min] s[s]"}</span>
 ```
+Examples:
+* `${4100|durationFormat}` -> `1h 8mins 20s`
 
 **API**
 ```typescript
 DurationFormatValueConverter.setDefaultFormat("h[h] m[min] s[s]");
+```
+
+**Requires**
+```shell
+npm install moment-duration-format --save
 ```
 
 ## highlight-text-value-converter

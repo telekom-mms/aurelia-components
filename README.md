@@ -27,6 +27,26 @@ aurelia.use
     ])
 ```
 
+## Locale related features
+
+Some extensions like `date-format-value-converter` or `currency-value-converter` support localization. To change their internal locale, use the `aurelia-i18n` library.
+
+```typescript
+import {I18N} from 'aurelia-i18n';
+import {autoinject} from 'aurelia-framework';
+
+@autoinject()
+export class App {
+    constructor(
+        private _i18n:I18N
+    ) {
+        this.i18n.setLocale("en");
+    }
+}
+```
+
+## Dependencies
+
 Some of these libraries have dependencies which are not provided by this library, so please install them by yourself.
 ```bash
 npm install momentjs --save
