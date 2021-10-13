@@ -8,12 +8,13 @@ export class CacheService {
 
     getForKeyWithLoadingFunction <T> (
         key:string,
-        loadingFunction:() => Promise<T>
+        loadingFunction:() => Promise<T>,
+        cacheTtlSeconds = this._defaultCacheTtlSeconds
     ):Promise<T> {
         let cacheEntry = this._cacheContainer[key];
         const now = (Date.now()/1000);
         if (cacheEntry !== undefined) {
-            if (cacheEntry[0] >= now - this._defaultCacheTtlSeconds) {
+            if (cacheEntry[0] >= now - cacheTtlSeconds) {
                 return cacheEntry[1];
             }
         }
@@ -50,6 +51,10 @@ export class CacheService {
             }
         }
         return keys;
+    }
+
+    get cacheKeys() {
+        return Object.keys(this._cacheContainer);
     }
 
     invalidateAll() {
