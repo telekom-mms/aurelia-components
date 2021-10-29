@@ -5,6 +5,20 @@
 validationController.addRenderer(new Bootstrap4ValidationFormRenderer());
 ```
 
+
+## clipboard
+
+Implements a workaround for copying text in framed applications.
+
+```typescript
+import {Clipboard} from 'clipboard';
+
+const clipboard = new Clipboard()
+clipboard.writeText("hello world").then({
+    console.log("Copied");
+})
+```
+
 ## trash-bin
 
 Implements the behaviour of a trash bin.
