@@ -2,10 +2,14 @@ import {autoinject} from "aurelia-dependency-injection";
 import {EventAggregator} from "aurelia-event-aggregator";
 
 @autoinject()
-export class AbstractLocaleValueConverter {
+export abstract class AbstractLocaleValueConverter {
     private static _locale:string='en';
 
-    protected static get locale() {
+    public static setLocale(locale:string) {
+        AbstractLocaleValueConverter._locale = locale;
+    }
+
+    protected static getLocale() {
         return AbstractLocaleValueConverter._locale;
     }
 

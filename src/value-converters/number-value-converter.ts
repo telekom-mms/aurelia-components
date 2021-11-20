@@ -10,7 +10,7 @@ import {AbstractLocaleValueConverter} from "./abstract-locale-value-converter";
 export class NumberValueConverter extends AbstractLocaleValueConverter {
 
     toView(value, precision:number=2): string {
-        return new Intl.NumberFormat(NumberValueConverter.locale,{
+        return new Intl.NumberFormat(NumberValueConverter.getLocale(),{
             maximumFractionDigits: precision
         }).format(value);
     }

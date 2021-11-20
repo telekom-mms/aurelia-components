@@ -6,13 +6,7 @@ import moment from "moment";
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
 export class DateFormatValueConverter {
-
-    /**
-     * @deprecated Use {@link getDefaultFormat} instead
-     */
-    static DEFAULT_TIME_FORMAT = "LLL";
-
-    private static _defaultFormat = DateFormatValueConverter.DEFAULT_TIME_FORMAT;
+    private static _defaultFormat = "LLL";
 
     static setDefaultFormat(format:string) {
         this._defaultFormat = format;

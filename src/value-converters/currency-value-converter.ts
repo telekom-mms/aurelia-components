@@ -20,7 +20,7 @@ export class CurrencyValueConverter extends AbstractLocaleValueConverter {
             realPrecision += precision;
         }
 
-        return new Intl.NumberFormat(CurrencyValueConverter.locale,{
+        return new Intl.NumberFormat(CurrencyValueConverter.getLocale(),{
             style: 'currency',
             currency: currencyCode,
             maximumFractionDigits: realPrecision

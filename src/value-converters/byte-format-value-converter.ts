@@ -13,6 +13,6 @@ export class ByteFormatValueConverter extends AbstractLocaleValueConverter {
 
         const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-        return parseFloat((bytes / Math.pow(k, i)).toFixed(precision)).toLocaleString(ByteFormatValueConverter.locale) + ' ' + sizes[i];
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(precision)).toLocaleString(ByteFormatValueConverter.getLocale()) + ' ' + sizes[i];
     }
 }
