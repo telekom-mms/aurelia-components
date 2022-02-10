@@ -54,9 +54,16 @@ npm install momentjs --save
 
 ## Publish
 
-```bash
-npm publish
-```
+* Enable 2FA in your account
+* Login as user (not as organisation)
+    ```shell
+    npm login
+    ```
+* Change version in `package.json`
+* Run 
+    ```shell
+    npm publish
+    ```
 
 ## References
 * Build and publish: https://medium.com/cameron-nokes/the-30-second-guide-to-publishing-a-typescript-package-to-npm-89d93ff7bccd
