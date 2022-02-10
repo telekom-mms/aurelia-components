@@ -1,25 +1,37 @@
+import {HTMLSanitizer} from "aurelia-templating-resources";
+
 /**
- * Highlights text by given text or precompiled regular expression
+ * Highlights text by given text or precompiled regular expression.
+ * Uses HTMLSanitizer interface to sanitize HTML after adding `<mark>` tags.
  * Usage: <span innerhtml="${property|highlightText:regexpOrString}">&nbsp;</span>
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
 export class HighlightTextValueConverter {
 
+    constructor(
+        private readonly _htmlSanitizer:HTMLSanitizer
+    ) {
+    }
+
     toView(value, text) {
-        if (!value) return value;
+        if (!value) {
+            return value;
+        }
+
         let regExp;
         if (text instanceof RegExp) {
             regExp = text;
         } else if (text && text.length > 0) {
             regExp = new RegExp("(" + text + ")", "ig");
-        } else {
-            return value;
         }
-        let match = value.match(regExp);
-        if (match && match.length) {
-            return value.replace(regExp, '<mark>$1</mark>');
-        } else {
-            return value;
+
+        if (regExp) {
+            const match = value.match(regExp);
+            if (match && match.length) {
+                value = value.replace(regExp, '<mark>$1</mark>');
+            }
         }
+
+        return this._htmlSanitizer.sanitize(value);
     }
 }

@@ -1,5 +1,24 @@
 # Value Converters
 
+## anti-xss-html-sanitizer
+
+Sanitizes HTML against XSS attacks for `innerhtml`.
+
+**Template**
+```html
+<span innerhtml.bind="insecureValue|sanitizeHTML"></span>
+```
+
+**Configuration**
+```typescript
+import {HTMLSanitizer} from "aurelia-templating-resources";
+
+aurelia.use.singleton(HTMLSanitizer, AntiXssHtmlSanitizer);
+
+const htmlSanitizer = aurelia.container.get(HTMLSanitizer) as AntiXssHtmlSanitizer;
+htmlSanitizer.setUntrustedTags(["script", "img", "iframe"])
+```
+
 ## byte-format-value-converter
 
 Formats bytes into the next higher byte form with a given precision.
