@@ -92,7 +92,7 @@ npm install moment-duration-format --save
 
 ## highlight-text-value-converter
 
-Highlights text by adding `<mark></mark>` tags.
+Highlights text by adding `<mark></mark>` tags. It uses the `HTMLSanitizer` interface to sanitize the input value before.
 
 **Template**
 ```html

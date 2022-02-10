@@ -18,6 +18,8 @@ export class HighlightTextValueConverter {
     toView(value, text) {
         if (!value) {
             return value;
+        } else {
+            value = this._htmlSanitizer.sanitize(value);
         }
 
         let regExp;
@@ -34,6 +36,6 @@ export class HighlightTextValueConverter {
             }
         }
 
-        return this._htmlSanitizer.sanitize(value);
+        return value;
     }
 }
