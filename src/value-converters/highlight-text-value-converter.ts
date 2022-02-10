@@ -1,4 +1,5 @@
 import {HTMLSanitizer} from "aurelia-templating-resources";
+import {autoinject} from "aurelia-dependency-injection";
 
 /**
  * Highlights text by given text or precompiled regular expression.
@@ -6,6 +7,7 @@ import {HTMLSanitizer} from "aurelia-templating-resources";
  * Usage: <span innerhtml="${property|highlightText:regexpOrString}">&nbsp;</span>
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
+@autoinject()
 export class HighlightTextValueConverter {
 
     constructor(
