@@ -77,6 +77,9 @@ npm install momentjs --save
 ## Developing with this library
 You can develop and bundling with this library directly by adding the library repository as dependency:
 ```shell
+git clone https://github.com/T-Systems-MMS/aurelia-components.git t-system-aurelia-components
+
+cd your-project
 npm install ../t-systems-aurelia-components
 ```
 
