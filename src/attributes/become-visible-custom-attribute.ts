@@ -9,10 +9,10 @@ import {autoinject} from "aurelia-dependency-injection";
 export class BecomeVisibleCustomAttribute {
 
     private _visible:Boolean = false;
-    private _checkVisibility:EventListener;
+    private readonly _checkVisibility:EventListener;
 
     constructor(
-        private _element:Element
+        private readonly _element:Element
     ) {
         this._checkVisibility = (ev:Event) => {
             let isVisible = BecomeVisibleCustomAttribute.elementInViewport(this._element as HTMLElement);
@@ -33,8 +33,8 @@ export class BecomeVisibleCustomAttribute {
     static elementInViewport(el) {
         let top = el.offsetTop;
         let left = el.offsetLeft;
-        let width = el.offsetWidth;
-        let height = el.offsetHeight;
+        const width = el.offsetWidth;
+        const height = el.offsetHeight;
 
         while(el.offsetParent) {
             el = el.offsetParent;

@@ -5,7 +5,7 @@ import {UiUpdateEvent} from "../events/ui-update-event";
 import {DateFormatValueConverter} from "../value-converters/date-format-value-converter";
 
 /**
- * Creates relative date formats and refreshs them by global interval
+ * Creates relative date formats and refreshes them by {@link UiUpdateEvent}
  * Usage: <span moment.bind="timeProperty">&nbsp;</span>
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
@@ -15,8 +15,8 @@ export class MomentCustomAttribute {
     private _subscriber: Subscription;
 
     constructor(
-        private _element: Element,
-        private _eventAggregator: EventAggregator
+        private readonly _element: Element,
+        private readonly _eventAggregator: EventAggregator
     ) {
     }
 
@@ -33,9 +33,9 @@ export class MomentCustomAttribute {
         let relativeTimeString: string = '';
 
         if (this.value) {
-            let referenceTime = DateFormatValueConverter.momentFromTimeValue(this.value);
-            let now = moment();
-            let daysDiff = now.diff(referenceTime, 'days');
+            const referenceTime = DateFormatValueConverter.momentFromTimeValue(this.value);
+            const now = moment();
+            const daysDiff = now.diff(referenceTime, 'days');
             if (daysDiff >= 1) {
                 relativeTimeString = referenceTime.calendar(now, {
                     sameElse: DateFormatValueConverter.getDefaultFormat()

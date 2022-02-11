@@ -22,7 +22,7 @@ export abstract class AbstractLocaleValueConverter {
     }
 
     constructor(
-        private _eventAggregator:EventAggregator,
+        private readonly _eventAggregator:EventAggregator,
     ) {
         this._eventAggregator.subscribe('i18n:locale:changed', payload => {
             AbstractLocaleValueConverter._locale = payload.newValue;

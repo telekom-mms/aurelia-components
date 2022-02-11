@@ -8,13 +8,14 @@ import {autoinject} from "aurelia-dependency-injection";
 @autoinject()
 export class CollapseCustomAttribute {
     constructor(
-        private _element:Element,
+        private readonly _element:Element,
     ) {
-
     }
+
     bind() {
         $(this._element).collapse();
     }
+
     unbind() {
         $(this._element).collapse('dispose');
     }

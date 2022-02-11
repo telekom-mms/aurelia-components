@@ -18,7 +18,7 @@ export class ProgressRing {
     @bindable progress:number=0;
 
     constructor(
-        private _element:Element
+        private readonly _element:Element
     ) {
     }
 

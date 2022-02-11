@@ -30,9 +30,9 @@ A circular progress indicator
 <progress-ring stroke="2" radius="20" color="green" progress.bind="progress"></progress-ring>
 ```
 
-## switch
+## switch (`@deprecated`)
 
-Checkbox based switch
+Checkbox based switch. Deprecated since Bootstrap 5 has an own switch component.
 
 **Template**
 ```html

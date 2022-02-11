@@ -22,8 +22,8 @@ export function createChecksum(object: object | [], objects: any[] = []): string
  * @param object
  */
 export function recursiveObjectSort(object: object): object {
-    let sorted_object: object = {};
-    let sorted_objects: Array<object> = [];
+    const sorted_object: object = {};
+    const sorted_objects: object[] = [];
 
     if (Array.isArray(object)) {
         object.forEach(obj => {

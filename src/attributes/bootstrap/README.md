@@ -1,5 +1,14 @@
 # Bootstrap Attributes
 
+These attributes requiring the *Bootstrap* library installed.
+```shell
+npm install bootstrap@4.4.1
+```
+because they are refering to the raw *Bootstrap* Javascript source like:
+```typescript
+import 'bootstrap/js/src/collapse';
+```
+
 ## collapse-custom-attribute
 
 ```html

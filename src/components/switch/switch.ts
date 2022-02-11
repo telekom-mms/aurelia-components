@@ -5,6 +5,7 @@ import {bindingMode} from 'aurelia-binding';
 /**
  * @author Mike Reiche <mike.reiche@t-systems.com>
  * @see https://www.w3schools.com/howto/howto_css_switch.asp
+ * @deprecated
  */
 export class Switch {
     @bindable({

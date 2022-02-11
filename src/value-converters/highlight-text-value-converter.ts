@@ -3,7 +3,7 @@ import {autoinject} from "aurelia-dependency-injection";
 
 /**
  * Highlights text by given text or precompiled regular expression.
- * Uses HTMLSanitizer interface to sanitize HTML after adding `<mark>` tags.
+ * Uses HTMLSanitizer interface to sanitize HTML before adding `<mark>` tags.
  * Usage: <span innerhtml="${property|highlightText:regexpOrString}">&nbsp;</span>
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */

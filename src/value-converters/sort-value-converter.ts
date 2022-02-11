@@ -26,7 +26,7 @@ export class SortValueConverter {
     }
 
     static getPropertyByPath(object:object, propertyPath:string[]):any {
-        for (let propertyName of propertyPath) {
+        for (const propertyName of propertyPath) {
             if (object[propertyName] !== undefined) {
                 object = object[propertyName];
             } else {

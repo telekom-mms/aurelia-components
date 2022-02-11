@@ -6,6 +6,7 @@ Common useful components for the Aurelia Framework (https://aurelia.io)
 You can find the documentation within the source.
 
 * [Attributes](src/attributes/README.md)
+  * [Bootstrap attributes](src/attributes/bootstrap/README.md) 
 * [Components](src/components/README.md)
 * [Services](src/services/README.md)
 * [Utils](src/utils/README.md)
@@ -19,12 +20,20 @@ npm install t-systems-aurelia-components --save
 
 ## Use in your Aurelia project
 
+Since this library doesn't provide any precompiled `dist/` files, you need to reference the source code in your project.
+
+### Aurelia features
 Open `main.ts`
 ```typescript
 aurelia.use
     .globalResources([
         PLATFORM.moduleName('t-systems-aurelia-components/src/value-converters/date-format-value-converter'),
     ])
+```
+
+### Direct imports
+```typescript
+import {CacheService} from "t-systems-aurelia-components/src/service/cache-service";
 ```
 
 ## Locale related features
@@ -38,21 +47,21 @@ import {autoinject} from 'aurelia-framework';
 @autoinject()
 export class App {
     constructor(
-        private _i18n:I18N
+        private readonly _i18n:I18N
     ) {
-        this.i18n.setLocale("en");
+        this._i18n.setLocale("en");
     }
 }
 ```
 
 ## Dependencies
 
-Some of these libraries have dependencies which are not provided by this library, so please install them by yourself.
+Some of these libraries have dependencies which are not provided by this library, so please install them by yourself in your project.
 ```bash
 npm install momentjs --save
 ```
 
-## Publish
+## Publish this library to NPM
 
 * Enable 2FA in your account
 * Login as user (not as organisation)
@@ -64,6 +73,18 @@ npm install momentjs --save
     ```shell
     npm publish
     ```
+  
+## Developing with this library
+You can develop and bundling with this library directly by adding the library repository as dependency:
+```shell
+npm install ../t-systems-aurelia-components
+```
+
+In this case you may need to install the library's dependencies first:
+```shell
+cd t-systems-aurelia-components
+npm install bootstrap@4.4.1
+```
 
 ## References
 * Build and publish: https://medium.com/cameron-nokes/the-30-second-guide-to-publishing-a-typescript-package-to-npm-89d93ff7bccd

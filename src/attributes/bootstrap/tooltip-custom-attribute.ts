@@ -8,13 +8,14 @@ import {autoinject} from "aurelia-dependency-injection";
 @autoinject()
 export class TooltipCustomAttribute {
     constructor(
-        private _element:Element,
+        private readonly _element:Element,
     ) {
-
     }
+
     bind() {
         $(this._element).tooltip();
     }
+
     unbind() {
         $(this._element).tooltip('dispose');
     }

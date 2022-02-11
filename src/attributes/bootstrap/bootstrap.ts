@@ -1,5 +1,0 @@
-export * from './collapse-custom-attribute'
-export * from './dropdown-custom-attribute'
-export * from './popover-custom-attribute'
-export * from './toast-custom-attribute'
-export * from './tooltip-custom-attribute'

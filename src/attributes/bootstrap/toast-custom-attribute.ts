@@ -7,9 +7,10 @@ import {autoinject} from "aurelia-dependency-injection";
  */
 @autoinject()
 export class ToastCustomAttribute {
-    private _eventListener:EventListener;
+    private readonly _eventListener:EventListener;
+
     constructor(
-        private _element:Element,
+        private readonly _element:Element,
     ) {
         this._eventListener = (ev:Event) => {
             this._element.dispatchEvent(new CustomEvent("toast-hidden",{
@@ -17,11 +18,13 @@ export class ToastCustomAttribute {
             }));
         };
     }
+
     bind() {
         const $element = $(this._element);
         $element.toast('show');
         $element.on("hidden.bs.toast", this._eventListener);
     }
+
     unbind() {
         const $element = $(this._element);
         $element.off("hidden.bs.toast", this._eventListener);

@@ -21,7 +21,7 @@ export class DateFormatValueConverter {
     }
 
     static format(value: any, format: string = DateFormatValueConverter._defaultFormat): string {
-        let moment = this.momentFromTimeValue(value);
+        const moment = this.momentFromTimeValue(value);
         return moment.format(format);
     }
 

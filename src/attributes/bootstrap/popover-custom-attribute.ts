@@ -8,13 +8,14 @@ import {autoinject} from "aurelia-dependency-injection";
 @autoinject()
 export class PopoverCustomAttribute {
     constructor(
-        private _element:Element,
+        private readonly _element:Element,
     ) {
-
     }
+
     bind() {
         $(this._element).popover();
     }
+
     unbind() {
         $(this._element).popover('dispose');
     }

@@ -63,9 +63,14 @@ trashBin.empty();
 
 ## object
 ```typescript
-import {createChecksum} from 'objects';
+import {createChecksum, clone} from 'objects';
 
-console.log(createChecksum(myObject));
+const myObject = {
+    "hello": "world"
+}
+
+const checksum = createChecksum(myObject);
+const clonedObject = clone(myObject);
 ```
 
 ## object-storage
