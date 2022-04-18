@@ -1,6 +1,6 @@
 {
 	"name": "t-systems-aurelia-components",
-	"version": "1.0.15",
+	"version": "1.0.17",
 	"description": "Common useful components for the Aurelia framework",
 	"repository": "https://github.com/T-Systems-MMS/aurelia-components.git",
 	"author": "Mike Reiche <mike.reiche@t-systems.com>",
@@ -9,20 +9,21 @@
 		"webpack": "webpack --mode=production"
 	},
 	"license": "MIT",
-	"dependencies": {},
+	"peerDependencies": {
+		"apexcharts": "^3.35.0",
+		"aurelia-templating": "^1.11.1",
+		"jquery": "^3.5.1",
+		"moment": "^2.29.1",
+		"moment-duration-format": "^2.3.2",
+		"ts-md5": "^1.2.7"
+	},
 	"devDependencies": {
 		"aurelia-binding": "^2.5.4",
 		"aurelia-bootstrapper": "^2.3.3",
 		"aurelia-dependency-injection": "^1.5.2",
 		"aurelia-event-aggregator": "^1.0.3",
 		"aurelia-loader-webpack": "^2.2.1",
-		"aurelia-templating": "^1.10.4",
-		"aurelia-validation": "^1.6.0",
 		"aurelia-webpack-plugin": "^4.0.0",
-		"jquery": "^3.5.1",
-		"moment": "^2.29.1",
-		"moment-duration-format": "^2.3.2",
-		"ts-md5": "^1.2.7",
 		"typescript": "^3.9.7",
 		"webpack": "^4.44.2",
 		"webpack-cli": "^3.3.12"
