@@ -18,6 +18,7 @@
 		"ts-md5": "^1.2.7"
 	},
 	"devDependencies": {
+		"@types/sanitize-html": "^2.6.2",
 		"aurelia-binding": "^2.5.4",
 		"aurelia-bootstrapper": "^2.3.3",
 		"aurelia-dependency-injection": "^1.5.2",
@@ -25,7 +26,10 @@
 		"aurelia-loader-webpack": "^2.2.1",
 		"aurelia-webpack-plugin": "^4.0.0",
 		"typescript": "^3.9.7",
-		"webpack": "^4.44.2",
-		"webpack-cli": "^3.3.12"
+		"webpack": "^5.70.0",
+		"webpack-cli": "^4.9.2"
+	},
+	"optionalPeerDependencies": {
+		"sanitize-html": "^2.7.0"
 	}
 }

@@ -2,7 +2,8 @@
 
 ## anti-xss-html-sanitizer
 
-Sanitizes HTML against XSS attacks for `innerhtml`.
+Sanitizes HTML against XSS attacks for `innerhtml`, etc. via blacklist and RegEx.
+Tries to escape all elements / discards nothing.
 
 **Template**
 ```html
@@ -18,6 +19,37 @@ aurelia.use.singleton(HTMLSanitizer, AntiXssHtmlSanitizer);
 const htmlSanitizer = aurelia.container.get(HTMLSanitizer) as AntiXssHtmlSanitizer;
 htmlSanitizer.setUntrustedTags(["script", "img", "iframe"])
 ```
+
+## sanitize-html-html-sanitizer
+
+Requires optional peer dependency [sanitize-html](https://github.com/apostrophecms/sanitize-html).
+
+Sanitizes HTML against XSS attacks for `innerhtml`, etc. via whitelist and parser.
+Inherits options from sanitize-html library.
+
+**Template**
+```html
+<span innerhtml.bind="insecureValue|sanitizeHTML"></span>
+```
+
+**Configuration**
+```typescript
+import sanitize from 'sanitize-html'
+import {HTMLSanitizer} from "aurelia-templating-resources"
+
+aurelia.use.singleton(HTMLSanitizer, SanitizeHtmlHtmlSanitizer)
+
+const htmlSanitizer = aurelia.container.get(HTMLSanitizer) as SanitizeHtmlHtmlSanitizer
+htmlSanitizer.withOptions(SanitizeHtmlHtmlSanitizer.paranoidOptions) // shortcut to allow nothing
+
+const options: sanitize.IOptions = { ...sanitize.defaults } // get copy of library defaults for customization
+options.disallowedTagsMode = "discard"                      // discard tags (rather than escape them)
+options.allowedTags = ['b', 'i', 'img']                     // set whitelist (use .concat to add to)
+options.allowedAttributes['img'] = ['src', 'alt']           /* whitelist attributes of a tag (does nothing,
+                                                               if tag not whitelisted) */
+htmlSanitizer.withOptions(options)
+```
+See [sanitize-html](https://github.com/apostrophecms/sanitize-html) for full manual.
 
 ## byte-format-value-converter
 
