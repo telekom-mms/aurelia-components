@@ -10,17 +10,14 @@ export type ApexSeries = ApexAxisChartSeries | ApexNonAxisChartSeries
 
 export class ApexChart {
     private _apex: HTMLDivElement;
-    private _myApexChart: ApexCharts;
+    private _myApexChart: ApexCharts|null;
 
     @bindable options: ApexOptions;
     @bindable series: ApexSeries;
     @bindable selection: ISelection;
     @bindable class:string;
 
-    private _attached:boolean = false;
-
     attached() {
-        this._attached = true;
         if (this.options) {
             this._createChart();
         }
@@ -28,7 +25,6 @@ export class ApexChart {
     }
 
     detached() {
-        this._attached = false;
         if (this._myApexChart) {
             this._myApexChart.destroy();
             this._myApexChart = null;
