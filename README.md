@@ -61,6 +61,11 @@ Some of these libraries have dependencies which are not provided by this library
 npm install momentjs --save
 ```
 
+If you want to use the sanitize-html-html-sanitizer [value-converter](src/value-converters/README.md):
+```bash
+npm install sanitize-html --save
+```
+
 ## Publish this library to NPM
 
 1. Enable 2FA in your account
