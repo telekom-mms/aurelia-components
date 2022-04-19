@@ -3,6 +3,11 @@ import {AbstractLocaleValueConverter} from "./abstract-locale-value-converter";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {NumberValueConverter} from "./number-value-converter";
 
+/**
+ * Formats bytes into the next higher byte form with a given precision.
+ * Usage: ${bytes|byteFormat}
+ * @author: Mike Reiche <mike@reiche.world>
+ */
 @autoinject()
 export class ByteFormatValueConverter extends AbstractLocaleValueConverter {
     constructor(
