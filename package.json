@@ -9,7 +9,7 @@
 		"webpack": "webpack --mode=production"
 	},
 	"license": "MIT",
-	"peerDependencies": {
+	"optionalPeerDependencies": {
 		"apexcharts": "^3.35.0",
 		"aurelia-templating": "^1.11.1",
 		"jquery": "^3.5.1",
