@@ -1,4 +1,5 @@
 import {bindable} from "aurelia-templating";
+import {bindingMode} from "aurelia-binding";
 import ApexCharts, {ApexOptions} from 'apexcharts';
 
 export interface ISelection {
@@ -12,10 +13,17 @@ export class ApexChart {
     private _apex: HTMLDivElement;
     private _myApexChart: ApexCharts|null;
 
-    @bindable options: ApexOptions;
-    @bindable series: ApexSeries;
-    @bindable selection: ISelection;
-    @bindable class:string;
+    @bindable({ defaultBindingMode: bindingMode.toView })
+    options: ApexOptions;
+
+    @bindable({ defaultBindingMode: bindingMode.toView })
+    series: ApexSeries;
+
+    @bindable({ defaultBindingMode: bindingMode.fromView })
+    selection: ISelection;
+
+    @bindable({ defaultBindingMode: bindingMode.toView })
+    class:string;
 
     attached() {
         if (this.options) {
