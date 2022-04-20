@@ -19,7 +19,7 @@ export class ApexChart {
     @bindable({ defaultBindingMode: bindingMode.toView })
     series: ApexSeries;
 
-    @bindable({ defaultBindingMode: bindingMode.fromView })
+    @bindable({ defaultBindingMode: bindingMode.toView })
     selection: ISelection;
 
     @bindable({ defaultBindingMode: bindingMode.toView })
