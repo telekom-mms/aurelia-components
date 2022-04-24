@@ -10,8 +10,10 @@ export interface ISelection {
 export type ApexSeries = ApexAxisChartSeries | ApexNonAxisChartSeries
 
 export class ApexChart {
-    private _apex: HTMLDivElement;
-    private _myApexChart: ApexCharts|null;
+    private _container: HTMLDivElement;
+
+    @bindable({ defaultBindingMode: bindingMode.fromView })
+    chart: ApexCharts|null;
 
     @bindable({ defaultBindingMode: bindingMode.toView })
     options: ApexOptions;
@@ -33,41 +35,41 @@ export class ApexChart {
     }
 
     detached() {
-        if (this._myApexChart) {
-            this._myApexChart.destroy();
-            this._myApexChart = null;
+        if (this.chart) {
+            this.chart.destroy();
+            this.chart = null;
         }
     }
 
     optionsChanged(newOptions:ApexOptions) {
-        if (this._myApexChart) {
-            this._myApexChart.updateOptions(newOptions);
+        if (this.chart) {
+            this.chart.updateOptions(newOptions);
         } else {
             this._createChart();
         }
     }
 
     seriesChanged(newSeries:ApexSeries) {
-        if (this._myApexChart) {
-            this._myApexChart.updateSeries(newSeries);
+        if (this.chart) {
+            this.chart.updateSeries(newSeries);
         } else {
             this._createChart();
         }
     }
 
     selectionChanged(newValue:ISelection, oldValue:ISelection) {
-        if (this._myApexChart) {
+        if (this.chart) {
             if (newValue) {
-                this._myApexChart.toggleDataPointSelection(newValue.series, newValue.dataPointIndex);
+                this.chart.toggleDataPointSelection(newValue.series, newValue.dataPointIndex);
             }
             else if (oldValue) {
-                this._myApexChart.toggleDataPointSelection(oldValue.series, oldValue.dataPointIndex);
+                this.chart.toggleDataPointSelection(oldValue.series, oldValue.dataPointIndex);
             }
         }
     }
 
     private _createChart() {
-        if (!this._apex) {
+        if (!this._container) {
             return;
         }
 
@@ -79,7 +81,7 @@ export class ApexChart {
             }
         }
 
-        this._myApexChart = new ApexCharts(this._apex, this.options);
-        this._myApexChart.render();
+        this.chart = new ApexCharts(this._container, this.options);
+        this.chart.render();
     }
 }
