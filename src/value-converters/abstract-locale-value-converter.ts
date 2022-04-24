@@ -3,25 +3,10 @@ import {EventAggregator} from "aurelia-event-aggregator";
 
 @autoinject()
 export abstract class AbstractLocaleValueConverter {
-    private static _locale:string;
+    private _locale:string;
+    private static _systemLocale:string = AbstractLocaleValueConverter.getSystemLocale();
 
-    /**
-     * @deprecated Use instance methods instead
-     * @param locale
-     */
-    public static setLocale(locale:string) {
-        AbstractLocaleValueConverter._locale = locale;
-    }
-
-    /**
-     * @deprecated Use instance methods instead
-     * @protected
-     */
-    protected static getLocale() {
-        return AbstractLocaleValueConverter._locale;
-    }
-
-    private static getDefaultLocale() {
+    private static getSystemLocale() {
         if (navigator.language) {
             return navigator.language;
         } else {
@@ -29,21 +14,36 @@ export abstract class AbstractLocaleValueConverter {
         }
     }
 
-    protected setLocale(locale:string) {
-        AbstractLocaleValueConverter._locale = locale;
+    /**
+     * Returns the instance or system locale
+     */
+    getLocale() {
+        return this._locale ? this._locale : AbstractLocaleValueConverter.getSystemLocale();
     }
 
-    protected getLocale() {
-        return AbstractLocaleValueConverter._locale;
+    /**
+     * Changes the instance locale
+     * @param locale
+     */
+    setLocale(locale:string) {
+        this._locale = locale;
+        this.localeChanged(locale);
+    }
+
+    /**
+     * Called when the instance or system locale has changed
+     * @param locale
+     */
+    protected localeChanged(locale:string) {
+
     }
 
     constructor(
         private readonly _eventAggregator:EventAggregator,
     ) {
-        this.setLocale(AbstractLocaleValueConverter.getDefaultLocale());
-
         this._eventAggregator.subscribe('i18n:locale:changed', payload => {
-            this.setLocale(payload.newValue);
+            AbstractLocaleValueConverter._systemLocale = payload.newValue;
+            this.localeChanged(payload.newValue);
         });
     }
 }
