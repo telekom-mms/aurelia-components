@@ -1,14 +1,21 @@
 export interface TimeComponents {
-    years?:number,
-    months?:number,
-    days?:number,
     hours?:number;
     minutes?:number;
     seconds?:number;
     ms?:number;
 }
 
-export function addTimedelta(date: Date, components: TimeComponents) {
+export interface DateComponents {
+    years?:number,
+    months?:number,
+    days?:number,
+}
+
+export interface DateTimeComponents extends DateComponents, TimeComponents {
+
+}
+
+export function addTimedelta(date: Date, components: DateTimeComponents) {
     return new Date(
         date.getFullYear()+(components.years||0),
         date.getMonth()+(components.months||0),
@@ -20,11 +27,11 @@ export function addTimedelta(date: Date, components: TimeComponents) {
     );
 }
 
-export function subtractTimedelta(date: Date, components: TimeComponents) {
+export function subtractTimedelta(date: Date, components: DateTimeComponents) {
     return addTimedelta(date, negateTimeComponents(components));
 }
 
-export function negateTimeComponents(components: TimeComponents) {
+export function negateTimeComponents(components: DateTimeComponents) {
     const negComponents:TimeComponents = {}
     for (const key in components) {
         if (components[key]) {
@@ -62,9 +69,9 @@ export function normalizeTime(date: Date, components: TimeComponents) {
 enum Seconds {
     MINUTE=60,
     HOUR=MINUTE*60,
-    DAY=HOUR*24,
-    MONTH=DAY*30,
-    YEAR=MONTH*12,
+    // DAY=HOUR*24,
+    // MONTH=DAY*30,
+    // YEAR=MONTH*12,
 }
 
 export function toMilliseconds(components: TimeComponents) {
@@ -74,9 +81,9 @@ export function toMilliseconds(components: TimeComponents) {
     ms += (components.seconds||0)*1000;
     ms += (components.minutes||0)*Seconds.MINUTE*1000;
     ms += (components.hours||0)*Seconds.HOUR*1000;
-    ms += (components.days||0)*Seconds.DAY*1000;
-    ms += (components.months||0)*Seconds.MONTH*1000;
-    ms += (components.years||0)*Seconds.YEAR*1000;
+    // ms += (components.days||0)*Seconds.DAY*1000;
+    // ms += (components.months||0)*Seconds.MONTH*1000;
+    // ms += (components.years||0)*Seconds.YEAR*1000;
 
     return ms
 }

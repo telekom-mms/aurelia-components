@@ -97,3 +97,4 @@ npm install bootstrap@4.4.1
 ## References
 * Build and publish: https://medium.com/cameron-nokes/the-30-second-guide-to-publishing-a-typescript-package-to-npm-89d93ff7bccd
 * https://lerna.js.org/
+* Typescript unit testing: https://www.testim.io/blog/typescript-unit-testing-101/
