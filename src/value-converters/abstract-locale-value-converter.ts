@@ -3,17 +3,10 @@ import {EventAggregator} from "aurelia-event-aggregator";
 
 @autoinject()
 export abstract class AbstractLocaleValueConverter {
-    private static _locale:string = AbstractLocaleValueConverter.getDefaultLocale();
+    private _locale:string;
+    private static _systemLocale:string = AbstractLocaleValueConverter.getSystemLocale();
 
-    public static setLocale(locale:string) {
-        AbstractLocaleValueConverter._locale = locale;
-    }
-
-    protected static getLocale() {
-        return AbstractLocaleValueConverter._locale;
-    }
-
-    private static getDefaultLocale() {
+    private static getSystemLocale() {
         if (navigator.language) {
             return navigator.language;
         } else {
@@ -21,11 +14,33 @@ export abstract class AbstractLocaleValueConverter {
         }
     }
 
+    /**
+     * Returns the instance or system locale
+     */
+    getLocale() {
+        return this._locale ? this._locale : AbstractLocaleValueConverter.getSystemLocale();
+    }
+
+    /**
+     * Changes the instance locale
+     */
+    setLocale(locale:string) {
+        this._locale = locale;
+        this.localeChanged(locale);
+    }
+
+    /**
+     * Called when the instance or system locale has changed
+     */
+    protected localeChanged(locale:string) {
+    }
+
     constructor(
         private readonly _eventAggregator:EventAggregator,
     ) {
         this._eventAggregator.subscribe('i18n:locale:changed', payload => {
-            AbstractLocaleValueConverter._locale = payload.newValue;
+            AbstractLocaleValueConverter._systemLocale = payload.newValue;
+            this.localeChanged(payload.newValue);
         });
     }
 }

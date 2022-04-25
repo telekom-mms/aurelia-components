@@ -68,13 +68,13 @@ npm install sanitize-html --save
 
 ## Publish this library to NPM
 
-* Enable 2FA in your account
-* Login as user (not as organisation)
+1. Enable 2FA in your account
+2. Login as user (not as organisation)
     ```shell
     npm login
     ```
-* Change version in `package.json`
-* Run 
+3. Change version in `package.json`
+4. Run 
     ```shell
     npm publish
     ```

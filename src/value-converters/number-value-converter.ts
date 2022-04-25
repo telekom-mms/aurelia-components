@@ -9,9 +9,18 @@ import {AbstractLocaleValueConverter} from "./abstract-locale-value-converter";
 @autoinject()
 export class NumberValueConverter extends AbstractLocaleValueConverter {
 
-    toView(value, precision:number=2): string {
-        return new Intl.NumberFormat(NumberValueConverter.getLocale(),{
-            maximumFractionDigits: precision
+    toView(value:number, precision:number=2, fixedPrecision:boolean = true): string {
+        return new Intl.NumberFormat(this.getLocale(),{
+            maximumFractionDigits: fixedPrecision?precision:this.calcFloatingPrecision(value, precision)
         }).format(value);
+    }
+
+    public calcFloatingPrecision(value:number, precision:number) {
+        let realPrecision = precision;
+        const absValue = Math.abs(value);
+        while (absValue > 0 && absValue < 1/Math.pow(10, realPrecision)) {
+            realPrecision += precision;
+        }
+        return realPrecision;
     }
 }

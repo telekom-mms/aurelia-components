@@ -95,7 +95,8 @@ You may need to update your `tsconfig.json`.
 
 **API**
 ```typescript
-DateFormatValueConverter.setDefaultFormat("LLL");
+const formatter = aurelia.container.get(DateFormatValueConverter);
+formatter.setDefaultFormat("LLL");
 ```
 
 **Requires**
@@ -114,7 +115,8 @@ Examples:
 
 **API**
 ```typescript
-DurationFormatValueConverter.setDefaultFormat("h[h] m[min] s[s]");
+const formatter = aurelia.container.get(DurationFormatValueConverter);
+formatter.setDefaultFormat("h[h] m[min] s[s]");
 ```
 
 **Requires**

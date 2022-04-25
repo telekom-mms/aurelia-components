@@ -16,7 +16,8 @@ export class MomentCustomAttribute {
 
     constructor(
         private readonly _element: Element,
-        private readonly _eventAggregator: EventAggregator
+        private readonly _eventAggregator: EventAggregator,
+        private readonly _dateFormatValueConverter: DateFormatValueConverter,
     ) {
     }
 
@@ -33,12 +34,12 @@ export class MomentCustomAttribute {
         let relativeTimeString: string = '';
 
         if (this.value) {
-            const referenceTime = DateFormatValueConverter.momentFromTimeValue(this.value);
+            const referenceTime = moment(this.value);
             const now = moment();
             const daysDiff = now.diff(referenceTime, 'days');
             if (daysDiff >= 1) {
                 relativeTimeString = referenceTime.calendar(now, {
-                    sameElse: DateFormatValueConverter.getDefaultFormat()
+                    sameElse: this._dateFormatValueConverter.getDefaultFormat()
                 });
             } else {
                 relativeTimeString = referenceTime.fromNow();

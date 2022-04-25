@@ -1,5 +1,37 @@
 # Components
 
+## apex-chart
+
+Wrapper for [ApexCharts](https://apexcharts.com/).
+
+**Config**
+```typescript
+aurelia.use
+    .globalResources([
+        PLATFORM.moduleName('t-systems-aurelia-components/src/components/apex-chart/apex-chart'),
+    ]);
+```
+
+**View**
+```html
+<apex-chart options.bind="_options" series.bind="_series" class="myChart"></apex-chart>
+```
+**ViewModel**
+```typescript
+import {ApexOptions} from 'apexcharts';
+import {ApexSeries} from "t-systems-aurelia-components/src/components/apex-chart/apex-chart";
+
+export class ViewModel {
+    private readonly _options:ApexOptions;
+    private _series:ApexSeries;
+
+    constructor() {
+        this._options = {}
+        this._loadData().then(data => this._series = data);
+    }
+}
+```
+
 ## empty
 
 Is just an empty view. You may need it for empty default routes.

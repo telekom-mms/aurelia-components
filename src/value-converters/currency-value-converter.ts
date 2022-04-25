@@ -5,25 +5,24 @@
  */
 import {autoinject} from "aurelia-dependency-injection";
 import {AbstractLocaleValueConverter} from "./abstract-locale-value-converter";
+import {NumberValueConverter} from "./number-value-converter";
+import {EventAggregator} from "aurelia-event-aggregator";
 
 @autoinject()
 export class CurrencyValueConverter extends AbstractLocaleValueConverter {
 
-    toView(value:any, currencyCode:string, precision:number=2): string {
-        if (!value) {
-            return value;
-        }
+    constructor(
+        private readonly _numberValueConverter:NumberValueConverter,
+        eventAggregator:EventAggregator
+    ) {
+        super(eventAggregator);
+    }
 
-        let realPrecision = precision;
-        const absValue = Math.abs(value);
-        while (absValue > 0 && absValue < 1/Math.pow(10, realPrecision)) {
-            realPrecision += precision;
-        }
-
-        return new Intl.NumberFormat(CurrencyValueConverter.getLocale(),{
+    toView(value:number, currencyCode:string, precision:number=2): string {
+        return new Intl.NumberFormat(this.getLocale(),{
             style: 'currency',
             currency: currencyCode,
-            maximumFractionDigits: realPrecision
+            maximumFractionDigits: this._numberValueConverter.calcFloatingPrecision(value, precision)
         }).format(value);
     }
 }
