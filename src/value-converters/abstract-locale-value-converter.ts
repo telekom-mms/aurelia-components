@@ -23,7 +23,6 @@ export abstract class AbstractLocaleValueConverter {
 
     /**
      * Changes the instance locale
-     * @param locale
      */
     setLocale(locale:string) {
         this._locale = locale;
@@ -32,10 +31,8 @@ export abstract class AbstractLocaleValueConverter {
 
     /**
      * Called when the instance or system locale has changed
-     * @param locale
      */
     protected localeChanged(locale:string) {
-
     }
 
     constructor(
