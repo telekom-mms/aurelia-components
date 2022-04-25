@@ -35,33 +35,20 @@ test("normalize time", () => {
   expect(normalizeDate.getSeconds()).toBe(0);
 })
 
-test("add time", () => {
+test("add/substract time", () => {
   const start = new Date(0);
   const components: DateTimeComponents = {
     years: 4,
-    months: 2,
-    days: 30,
-    hours: 12,
-    minutes: 33,
-    seconds: 10,
-    ms: 1
-  }
-  const later = addTimedelta(start, components);
-
-  expect(later.toISOString()).toBe("1974-03-31T12:33:10.001Z")
-});
-
-test("substract time", () => {
-  const start = new Date("1974-03-31T12:33:10.001Z");
-  const components: DateTimeComponents = {
-    years: 2,
     months: 14,
-    days: 40,
+    days: 36,
     hours: 36,
     minutes: 66,
     seconds: 122,
     ms: 4000
   }
-  const later = subtractTimedelta(start, components);
-  expect(later.toISOString()).toBe("1970-12-20T23:25:04.001Z");
-})
+  const later = addTimedelta(start, components);
+  expect(later.toISOString()).toBe("1975-04-07T13:08:06.000Z")
+
+  const before = subtractTimedelta(later, components);
+  expect(before.toISOString()).toBe(start.toISOString());
+});
