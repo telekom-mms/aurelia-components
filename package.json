@@ -15,7 +15,8 @@
 		"jquery": "^3.5.1",
 		"moment": "^2.29.1",
 		"moment-duration-format": "^2.3.2",
-		"ts-md5": "^1.2.7"
+		"ts-md5": "^1.2.7",
+		"sanitize-html": "^2.7.0"
 	},
 	"devDependencies": {
 		"@types/sanitize-html": "^2.6.2",
@@ -28,8 +29,5 @@
 		"typescript": "^3.9.7",
 		"webpack": "^5.70.0",
 		"webpack-cli": "^4.9.2"
-	},
-	"optionalPeerDependencies": {
-		"sanitize-html": "^2.7.0"
 	}
 }
