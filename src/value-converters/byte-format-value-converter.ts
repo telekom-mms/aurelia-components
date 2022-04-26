@@ -2,6 +2,7 @@ import {autoinject} from "aurelia-dependency-injection";
 import {AbstractLocaleValueConverter} from "./abstract-locale-value-converter";
 import {EventAggregator} from "aurelia-event-aggregator";
 import {NumberValueConverter} from "./number-value-converter";
+import {bytesMap, getFactor} from "../utils/numbers";
 
 /**
  * Formats bytes into the next higher byte form with a given precision.
@@ -18,15 +19,10 @@ export class ByteFormatValueConverter extends AbstractLocaleValueConverter {
     }
 
     toView(bytes: number, precision: number = 2): string {
+        const {factor: factor, label: label} = getFactor(bytes, bytesMap);
         if (bytes === 0) {
-            return '0 Bytes';
+            return '0' + label
         }
-
-        const k = 1024;
-        const sizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-        return this._numberValueConverter.toView(i, precision) + ' ' + sizes[i]
+        return this._numberValueConverter.toView(bytes/factor, precision) + label;
     }
 }

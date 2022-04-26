@@ -11,7 +11,7 @@ export default {
   // bail: 0,
 
   // The directory where Jest should store its cached dependency information
-  // cacheDirectory: "/private/var/folders/r4/b1879v110c79t2wv163m95300000gp/T/jest_dy",
+  // cacheDirectory: "/private/var/folders/cn/dnd_thyn0_zbdnz6dr8f7wdc0000gn/T/jest_dx",
 
   // Automatically clear mock calls, instances and results before every test
   // clearMocks: false,
@@ -137,7 +137,7 @@ export default {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: "node",
+  testEnvironment: "jsdom",
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},

@@ -17,6 +17,20 @@ const clipboard = new Clipboard()
 clipboard.writeText("hello world").then(() => console.log("Copied"));
 ```
 
+## numbers
+
+Number handling and formatting.
+
+```typescript
+import {bytesMap, getFactor, kiloMap} from "./numbers";
+
+const posts = 1300;
+const kilo = getFactor(posts, kiloMap);
+const bytes = getFactor(posts, bytesMap);
+console.log(`Your wrote ${(posts / kilo.factor).toFixed(1)} ${kilo.label} posts with a size of ${(posts / bytes.factor).toFixed(0)} ${bytes.label} `);
+// You wrote 1.3k posts with a size of 1 KiB
+```
+
 ## time
 
 Provides some time functions.
