@@ -35,7 +35,7 @@ export function negateTimeComponents(components: DateTimeComponents) {
     const negComponents:TimeComponents = {}
     for (const key in components) {
         if (components[key]) {
-            negComponents[key] = components[key] * -1;
+            negComponents[key] = -components[key];
         }
     }
     return negComponents;
