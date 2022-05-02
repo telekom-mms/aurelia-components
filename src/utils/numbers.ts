@@ -5,7 +5,7 @@ export interface FactorMap {
 
 export const bytesMap: FactorMap = {
     divisor: 1024,
-    labels: [' Bytes', ' KiB', ' MiB', ' GiB', ' TiB', ' PiB', ' EiB', ' ZiB', ' YiB']
+    labels: ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
 }
 
 export const kiloMap: FactorMap = {
@@ -15,7 +15,7 @@ export const kiloMap: FactorMap = {
 
 export function getFactor(value: number, map:FactorMap) {
     let index = 0;
-    if (value > 0) {
+    if (Math.abs(value) > 0) {
         index = Math.floor(Math.log(value) / Math.log(map.divisor));
         if (index > map.labels.length) {
             index = map.labels.length-1;

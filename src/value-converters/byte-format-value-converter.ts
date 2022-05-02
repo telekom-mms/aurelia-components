@@ -21,8 +21,8 @@ export class ByteFormatValueConverter extends AbstractLocaleValueConverter {
     toView(bytes: number, precision: number = 2): string {
         const {factor: factor, label: label} = getFactor(bytes, bytesMap);
         if (bytes === 0) {
-            return '0' + label
+            return '0 ' + label
         }
-        return this._numberValueConverter.toView(bytes/factor, precision) + label;
+        return this._numberValueConverter.toView(bytes/factor, precision) + ' ' + label;
     }
 }

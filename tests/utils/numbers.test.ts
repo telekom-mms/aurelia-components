@@ -4,37 +4,37 @@ const bytesData = [
   {
     input: 0,
     expectedFactor: 1,
-    expectedLabel: ' Bytes'
+    expectedLabel: 'Bytes'
   },
   {
     input: 1,
     expectedFactor: 1,
-    expectedLabel: ' Bytes'
+    expectedLabel: 'Bytes'
   },
   {
     input: 1023,
     expectedFactor: 1,
-    expectedLabel: ' Bytes'
+    expectedLabel: 'Bytes'
   },
   {
     input: 1024,
     expectedFactor: 1024,
-    expectedLabel: ' KiB'
+    expectedLabel: 'KiB'
   },
   {
     input: 1025,
     expectedFactor: 1024,
-    expectedLabel: ' KiB'
+    expectedLabel: 'KiB'
   },
   {
     input: Math.pow(1024,2),
     expectedFactor: Math.pow(1024,2),
-    expectedLabel: ' MiB'
+    expectedLabel: 'MiB'
   },
   {
     input: Math.pow(1024,3),
     expectedFactor: Math.pow(1024,3),
-    expectedLabel: ' GiB'
+    expectedLabel: 'GiB'
   },
 ];
 
@@ -77,7 +77,7 @@ describe.each(bytesData)('getFactorLabel on bytesMap', (data) => {
 test("formatted bytesMap", () => {
   const bytes = 1300;
   const {factor: factor, label: label} = getFactor(bytes, bytesMap);
-  const formatted = `${(bytes/factor).toFixed(1)}${label}`
+  const formatted = `${(bytes/factor).toFixed(1)} ${label}`
   expect(formatted).toBe("1.3 KiB");
 })
 
