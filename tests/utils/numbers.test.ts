@@ -68,7 +68,7 @@ const kiloData = [
 
 describe.each(bytesData)('getFactorLabel on bytesMap', (data) => {
   it(`bytes '${data.input}'`, () => {
-    const {factor: factor, label: label} = getFactor(data.input, bytesMap);
+    const {factor: factor, unit: label} = getFactor(data.input, bytesMap);
     expect(factor).toEqual(data.expectedFactor);
     expect(label).toEqual(data.expectedLabel);
   });
@@ -76,14 +76,14 @@ describe.each(bytesData)('getFactorLabel on bytesMap', (data) => {
 
 test("formatted bytesMap", () => {
   const bytes = 1300;
-  const {factor: factor, label: label} = getFactor(bytes, bytesMap);
+  const {factor: factor, unit: label} = getFactor(bytes, bytesMap);
   const formatted = `${(bytes/factor).toFixed(1)} ${label}`
   expect(formatted).toBe("1.3 KiB");
 })
 
 describe.each(kiloData)('getFactorLabel on kiloMap', (data) => {
   it(`number '${data.input}'`, () => {
-    const {factor: factor, label: label} = getFactor(data.input, kiloMap);
+    const {factor: factor, unit: label} = getFactor(data.input, kiloMap);
     expect(factor).toEqual(data.expectedFactor);
     expect(label).toEqual(data.expectedLabel);
   });
@@ -91,7 +91,7 @@ describe.each(kiloData)('getFactorLabel on kiloMap', (data) => {
 
 test("formatted kiloMap", () => {
   const posts = 1300;
-  const {factor: factor, label: label} = getFactor(posts, kiloMap);
+  const {factor: factor, unit: label} = getFactor(posts, kiloMap);
   const formatted = `${(posts/factor).toFixed(1)}${label}`
   expect(formatted).toBe("1.3k");
 })
