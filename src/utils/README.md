@@ -14,9 +14,52 @@ Implements a workaround for copying text in framed applications.
 import {Clipboard} from 'clipboard';
 
 const clipboard = new Clipboard()
-clipboard.writeText("hello world").then({
-    console.log("Copied");
-})
+clipboard.writeText("hello world").then(() => console.log("Copied"));
+```
+
+## time
+
+Provides some time functions.
+
+### Adding/subtracting time
+
+```typescript
+import {addTimedelta, DateTimeComponents, subtractTimedelta} from "./time";
+
+const now = new Date();
+const timedelta: DateTimeComponents = {
+  days: 10
+}
+const newDate = addTimedelta(now, timedelta);
+const oldDate = subtractTimedelta(newDate, timedelta);
+```
+
+### Normalize time
+
+Normalizes the time of a given date to full divisors of the components.
+
+```typescript
+import {normalizeTime, TimeComponents} from "./time";
+
+const now = new Date();
+// now: 13:44:33
+
+const timedelta: TimeComponents = {
+  hours: 4,
+  minutes: 5,
+  seconds: 0
+}
+
+const newDate = normalizeTime(now, timedelta);
+// newDate: 12:40:00
+```
+
+### Time components to seconds and milliseconds
+
+```typescript
+import {toMilliseconds} from "./time";
+
+window.setTimeout(() => console.log("Hello"), toMilliseconds({seconds: 10}));
 ```
 
 ## trash-bin
