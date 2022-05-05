@@ -31,6 +31,15 @@ console.log(`Your wrote ${(posts / kilo.factor).toFixed(1)} ${kilo.unit} posts w
 // You wrote 1.3k posts with a size of 1 KiB
 ```
 
+## strings
+
+String conversion for use in RegExp.
+
+```typescript
+const regExp = createRegexpFromSearchString("my-[string]");
+textToSearch.match(regExp);
+```
+
 ## time
 
 Provides some time functions.
