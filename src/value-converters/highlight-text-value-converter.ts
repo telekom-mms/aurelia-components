@@ -30,6 +30,9 @@ export class HighlightTextValueConverter {
         }
 
         if (regExp) {
+            // value is sanitized, so the RegExp has to be sanitized as well to match the results
+            // this fixes the issue with &, <, >, "
+            regExp = new RegExp(this._htmlSanitizer.sanitize(regExp.source), regExp.flags);
             const match = value.match(regExp);
             if (match && match.length) {
                 value = value.replace(regExp, '<mark>$1</mark>');
