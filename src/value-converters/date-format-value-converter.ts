@@ -4,6 +4,7 @@ import moment from "moment";
  * Formats timestamps or strings to localized date formats
  * Usage: ${dateProperty|dateFormat}
  * @author Mike Reiche <mike.reiche@t-systems.com>
+ * @deprecated Use {@link IntlDateFormatValueConverter} instead.
  */
 export class DateFormatValueConverter {
     private _defaultFormat = "LLL";
