@@ -8,6 +8,7 @@ container.makeGlobal();
 const dateFormatter = container.get(IntlDateFormatValueConverter);
 dateFormatter.setLocale("en");
 dateFormatter.setOptions("full", { dateStyle: 'full', timeStyle: 'long' });
+dateFormatter.setOptions("default", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
 const inputDate = new Date(0);
 const inputTimestamp = 0;
@@ -18,6 +19,16 @@ const formatData = [
         input: inputDate,
         optionId: null,
         expectedFormat: '1/1/1970'
+    },
+    {
+        input: inputDate,
+        optionId: undefined,
+        expectedFormat: 'Thursday, January 1, 1970'
+    },
+    {
+        input: inputDate,
+        optionId: "default",
+        expectedFormat: 'Thursday, January 1, 1970'
     },
     {
         input: inputDate,

@@ -14,7 +14,7 @@ export class IntlDateFormatValueConverter extends AbstractLocaleValueConverter {
         this._options[id] = options;
     }
 
-    toView(value: Date | string | number = 0, optionId: string = null): string {
+    toView(value: Date | string | number = 0, optionId: string = "default"): string {
         if (!(value instanceof Date)) {
             value = new Date(value);
         }
