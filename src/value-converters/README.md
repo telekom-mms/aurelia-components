@@ -112,8 +112,8 @@ Formats a unix timestamp as milliseconds or formatted date string to a localized
 **API**
 ```typescript
 const formatter = aurelia.container.get(IntlDateFormatValueConverter);
-formatter.setOption("default", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-formatter.setOption("long", { dateStyle: 'full', timeStyle: 'long' });
+formatter.setOptions("default", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+formatter.setOptions("long", { dateStyle: 'full', timeStyle: 'long' });
 ```
 
 **Template**
