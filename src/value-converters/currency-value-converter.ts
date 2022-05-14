@@ -19,10 +19,16 @@ export class CurrencyValueConverter extends AbstractLocaleValueConverter {
     }
 
     toView(value:number, currencyCode:string, precision:number=2): string {
-        return new Intl.NumberFormat(this.getLocale(),{
-            style: 'currency',
-            currency: currencyCode,
-            maximumFractionDigits: this._numberValueConverter.calcFloatingPrecision(value, precision)
-        }).format(value);
+        const options:Intl.NumberFormatOptions = {
+            minimumFractionDigits: precision,
+            maximumFractionDigits: this._numberValueConverter.calcFloatingPrecision(value, precision),
+        }
+
+        if (currencyCode) {
+            options.style = "currency";
+            options.currency = currencyCode;
+        }
+
+        return Intl.NumberFormat(this.getLocale(),options).format(value);
     }
 }
