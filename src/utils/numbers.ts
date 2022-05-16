@@ -62,3 +62,23 @@ export function getFactor(value: number, map:FactorMap): Factor {
         unit: map.units[index]
     };
 }
+
+/**
+ * @see https://gist.github.com/djD-REK/2e347f5532bb22310daf450f03ec6ad8
+ */
+export function round(number:number, decimalPlaces:number) {
+    const factorOfTen = Math.pow(10, decimalPlaces);
+    return Math.round(number * factorOfTen) / factorOfTen;
+}
+
+export function calcFloatingPrecision(value:number, precision:number) {
+    let realPrecision = precision;
+    const absValue = Math.abs(value);
+    while (absValue > 0 && absValue < 1/Math.pow(10, realPrecision)) {
+        realPrecision += precision;
+    }
+    if (realPrecision < precision) {
+        realPrecision = precision;
+    }
+    return realPrecision;
+}

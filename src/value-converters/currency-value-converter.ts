@@ -5,23 +5,15 @@
  */
 import {autoinject} from "aurelia-dependency-injection";
 import {AbstractLocaleValueConverter} from "./abstract-locale-value-converter";
-import {NumberValueConverter} from "./number-value-converter";
-import {EventAggregator} from "aurelia-event-aggregator";
+import {calcFloatingPrecision} from "../utils/numbers";
 
 @autoinject()
 export class CurrencyValueConverter extends AbstractLocaleValueConverter {
 
-    constructor(
-        private readonly _numberValueConverter:NumberValueConverter,
-        eventAggregator:EventAggregator
-    ) {
-        super(eventAggregator);
-    }
-
     toView(value:number, currencyCode:string, precision:number=2): string {
         const options:Intl.NumberFormatOptions = {
             minimumFractionDigits: precision,
-            maximumFractionDigits: this._numberValueConverter.calcFloatingPrecision(value, precision),
+            maximumFractionDigits: calcFloatingPrecision(value, precision),
         }
 
         if (currencyCode) {
