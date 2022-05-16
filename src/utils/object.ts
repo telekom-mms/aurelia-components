@@ -1,21 +1,3 @@
-import {Md5} from 'ts-md5/dist/md5';
-
-/**
- * Method for generating simple object checksums
- * @author Mike Reiche <mike.reiche@t-systems.com>
- * @param object
- * @param objects
- */
-export function createChecksum(object: object | [], objects: any[] = []): string {
-    if (!object) {
-        return ""
-    }
-
-    let sorted_object = recursiveObjectSort(object);
-
-    return Md5.hashStr(JSON.stringify(sorted_object)) as string;
-}
-
 /**
  * Method for sorting an object recursively by key (arrays are not sorted)
  * @author Andreas Geyer <andreas.geyer@t-systems.com>
@@ -49,11 +31,21 @@ export function recursiveObjectSort(object: object): object {
 }
 
 /**
- * lodash cloneDeep only clones enumerable properties
+ * Deep clone of object
  * @see https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore/issues/121
  * @author Mike Reiche <mike.reiche@t-systems.com>
  * @param object
  */
-export function clone(object: any) {
-    return Object.create(null, Object.getOwnPropertyDescriptors(object));
+export function clone(src: any) {
+    const target = {};
+    for (const prop in src) {
+        if (src.hasOwnProperty(prop)) {
+            if(src[prop] != null && typeof src[prop] === 'object') {
+                target[prop] = clone(src[prop]);
+            } else {
+                target[prop] = src[prop];
+            }
+        }
+    }
+    return target;
 }
