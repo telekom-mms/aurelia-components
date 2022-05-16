@@ -71,6 +71,12 @@ export function round(number:number, decimalPlaces:number) {
     return Math.round(number * factorOfTen) / factorOfTen;
 }
 
+/**
+ * Calculates a floating precision if the value is smaller than the requested precision
+ * @param value The given value
+ * @param precision Target precision
+ * @return Fitting precision
+ */
 export function calcFloatingPrecision(value:number, precision:number) {
     let realPrecision = precision;
     const absValue = Math.abs(value);
