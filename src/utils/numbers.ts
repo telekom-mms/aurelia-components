@@ -64,11 +64,15 @@ export function getFactor(value: number, map:FactorMap): Factor {
 }
 
 /**
+ * Rounds a number to a specified precision.
  * @see https://gist.github.com/djD-REK/2e347f5532bb22310daf450f03ec6ad8
+ * @param value Value to round.
+ * @param precision Target precision.
+ * @return Round value
  */
-export function round(number:number, decimalPlaces:number) {
-    const factorOfTen = Math.pow(10, decimalPlaces);
-    return Math.round(number * factorOfTen) / factorOfTen;
+export function round(value:number, precision:number) {
+    const factorOfTen = Math.pow(10, precision);
+    return Math.round(value * factorOfTen) / factorOfTen;
 }
 
 /**
