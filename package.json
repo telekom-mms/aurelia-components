@@ -11,6 +11,7 @@
 	},
 	"license": "MIT",
 	"optionalPeerDependencies": {
+		"echarts": "^5.3.2",
 		"apexcharts": "^3.35.0",
 		"aurelia-templating": "^1.11.1",
 		"jquery": "^3.5.1",
