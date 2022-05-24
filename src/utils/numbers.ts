@@ -62,3 +62,33 @@ export function getFactor(value: number, map:FactorMap): Factor {
         unit: map.units[index]
     };
 }
+
+/**
+ * Rounds a number to a specified precision.
+ * @see https://gist.github.com/djD-REK/2e347f5532bb22310daf450f03ec6ad8
+ * @param value Value to round.
+ * @param precision Target precision.
+ * @return Round value
+ */
+export function round(value:number, precision:number) {
+    const factorOfTen = Math.pow(10, precision);
+    return Math.round(value * factorOfTen) / factorOfTen;
+}
+
+/**
+ * Calculates a floating precision if the value is smaller than the requested precision
+ * @param value The given value
+ * @param precision Target precision
+ * @return Fitting precision
+ */
+export function calcFloatingPrecision(value:number, precision:number) {
+    let realPrecision = precision;
+    const absValue = Math.abs(value);
+    while (absValue > 0 && absValue < 1/Math.pow(10, realPrecision)) {
+        realPrecision += precision;
+    }
+    if (realPrecision < precision) {
+        realPrecision = precision;
+    }
+    return realPrecision;
+}
