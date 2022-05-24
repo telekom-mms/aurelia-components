@@ -74,10 +74,12 @@ Examples:
 * `${0.0055|currency:"EUR":2}` -> `0,0055 €`
 * `${0.036|currency:"USD":2}` -> `$ 0,04`
 
-## date-format-value-converter
+## date-format-value-converter (`@deprecated`)
 
 Formats a unix timestamp as milliseconds or formatted date string to a localized date format using *momentjs*.
 Default format is "LLL".
+
+This value converter is `@deprecated`, because the [IntlDateFormatValueConverter](#intl-date-format-value-converter) provides a standard interface.
 
 You may need to update your `tsconfig.json`.
 ```json
@@ -102,6 +104,22 @@ formatter.setDefaultFormat("LLL");
 **Requires**
 ```shell
 npm install moment --save
+```
+
+## intl-date-format-value-converter
+Formats a unix timestamp as milliseconds or formatted date string to a localized date format using [Intl.DateTimeFormat](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat).
+
+**API**
+```typescript
+const formatter = aurelia.container.get(IntlDateFormatValueConverter);
+formatter.setOptions("default", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+formatter.setOptions("long", { dateStyle: 'full', timeStyle: 'long' });
+```
+
+**Template**
+```html
+<span>Default: ${unixTimeStampOrFormattedDateString|dateFormat}</span>
+<span>Long: ${unixTimeStampOrFormattedDateString|dateFormat:"long"}</span>
 ```
 
 ## duration-format-value-converter
