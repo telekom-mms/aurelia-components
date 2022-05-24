@@ -164,40 +164,39 @@ export class ViewModel {
 }
 ```
 
+## percent-value-converter
+```html
+<span>${number|percent}</span>
+```
+
 ## repeat-string-value-converter
-**Template**
 ```html
 <span>${"."|repeatString:10}</span>
 ```
 
 ## sort-value-converter
-**Template**
 Sort by property `users.name` descending
 ```html
 <span repeat.for="item of list|sort:'user.name':-1"></span>
 ```
 
 ## reverse-value-converter
-**Template**
 Reverse an array
 ```html
 <span repeat.for="item of list|reverse"></span>
 ```
 
 ## object-keys-value-converter
-**Template**
 ```html
 <span repeat.for="key of objects|objectKeys"></span>
 ```
 
 ## object-values-value-converter
-**Template**
 ```html
 <span repeat.for="value of objects|objectValues"></span>
 ```
 
 ## number-value-converter
-**Template**
 ```html
 <span>${number|number:2}</span>
 ```
