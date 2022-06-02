@@ -58,7 +58,7 @@ export class App {
 
 Some of these libraries have dependencies which are not provided by this library, so please install them by yourself in your project.
 ```bash
-npm install momentjs --save
+npm install moment --save
 ```
 
 If you want to use the sanitize-html-html-sanitizer [value-converter](src/value-converters/README.md):

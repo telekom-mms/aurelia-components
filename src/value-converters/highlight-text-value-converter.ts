@@ -1,5 +1,6 @@
 import {HTMLSanitizer} from "aurelia-templating-resources";
 import {autoinject} from "aurelia-dependency-injection";
+import escapeStringRegexp from "escape-string-regexp";
 
 /**
  * Highlights text by given text or precompiled regular expression.
@@ -26,13 +27,16 @@ export class HighlightTextValueConverter {
         if (text instanceof RegExp) {
             regExp = text;
         } else if (text && text.length > 0) {
-            regExp = new RegExp("(" + text + ")", "ig");
+            regExp = new RegExp("(" + escapeStringRegexp(text) + ")", "ig");
         }
 
         if (regExp) {
+            // value is sanitized, so the RegExp has to be sanitized as well to match the results
+            // this fixes the issue with &, <, >, "
+            regExp = new RegExp(this._htmlSanitizer.sanitize(regExp.source), regExp.flags);
             const match = value.match(regExp);
             if (match && match.length) {
-                value = value.replace(regExp, '<mark>$1</mark>');
+                value = value.replace(regExp, '<mark>$&</mark>');
             }
         }
 
