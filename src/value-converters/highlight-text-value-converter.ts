@@ -36,7 +36,7 @@ export class HighlightTextValueConverter {
             regExp = new RegExp(this._htmlSanitizer.sanitize(regExp.source), regExp.flags);
             const match = value.match(regExp);
             if (match && match.length) {
-                value = value.replace(regExp, '<mark>$1</mark>');
+                value = value.replace(regExp, '<mark>$&</mark>');
             }
         }
 
