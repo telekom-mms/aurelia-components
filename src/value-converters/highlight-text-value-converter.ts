@@ -1,5 +1,6 @@
 import {HTMLSanitizer} from "aurelia-templating-resources";
 import {autoinject} from "aurelia-dependency-injection";
+import escapeStringRegexp from "escape-string-regexp";
 
 /**
  * Highlights text by given text or precompiled regular expression.
@@ -26,7 +27,7 @@ export class HighlightTextValueConverter {
         if (text instanceof RegExp) {
             regExp = text;
         } else if (text && text.length > 0) {
-            regExp = new RegExp("(" + text + ")", "ig");
+            regExp = new RegExp("(" + escapeStringRegexp(text) + ")", "ig");
         }
 
         if (regExp) {
