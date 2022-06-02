@@ -5,6 +5,16 @@
 validationController.addRenderer(new Bootstrap4ValidationFormRenderer());
 ```
 
+## checksum (`@deprecated`)
+```typescript
+import {createChecksum} from 'objects';
+
+const myObject = {
+    "hello": "world"
+}
+
+const checksum = createChecksum(myObject);
+```
 
 ## clipboard
 
@@ -120,14 +130,14 @@ trashBin.empty();
 
 ## object
 ```typescript
-import {createChecksum, clone} from 'objects';
+import {recursiveObjectSort} from 'objects';
 
 const myObject = {
-    "hello": "world"
+    "katze": "kuh",
+    "hello": "world",
 }
 
-const checksum = createChecksum(myObject);
-const clonedObject = clone(myObject);
+const sorted = recursiveObjectSort(myObject);
 ```
 
 ## object-storage
