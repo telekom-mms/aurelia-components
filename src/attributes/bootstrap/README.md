@@ -66,4 +66,6 @@ import 'bootstrap/js/src/collapse';
    popover
 >Tooltip</a>
 ```
-Note that for a "dismissable" popover using the attribute `data-trigger="focus"`, the element having the popover attached must be able to receive focus. (See this [StackOverflow answer](https://stackoverflow.com/a/1600194) on which elements can receive focus)
+Notes:
+- Bootstrap popovers usually react to missing content with NOP. This attribute instead prints a warning to console and provides the Bootstrap popover with a marker text, so it will be displayed and can easily be found.
+- For a "dismissable" popover using the attribute `data-trigger="focus"`, the element having the popover attached must be able to receive focus. (See this [StackOverflow answer](https://stackoverflow.com/a/1600194) on which elements can receive focus.)
