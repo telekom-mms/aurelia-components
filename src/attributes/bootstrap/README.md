@@ -56,8 +56,13 @@ import 'bootstrap/js/src/collapse';
 </div>
 ```
 
+# Bootstrap 5 Attributes
+
+use proper imports and a bootstrap entry in `optionalPeerDependencies`
+
 ## popover-custom-attribute
 
+Can be given the optional value "empty" to use default Bootstrap behaviour silently not displaying Popovers with empty content. If no value is given, will log a warning instead and fill the Popover with a marker text for easy diagnosis.
 ```html
 <a href="#"
    title="Popover title"
@@ -66,6 +71,4 @@ import 'bootstrap/js/src/collapse';
    popover
 >Tooltip</a>
 ```
-Notes:
-- Bootstrap popovers usually react to missing content with NOP. This attribute instead prints a warning to console and provides the Bootstrap popover with a marker text, so it will be displayed and can easily be found.
-- For a "dismissable" popover using the attribute `data-trigger="focus"`, the element having the popover attached must be able to receive focus. (See this [StackOverflow answer](https://stackoverflow.com/a/1600194) on which elements can receive focus.)
+Note that for a "dismissable" popover using the attribute `data-trigger="focus"`, the element having the popover attached must be able to receive focus. (See this [StackOverflow answer](https://stackoverflow.com/a/1600194) on which elements can receive focus)
