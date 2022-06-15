@@ -25,7 +25,7 @@
 		"@types/jest": "^27.4.1",
 		"@types/sanitize-html": "^2.6.2",
 		"aurelia-binding": "^2.5.4",
-		"aurelia-bootstrapper": "^2.3.3",
+		"aurelia-bootstrapper": "2.4.0",
 		"aurelia-dependency-injection": "^1.5.2",
 		"aurelia-event-aggregator": "^1.0.3",
 		"aurelia-loader-webpack": "^2.2.1",
