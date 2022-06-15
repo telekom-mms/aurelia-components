@@ -22,7 +22,7 @@
 		"sanitize-html": "^2.7.0"
 	},
 	"devDependencies": {
-		"@types/jest": "^27.4.1",
+		"@types/jest": "27.5.2",
 		"@types/sanitize-html": "^2.6.2",
 		"aurelia-binding": "^2.5.4",
 		"aurelia-bootstrapper": "^2.3.3",
