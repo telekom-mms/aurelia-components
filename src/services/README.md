@@ -33,9 +33,7 @@ export class ViewModel {
     }
     
     clearCache() {
-        const keys = this._cacheService.outdatedKeys;
-        this._cacheService.invalidate(keys);
-        // this._cacheService.invalidateAll();
+        this._cacheService.invalidateOutdated();
     }
 }
 ```
