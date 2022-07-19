@@ -1,5 +1,4 @@
-import $ from 'jquery';
-import 'bootstrap/js/src/popover';
+import {Popover} from "bootstrap"
 import {autoinject} from "aurelia-dependency-injection";
 
 /**
@@ -7,16 +6,19 @@ import {autoinject} from "aurelia-dependency-injection";
  */
 @autoinject()
 export class PopoverCustomAttribute {
+    private popover: Popover | undefined
+
     constructor(
         private readonly _element:Element,
     ) {
     }
 
-    bind() {
-        $(this._element).popover();
+    attached() {
+        this.popover = new Popover(this._element)
     }
 
     unbind() {
-        $(this._element).popover('dispose');
+        this.popover?.dispose()
+        this.popover = undefined
     }
 }
