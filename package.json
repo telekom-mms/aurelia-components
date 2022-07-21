@@ -10,17 +10,6 @@
 		"test": "jest"
 	},
 	"license": "MIT",
-	"optionalPeerDependencies": {
-		"echarts": "^5.3.2",
-		"apexcharts": "^3.35.0",
-		"aurelia-templating": "^1.11.1",
-		"aurelia-validation": "^2.0.0-rc2",
-		"jquery": "^3.5.1",
-		"moment": "^2.29.1",
-		"moment-duration-format": "^2.3.2",
-		"ts-md5": "^1.2.7",
-		"sanitize-html": "^2.7.0"
-	},
 	"devDependencies": {
 		"@types/jest": "^27.4.1",
 		"@types/sanitize-html": "^2.6.2",
@@ -37,5 +26,45 @@
 		"typescript": "^3.9.7",
 		"webpack": "^5.70.0",
 		"webpack-cli": "^4.9.2"
+	},
+	"peerDependencies": {
+		"apexcharts": "^3.35.0",
+		"aurelia-templating": "^1.11.1",
+		"aurelia-validation": "^2.0.0-rc2",
+		"echarts": "^5.3.2",
+		"jquery": "^3.5.1",
+		"moment": "^2.29.1",
+		"moment-duration-format": "^2.3.2",
+		"ts-md5": "^1.2.7",
+		"sanitize-html": "^2.7.0"
+	},
+	"peerDependenciesMeta": {
+		"apexcharts": {
+			"optional": true
+		},
+		"aurelia-templating": {
+			"optional": true
+		},
+		"aurelia-validation": {
+			"optional": true
+		},
+		"echarts": {
+			"optional": true
+		},
+		"jquery": {
+			"optional": true
+		},
+		"moment": {
+			"optional": true
+		},
+		"moment-duration-format": {
+			"optional": true
+		},
+		"ts-md5": {
+			"optional": true
+		},
+		"sanitize-html": {
+			"optional": true
+		}
 	}
 }
