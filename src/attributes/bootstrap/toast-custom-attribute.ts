@@ -19,7 +19,7 @@ export class ToastCustomAttribute {
         };
     }
 
-    bind() {
+    attached() {
         this.toast = new Toast(this._element)
         this.toast.show()
         this._element.addEventListener('hidden.bs.toast', this._eventListener)

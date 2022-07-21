@@ -10,7 +10,7 @@ export class DropdownCustomAttribute {
 
     constructor(private readonly element: Element) {}
 
-    bind() {
+    attached() {
         this.dropdown = new Dropdown(this.element)
     }
 

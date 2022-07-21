@@ -10,7 +10,7 @@ export class CollapseCustomAttribute {
 
     constructor(private readonly element: Element) {}
 
-    bind() {
+    attached() {
         this.collapse = new Collapse(this.element)
     }
 

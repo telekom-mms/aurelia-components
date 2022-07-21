@@ -10,7 +10,7 @@ export class TooltipCustomAttribute {
 
     constructor(private readonly element: Element) {}
 
-    bind() {
+    attached() {
         this.tooltip = new Tooltip(this.element)
     }
 
