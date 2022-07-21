@@ -13,6 +13,7 @@ export class PopoverCustomAttribute {
     ) {
     }
 
+    /** Note: <code>bind</code> happens before <code>aurelia-i18n</code>'s <code>tr</code>, so localised <code>data-bs-content</code> would be always missing. */
     attached() {
         this.popover = new Popover(this._element)
     }
