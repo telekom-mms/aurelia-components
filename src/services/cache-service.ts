@@ -2,33 +2,32 @@
  * Caches the response of any promise value of a loading function and prevents duplicate calls
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
+import {TimeComponents, toMilliseconds} from "../utils/time";
+
 export class CacheService {
     private _cacheContainer:{[key: string]: [number, Promise<any>]} = {};
-    private _defaultCacheTtlSeconds = 10;
+    private _defaultCacheTtl:TimeComponents = {seconds: 10};
 
     /**
      *
      * @param key The key for cached value
      * @param loadingFunction The loading function returning a promise of the value.
-     * @param cacheTtlSeconds The accepted cache timeout in seconds for this call.
+     * @param ttl The cache timeout for the response.
      */
     getForKeyWithLoadingFunction <T> (
         key:string,
         loadingFunction:() => Promise<T>,
-        cacheTtlSeconds = this._defaultCacheTtlSeconds
+        ttl:number|TimeComponents = this._defaultCacheTtl
     ):Promise<T> {
         const cacheEntry = this._cacheContainer[key];
         const now = Date.now();
 
-        if (
-            cacheEntry !== undefined
-            && cacheTtlSeconds > 0
-            && cacheEntry[0] >= now
-        ) {
+        if (cacheEntry !== undefined && cacheEntry[0] >= now) {
             return cacheEntry[1];
         }
 
-        const cacheTtlMs = cacheTtlSeconds * 1000;
+        ttl = CacheService.wrapTtl(ttl);
+        const cacheTtlMs = toMilliseconds(ttl);
         const validUntil = now + cacheTtlMs;
         this._cacheContainer[key] = [
             validUntil,
@@ -42,11 +41,21 @@ export class CacheService {
     }
 
     /**
-     * Changes the default cache TTL.
-     * @param seconds
+     * @deprecated Passing seconds as cache TTL is deprecated.
      */
-    setDefaultCacheTtl(seconds:number) {
-        this._defaultCacheTtlSeconds = seconds;
+    private static wrapTtl(ttl:number|TimeComponents):TimeComponents {
+        if (typeof ttl === "number") {
+            return {seconds: ttl}
+        }
+        return ttl;
+    }
+
+    /**
+     * Changes the default cache TTL.
+     * @param ttl Cache TTL as TimeComponents
+     */
+    setDefaultCacheTtl(ttl:number|TimeComponents) {
+        this._defaultCacheTtl = CacheService.wrapTtl(ttl);
         return this;
     }
 

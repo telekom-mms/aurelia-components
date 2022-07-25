@@ -1,4 +1,5 @@
 import {CacheService} from "../../src/services/cache-service";
+import {toMilliseconds} from "../../src/utils/time";
 
 function sleep(milliseconds) {
   return new Promise((resolve) => {
@@ -26,8 +27,8 @@ describe("CacheService", () => {
     const promiseB = Promise.resolve("Eyo!")
 
     const resultA = await cacheService.getForKeyWithLoadingFunction(key, () => promiseA);
-    await sleep(10);
-    const resultB = await cacheService.getForKeyWithLoadingFunction(key, () => promiseB,0);
+    cacheService.invalidate([key]);
+    const resultB = await cacheService.getForKeyWithLoadingFunction(key, () => promiseB);
 
     expect(resultA).not.toBe(resultB);
   })
@@ -44,23 +45,23 @@ describe("CacheService", () => {
       return Promise.resolve("Katze");
     }
 
-    let result = await cacheService.getForKeyWithLoadingFunction(key, loadingFunction, 1);
+    let result = await cacheService.getForKeyWithLoadingFunction(key, loadingFunction, {ms: 10});
     expect(result).toBe("Katze");
     expect(callCount).toBe(1);
     expect(cacheService.outdatedKeys.length).toBe(0);
 
-    result = await cacheService.getForKeyWithLoadingFunction(key, loadingFunction, 1);
+    result = await cacheService.getForKeyWithLoadingFunction(key, loadingFunction, {ms: 10});
     expect(result).toBe("Katze");
     expect(callCount).toBe(1);
     expect(cacheService.outdatedKeys.length).toBe(0);
 
-    result = await cacheService.getForKeyWithLoadingFunction(key, loadingFunction, 0);
+    await sleep(11);
+    expect(cacheService.outdatedKeys).toContain(key);
+
+    result = await cacheService.getForKeyWithLoadingFunction(key, loadingFunction);
     expect(result).toBe("Katze");
     expect(callCount).toBe(2);
-    expect(cacheService.outdatedKeys.length).toBe(0);
 
-    await sleep(10);
-    expect(cacheService.outdatedKeys).toContain(key);
   })
 
   test("Call invalidates other", async () => {
@@ -80,6 +81,7 @@ describe("CacheService", () => {
     }
 
     const resultA = cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction);
+    await sleep(1);
     const resultB = cacheService.getForKeyWithLoadingFunction(key, fastLoadingFunction);
     expect(resultB).not.toBe(resultA);
 
@@ -91,19 +93,19 @@ describe("CacheService", () => {
     const cacheService = new CacheService()
     const key = "someKey"
     // each must be bigger than the previous one
-    const ttl = 1
-    const cleanupTime = ttl + 1
-    const loadingTime = cleanupTime + 1
+    const ttl = {ms: 10}
+    const cleanupTime = {ms: 20}
+    const loadingTime = {ms: 30}
 
     const slowLoadingFunction = async () => {
-      await sleep(loadingTime * 1000);
+      await sleep(toMilliseconds(loadingTime));
       return Promise.resolve("Schnecke");
     }
 
     const resultA = cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction, ttl)
     resultA.then(_ => {}) // just consume it
 
-    await sleep(cleanupTime * 1000)
+    await sleep(toMilliseconds(cleanupTime))
     cacheService.invalidateOutdated()
 
     //await sleep(loadingTime * 1000)
