@@ -32,8 +32,10 @@ export class CacheService {
         const validUntil = now + cacheTtlMs;
         this._cacheContainer[key] = [
             validUntil,
-            loadingFunction().then(object => {
-                return this._cacheContainer[key][1] = Promise.resolve(object);
+            loadingFunction().then(response => {
+                const cachedResponse = Promise.resolve(response);
+                this._cacheContainer[key] = [validUntil, cachedResponse];
+                return cachedResponse;
             })
         ];
         return this._cacheContainer[key][1];

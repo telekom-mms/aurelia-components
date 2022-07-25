@@ -86,4 +86,27 @@ describe("CacheService", () => {
     await resultA.then(value => expect(value).toBe("Schnecke"));
     await resultB.then(value => expect(value).toBe("Hase"));
   })
+
+  test("Value arriving after key timed out will not crash", async () => {
+    const cacheService = new CacheService()
+    const key = "someKey"
+    // each must be bigger than the previous one
+    const ttl = 1
+    const cleanupTime = ttl + 1
+    const loadingTime = cleanupTime + 1
+
+    const slowLoadingFunction = async () => {
+      await sleep(loadingTime * 1000);
+      return Promise.resolve("Schnecke");
+    }
+
+    const resultA = cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction, ttl)
+    resultA.then(_ => {}) // just consume it
+
+    await sleep(cleanupTime * 1000)
+    cacheService.invalidateOutdated()
+
+    //await sleep(loadingTime * 1000)
+    // will fail if getForKeyWithLoadingFunction throws
+  }, 1000000) // exaggeratedly high timeout so we can use breakpoints without breaking a sweat
 })
