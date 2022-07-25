@@ -15,10 +15,10 @@ import {HttpClient} from 'aurelia-fetch-client';
 @autoinject()
 export class ViewModel {
     constructor(
-        private _cacheService: CacheService,
-        private _httpClient: HttpClient
+        private readonly _cacheService: CacheService,
+        private readonly _httpClient: HttpClient
     ) {
-        this._cacheService.setDefaultCacheTtl(60);
+        this._cacheService.setDefaultCacheTtl({seconds: 60});
     }
     
     loadSomething() {
