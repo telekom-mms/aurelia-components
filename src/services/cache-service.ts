@@ -94,7 +94,8 @@ export class CacheService {
     }
 
     /**
-     * Clears all caches
+     * Clears all caches.
+     * @deprecated Please use {@link invalidate} instead.
      */
     invalidateAll() {
         this._cacheContainer = {};
