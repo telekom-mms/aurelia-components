@@ -1,8 +1,8 @@
 # Utilities
 
-## bootstrap4-form-validation-renderer
+## bootstrap5-form-validation-renderer
 ```typescript
-validationController.addRenderer(new Bootstrap4ValidationFormRenderer());
+validationController.addRenderer(new Bootstrap5ValidationFormRenderer());
 ```
 
 ## checksum (`@deprecated`)
