@@ -14,10 +14,6 @@ export interface DateComponents {
 export interface DateTimeComponents extends DateComponents, TimeComponents {
 }
 
-export interface DurationComponents extends DateTimeComponents {
-    weeks?:number
-}
-
 export function addTimedelta(date: Date, components: DateTimeComponents) {
     return new Date(
         date.getFullYear()+(components.years||0),
@@ -69,13 +65,14 @@ export function normalizeTime(date: Date, components: TimeComponents) {
     return newDate
 }
 
-enum Milliseconds {
+export enum Milliseconds {
     SECOND=1000,
     MINUTE=SECOND*60,
     HOUR=MINUTE*60,
     DAY=HOUR*24,
     WEEK=DAY*7,
     MONTH=DAY*30,
+    QUARTER=MONTH*4,
     YEAR=DAY*365,
 }
 
