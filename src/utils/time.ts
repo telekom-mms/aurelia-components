@@ -8,6 +8,7 @@ export interface TimeComponents {
 export interface DateComponents {
     years?:number,
     months?:number,
+    weeks?:number,
     days?:number,
 }
 
@@ -17,13 +18,13 @@ export interface DateTimeComponents extends DateComponents, TimeComponents {
 
 export function addTimedelta(date: Date, components: DateTimeComponents) {
     return new Date(
-        date.getFullYear()+(components.years||0),
-        date.getMonth()+(components.months||0),
-        date.getDate()+(components.days||0),
-        date.getHours()+(components.hours||0),
-        date.getMinutes()+(components.minutes||0),
-        date.getSeconds()+(components.seconds||0),
-        date.getMilliseconds()+(components.ms||0)
+        date.getUTCFullYear()+(components.years||0),
+        date.getUTCMonth()+(components.months||0),
+        date.getUTCDate()+(components.days||0),
+        date.getUTCHours()+(components.hours||0),
+        date.getUTCMinutes()+(components.minutes||0),
+        date.getUTCSeconds()+(components.seconds||0),
+        date.getUTCMilliseconds()+(components.ms||0)
     );
 }
 
@@ -52,42 +53,96 @@ export function negateTimeComponents(components: DateTimeComponents) {
 export function normalizeTime(date: Date, components: TimeComponents) {
     const newDate = new Date(date);
     if (components.hours >= 0) {
-        newDate.setHours(components.hours>0 ? Math.floor(newDate.getHours() / components.hours) * components.hours : components.hours);
+        newDate.setUTCHours(components.hours>0 ? Math.floor(newDate.getUTCHours() / components.hours) * components.hours : components.hours);
     }
     if (components.minutes >= 0) {
-        newDate.setMinutes(components.minutes > 0 ? Math.floor(newDate.getMinutes() / components.minutes) * components.minutes : components.minutes);
+        newDate.setUTCMinutes(components.minutes > 0 ? Math.floor(newDate.getUTCMinutes() / components.minutes) * components.minutes : components.minutes);
     }
     if (components.seconds >= 0) {
-        newDate.setSeconds(components.seconds > 0 ? Math.floor(newDate.getSeconds() / components.seconds) * components.seconds : components.seconds);
+        newDate.setUTCSeconds(components.seconds > 0 ? Math.floor(newDate.getUTCSeconds() / components.seconds) * components.seconds : components.seconds);
     }
     if (components.ms >= 0) {
-        newDate.setMilliseconds(components.ms > 0 ? Math.floor(newDate.getSeconds() / components.ms) * components.ms : components.ms);
+        newDate.setUTCMilliseconds(components.ms > 0 ? Math.floor(newDate.getUTCMilliseconds() / components.ms) * components.ms : components.ms);
     }
     return newDate
 }
 
-enum Seconds {
-    MINUTE=60,
+enum Milliseconds {
+    SECOND=1000,
+    MINUTE=SECOND*60,
     HOUR=MINUTE*60,
-    // DAY=HOUR*24,
-    // MONTH=DAY*30,
-    // YEAR=MONTH*12,
+    DAY=HOUR*24,
+    WEEK=DAY*7,
+    MONTH=DAY*30,
+    YEAR=DAY*365,
 }
 
-export function toMilliseconds(components: TimeComponents) {
+export function toMilliseconds(components: DateTimeComponents) {
     let ms = 0;
 
     ms += (components.ms||0);
-    ms += (components.seconds||0)*1000;
-    ms += (components.minutes||0)*Seconds.MINUTE*1000;
-    ms += (components.hours||0)*Seconds.HOUR*1000;
-    // ms += (components.days||0)*Seconds.DAY*1000;
-    // ms += (components.months||0)*Seconds.MONTH*1000;
-    // ms += (components.years||0)*Seconds.YEAR*1000;
+    ms += (components.seconds||0)*Milliseconds.SECOND;
+    ms += (components.minutes||0)*Milliseconds.MINUTE;
+    ms += (components.hours||0)*Milliseconds.HOUR;
+    ms += (components.days||0)*Milliseconds.DAY;
+    ms += (components.weeks||0)*Milliseconds.WEEK;
+    ms += (components.months||0)*Milliseconds.MONTH;
+    ms += (components.years||0)*Milliseconds.YEAR;
 
-    return ms
+    return ms;
 }
 
-export function toSeconds(components: TimeComponents) {
+export function toSeconds(components: DateTimeComponents) {
     return toMilliseconds(components) / 1000;
+}
+
+export function calcDuration(time: DateTimeComponents|Date|number):DateTimeComponents {
+    const refDate = new Date();
+    let durationDate;
+    if (time instanceof Date) {
+        durationDate = time
+    } else {
+        if (typeof time !== "number") {
+            time = toMilliseconds(time);
+        }
+        durationDate = new Date(refDate.getTime()+time);
+    }
+
+    const components:DateTimeComponents = {};
+    let value = refDate.getUTCFullYear()+durationDate.getUTCFullYear();
+    if (value!==0) {
+        components.years = value;
+    }
+
+    value = refDate.getUTCMonth()+durationDate.getUTCMonth();
+    if (value!==0) {
+        components.months = value;
+    }
+
+    value = refDate.getUTCDate()+durationDate.getUTCDate();
+    if (value!==0) {
+        components.days = value;
+    }
+
+    value = refDate.getUTCHours()+durationDate.getUTCHours();
+    if (value!==0) {
+        components.hours = value;
+    }
+
+    value = refDate.getUTCMinutes()+durationDate.getUTCMinutes();
+    if (value!==0) {
+        components.minutes = value;
+    }
+
+    value = refDate.getUTCSeconds()+durationDate.getUTCSeconds();
+    if (value!==0) {
+        components.seconds = value;
+    }
+
+    value = refDate.getUTCMilliseconds()+durationDate.getUTCMilliseconds();
+    if (value!==0) {
+        components.ms = value;
+    }
+
+    return components;
 }
