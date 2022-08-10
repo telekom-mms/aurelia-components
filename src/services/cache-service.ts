@@ -2,63 +2,110 @@
  * Caches the response of any promise value of a loading function and prevents duplicate calls
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-export class CacheService {
-    private _cacheContainer = {};
-    private _defaultCacheTtlSeconds = 10;
+import {TimeComponents, toMilliseconds} from "../utils/time";
 
+export class CacheService {
+    private _cacheContainer:{[key: string]: [number, Promise<any>]} = {};
+    private _defaultCacheTtl:TimeComponents = {seconds: 10};
+
+    /**
+     *
+     * @param key The key for cached value
+     * @param loadingFunction The loading function returning a promise of the value.
+     * @param ttl The cache timeout for the response.
+     */
     getForKeyWithLoadingFunction <T> (
         key:string,
         loadingFunction:() => Promise<T>,
-        cacheTtlSeconds = this._defaultCacheTtlSeconds
+        ttl:number|TimeComponents = this._defaultCacheTtl
     ):Promise<T> {
-        let cacheEntry = this._cacheContainer[key];
-        const now = (Date.now()/1000);
-        if (cacheEntry !== undefined) {
-            if (cacheEntry[0] >= now - cacheTtlSeconds) {
-                return cacheEntry[1];
-            }
+        const cacheEntry = this._cacheContainer[key];
+        const now = Date.now();
+
+        if (cacheEntry !== undefined && cacheEntry[0] >= now) {
+            return cacheEntry[1];
         }
 
+        ttl = CacheService.wrapTtl(ttl);
+        const cacheTtlMs = toMilliseconds(ttl);
+        const validUntil = now + cacheTtlMs;
         this._cacheContainer[key] = [
-            now,
-            loadingFunction().then(object=>{
-                return this._cacheContainer[key][1] = Promise.resolve(object);
+            validUntil,
+            loadingFunction().then(response => {
+                const cachedResponse = Promise.resolve(response);
+                this._cacheContainer[key] = [validUntil, cachedResponse];
+                return cachedResponse;
             })
         ];
         return this._cacheContainer[key][1];
     }
 
-    setDefaultCacheTtl(seconds:number) {
-        this._defaultCacheTtlSeconds = seconds;
+    /**
+     * @deprecated Passing seconds as cache TTL is deprecated.
+     */
+    private static wrapTtl(ttl:number|TimeComponents):TimeComponents {
+        if (typeof ttl === "number") {
+            return {seconds: ttl}
+        }
+        return ttl;
+    }
+
+    /**
+     * Changes the default cache TTL.
+     * @param ttl Cache TTL as TimeComponents
+     */
+    setDefaultCacheTtl(ttl:number|TimeComponents) {
+        this._defaultCacheTtl = CacheService.wrapTtl(ttl);
         return this;
     }
 
+    /**
+     * Invalidates a list of keys
+     * @param keys
+     */
     invalidate(keys:string[]) {
-        for (let key of keys) {
+        for (const key of keys) {
             delete this._cacheContainer[key];
         }
         return this;
     }
 
+    /**
+     * Returns a list of outdated keys.
+     */
     get outdatedKeys() {
-        const now = (Date.now()/1000);
+        const now = Date.now();
         let cacheEntry;
         const keys = [];
-        for (let key in this._cacheContainer) {
+        for (const key in this._cacheContainer) {
             cacheEntry = this._cacheContainer[key];
-            if (cacheEntry[0] < now - this._defaultCacheTtlSeconds) {
+            if (cacheEntry[0] < now) {
                 keys.push(key);
             }
         }
         return keys;
     }
 
+    /**
+     * A list of all existing cache keys.
+     */
     get cacheKeys() {
         return Object.keys(this._cacheContainer);
     }
 
+    /**
+     * Clears all caches.
+     * @deprecated Please use {@link invalidate} instead.
+     */
     invalidateAll() {
         this._cacheContainer = {};
         return this;
+    }
+
+    /**
+     * Invalidates all outdated keys.
+     */
+    invalidateOutdated() {
+        this.invalidate(this.outdatedKeys);
     }
 }
