@@ -1,5 +1,30 @@
 {
   "extends": [
     "config:base"
+  ],
+  "assignees": ["Zsar"],
+  "automergeStrategy": "merge-commit",
+  "automergeSchedule": ["on saturday"],
+  "configMigration": true,
+  "rangeStrategy": "update-lockfile",
+  "reviewers": ["Zsar"],
+  "rollbackPrs": true,
+  "schedule": ["on sunday"],
+  "stabilityDays": 5,
+  "packageRules": [
+    {
+      "groupName": "trivial",
+      "matchUpdateTypes": ["bump", "digest", "lockFileMaintenance", "patch", "pin", "pinDigest", "rollback"],
+      "automerge": true
+    },
+    {
+      "groupName": "minor",
+      "matchUpdateTypes": ["minor"]
+    },
+    {
+      "groupName": "major",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    }
   ]
 }
