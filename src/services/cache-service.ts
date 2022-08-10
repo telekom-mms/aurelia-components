@@ -32,9 +32,12 @@ export class CacheService {
         this._cacheContainer[key] = [
             validUntil,
             loadingFunction().then(response => {
-                const cachedResponse = Promise.resolve(response);
-                this._cacheContainer[key] = [validUntil, cachedResponse];
-                return cachedResponse;
+                const cachedResponse = Promise.resolve(response)
+                if (validUntil >= Date.now()) { // lest older, dead key replace newer, still living one
+                    this._cacheContainer[key] = [validUntil, cachedResponse]
+                }
+                // outside 'if', so previous handles on this call still eventually receive the result
+                return cachedResponse
             })
         ];
         return this._cacheContainer[key][1];
@@ -73,7 +76,7 @@ export class CacheService {
     /**
      * Returns a list of outdated keys.
      */
-    get outdatedKeys() {
+    get outdatedKeys(): string[] {
         const now = Date.now();
         let cacheEntry;
         const keys = [];

@@ -102,13 +102,67 @@ describe("CacheService", () => {
       return Promise.resolve("Schnecke");
     }
 
-    const resultA = cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction, ttl)
-    resultA.then(_ => {}) // just consume it
+    const result = cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction, ttl)
+    const handle = result.then(_ => {}) // let result begin to resolve
 
     await sleep(toMilliseconds(cleanupTime))
     cacheService.invalidateOutdated()
 
-    //await sleep(loadingTime * 1000)
+    await handle // wait for result to resolve: no code execution => no exception
     // will fail if getForKeyWithLoadingFunction throws
+  }, 1000000) // exaggeratedly high timeout so we can use breakpoints without breaking a sweat
+
+  test("Dead entries do not supplant living ones", async () => {
+    const cacheService = new CacheService()
+    const key = "someKey"
+    // Each must be greater than the previous one. Script may run too slowly for the math to work out for two-digit values.
+    const ttl = {ms: 100}
+    const cleanupTime = {ms: 150}
+    const loadingTime = {ms: 200}
+    // afterLoadingTimeButBeforeTtlEnds must be (quite considerably) less than ttl.
+    const afterLoadingTimeButBeforeTtlEnds = {ms: 1 + loadingTime.ms - cleanupTime.ms}
+    expect(afterLoadingTimeButBeforeTtlEnds.ms).toBeLessThan(ttl.ms) // Sanity Check
+
+    let counter = 0
+    const fastLoadingFunction = () => Promise.resolve(counter++)
+    const slowLoadingFunction = async () => {
+      const result = counter++ // Copy-by-Value before another call can change counter
+      await sleep(toMilliseconds(loadingTime))
+      return Promise.resolve(result)
+    }
+
+    const actualResults = new Array<number>()
+    cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction, ttl)
+        .then(result => actualResults[0] = result)
+
+    await sleep(toMilliseconds(cleanupTime))
+    cacheService.invalidateOutdated() // entry of slowLoadingFunction removed
+
+    // This will find no entry and thence call fastLoadingFunction.
+    cacheService.getForKeyWithLoadingFunction(key, fastLoadingFunction, ttl)
+        .then(result => actualResults[1] = result)
+
+    // This will find the valid entry 1 and not call fastLoadingFunction again.
+    cacheService.getForKeyWithLoadingFunction(key, fastLoadingFunction, ttl)
+        .then(result => actualResults[2] = result)
+    expect(actualResults[2]).toBe(actualResults[1]) // Sanity Check: Call 2 did not happen because entry 1 is still valid.
+
+    // After this wait, entry 1 is still valid - but slowLoadingFunction now resolves and would replace it with its own, long dead one.
+    await sleep(toMilliseconds(afterLoadingTimeButBeforeTtlEnds))
+    expect(cacheService.outdatedKeys).toHaveLength(0) // Sanity Check: Only the living entry 1 should exist at this point.
+
+    // This would find the zombie entry of slowLoadingFunction instead of the valid entry of fastLoadingFunction.
+    const lastCall = cacheService.getForKeyWithLoadingFunction(key, fastLoadingFunction, ttl)
+        .then(result => actualResults[3] = result)
+    await lastCall // extra line so IDEA breakpoint on previous line works normally
+
+    // Sanity Check: no past value read in the future
+    let previousResult = -1
+    for (const result of actualResults) {
+      expect(result).toBeGreaterThanOrEqual(previousResult)
+      previousResult = result
+    }
+    // Call 3 would have happened originally because entry 1 was supplanted by zombie entry 0.
+    expect(actualResults[3]).toBe(actualResults[1])
   }, 1000000) // exaggeratedly high timeout so we can use breakpoints without breaking a sweat
 })
