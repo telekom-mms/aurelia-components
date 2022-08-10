@@ -8,23 +8,25 @@ export interface TimeComponents {
 export interface DateComponents {
     years?:number,
     months?:number,
-    weeks?:number,
     days?:number,
 }
 
 export interface DateTimeComponents extends DateComponents, TimeComponents {
+}
 
+export interface DurationComponents extends DateTimeComponents {
+    weeks?:number
 }
 
 export function addTimedelta(date: Date, components: DateTimeComponents) {
     return new Date(
-        date.getUTCFullYear()+(components.years||0),
-        date.getUTCMonth()+(components.months||0),
-        date.getUTCDate()+(components.days||0),
-        date.getUTCHours()+(components.hours||0),
-        date.getUTCMinutes()+(components.minutes||0),
-        date.getUTCSeconds()+(components.seconds||0),
-        date.getUTCMilliseconds()+(components.ms||0)
+        date.getFullYear()+(components.years||0),
+        date.getMonth()+(components.months||0),
+        date.getDate()+(components.days||0),
+        date.getHours()+(components.hours||0),
+        date.getMinutes()+(components.minutes||0),
+        date.getSeconds()+(components.seconds||0),
+        date.getMilliseconds()+(components.ms||0)
     );
 }
 
@@ -53,16 +55,16 @@ export function negateTimeComponents(components: DateTimeComponents) {
 export function normalizeTime(date: Date, components: TimeComponents) {
     const newDate = new Date(date);
     if (components.hours >= 0) {
-        newDate.setUTCHours(components.hours>0 ? Math.floor(newDate.getUTCHours() / components.hours) * components.hours : components.hours);
+        newDate.setHours(components.hours>0 ? Math.floor(newDate.getHours() / components.hours) * components.hours : components.hours);
     }
     if (components.minutes >= 0) {
-        newDate.setUTCMinutes(components.minutes > 0 ? Math.floor(newDate.getUTCMinutes() / components.minutes) * components.minutes : components.minutes);
+        newDate.setMinutes(components.minutes > 0 ? Math.floor(newDate.getMinutes() / components.minutes) * components.minutes : components.minutes);
     }
     if (components.seconds >= 0) {
-        newDate.setUTCSeconds(components.seconds > 0 ? Math.floor(newDate.getUTCSeconds() / components.seconds) * components.seconds : components.seconds);
+        newDate.setSeconds(components.seconds > 0 ? Math.floor(newDate.getSeconds() / components.seconds) * components.seconds : components.seconds);
     }
     if (components.ms >= 0) {
-        newDate.setUTCMilliseconds(components.ms > 0 ? Math.floor(newDate.getUTCMilliseconds() / components.ms) * components.ms : components.ms);
+        newDate.setMilliseconds(components.ms > 0 ? Math.floor(newDate.getMilliseconds() / components.ms) * components.ms : components.ms);
     }
     return newDate
 }
@@ -85,7 +87,6 @@ export function toMilliseconds(components: DateTimeComponents) {
     ms += (components.minutes||0)*Milliseconds.MINUTE;
     ms += (components.hours||0)*Milliseconds.HOUR;
     ms += (components.days||0)*Milliseconds.DAY;
-    ms += (components.weeks||0)*Milliseconds.WEEK;
     ms += (components.months||0)*Milliseconds.MONTH;
     ms += (components.years||0)*Milliseconds.YEAR;
 
@@ -96,50 +97,39 @@ export function toSeconds(components: DateTimeComponents) {
     return toMilliseconds(components) / 1000;
 }
 
-export function calcDuration(time: DateTimeComponents|Date|number):DateTimeComponents {
-    const refDate = new Date();
-    let durationDate;
-    if (time instanceof Date) {
-        durationDate = time
-    } else {
-        if (typeof time !== "number") {
-            time = toMilliseconds(time);
-        }
-        durationDate = new Date(refDate.getTime()+time);
-    }
-
+export function calcDuration(startDate:Date, endDate:Date):DateTimeComponents {
     const components:DateTimeComponents = {};
-    let value = refDate.getUTCFullYear()+durationDate.getUTCFullYear();
+    let value = endDate.getFullYear()-startDate.getFullYear();
     if (value!==0) {
         components.years = value;
     }
 
-    value = refDate.getUTCMonth()+durationDate.getUTCMonth();
+    value = endDate.getMonth()-startDate.getMonth();
     if (value!==0) {
         components.months = value;
     }
 
-    value = refDate.getUTCDate()+durationDate.getUTCDate();
+    value = endDate.getDate()-startDate.getDate();
     if (value!==0) {
         components.days = value;
     }
 
-    value = refDate.getUTCHours()+durationDate.getUTCHours();
+    value = endDate.getHours()-startDate.getHours();
     if (value!==0) {
         components.hours = value;
     }
 
-    value = refDate.getUTCMinutes()+durationDate.getUTCMinutes();
+    value = endDate.getMinutes()-startDate.getMinutes();
     if (value!==0) {
         components.minutes = value;
     }
 
-    value = refDate.getUTCSeconds()+durationDate.getUTCSeconds();
+    value = endDate.getSeconds()-startDate.getSeconds();
     if (value!==0) {
         components.seconds = value;
     }
 
-    value = refDate.getUTCMilliseconds()+durationDate.getUTCMilliseconds();
+    value = endDate.getMilliseconds()-startDate.getMilliseconds();
     if (value!==0) {
         components.ms = value;
     }
