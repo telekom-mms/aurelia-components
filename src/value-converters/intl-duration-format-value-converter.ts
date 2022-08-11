@@ -2,6 +2,12 @@ import {valueConverter} from 'aurelia-binding'
 import {AbstractLocaleValueConverter} from "./abstract-locale-value-converter";
 import {DateTimeComponents, Milliseconds, toMilliseconds} from "../utils/time";
 
+type FormattingPart = {
+    type: "literal"|"integer"|string,
+    value: string,
+    unit?: string,
+}
+
 /**
  * Formats dates, components or milliseconds to human readable durations.
  * Usage: ${dateProperty|durationFormat}
@@ -41,7 +47,7 @@ export class IntlDurationFormatValueConverter extends AbstractLocaleValueConvert
     }
 
     /**
-     * Set the seperator for the option id.
+     * Set the components' separator for the option id.
      * @param id
      * @param separator
      */
@@ -63,12 +69,10 @@ export class IntlDurationFormatValueConverter extends AbstractLocaleValueConvert
      * @param value The value to format.
      * @param optionId Given option id for formatting, units and separator.
      */
-    toView(value: Date|DateTimeComponents|number = 0, optionId: string = "default"): string {
+    toView(value: DateTimeComponents|number = 0, optionId: string = "default"): string {
         const formatter = new Intl.RelativeTimeFormat(this.getLocale(), this._options[optionId]);
 
-        if (value instanceof Date) {
-            value = value.getTime() - new Date().getTime();
-        } else if (typeof value !== "number") {
+        if (typeof value !== "number") {
             value = toMilliseconds(value);
         }
 
@@ -78,7 +82,7 @@ export class IntlDurationFormatValueConverter extends AbstractLocaleValueConvert
         const multiplier = value < 0 ? -1 :1;
         value = Math.abs(value);
 
-        const unitFormats = [];
+        const unitFormats:FormattingPart[][] = [];
         for (const unit of units) {
             const unitMs = this._partsMap[unit];
             const amount = Math.floor(value/unitMs);
@@ -92,23 +96,6 @@ export class IntlDurationFormatValueConverter extends AbstractLocaleValueConvert
             }
         }
 
-        // Remove duplicate literals
-        // if (unitFormats.length > 1) {
-        //     const firstUnitFormat:object[] = unitFormats[0];
-        //     for (const formatPart of firstUnitFormat) {
-        //         if (formatPart["type"] === "literal") {
-        //             const formatPartToRemove = formatPart["value"];
-        //             for (let s = 1; s < unitFormats.length; ++s) {
-        //                 const otherUnitFormat:object[] = unitFormats[s];
-        //                 for (const formatPart of otherUnitFormat) {
-        //                     if (formatPart["value"] === formatPartToRemove) {
-        //                         otherUnitFormat.splice(otherUnitFormat.indexOf(formatPart), 1);
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-        return unitFormats.map(unitFormat => unitFormat.map(part => part["value"]).join("")).join(separator);
+        return unitFormats.map(unitFormat => unitFormat.map(part => part.value).join("")).join(separator);
     }
 }

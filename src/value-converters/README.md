@@ -79,7 +79,7 @@ Examples:
 Formats a unix timestamp as milliseconds or formatted date string to a localized date format using *momentjs*.
 Default format is "LLL".
 
-This value converter is `@deprecated`, because the [IntlDateFormatValueConverter](#intl-date-format-value-converter) provides a standard interface.
+This value converter is `@deprecated`, because the [IntlDateFormatValueConverter](#intl-date-format-value-converter) provides a standard interface without *momentjs*.
 
 You may need to update your `tsconfig.json`.
 ```json
@@ -122,7 +122,26 @@ formatter.setOptions("long", { dateStyle: 'full', timeStyle: 'long' });
 <span>Long: ${unixTimeStampOrFormattedDateString|dateFormat:"long"}</span>
 ```
 
-## duration-format-value-converter
+## intl-duration-format-value-converter
+
+Formats a duration as milliseconds or DateTimeComponents to relative time units based on [Intl.RelativeTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat).
+
+**API**
+```typescript
+const formatter = aurelia.container.get(IntlDurationFormatValueConverter);
+formatter.setUnits("default", ["days", "hours"]);
+formatter.setSeparators("default", " and ");
+formatter.setOptions("default", {numberic: "auto"});
+```
+
+**Template**
+```html
+<span>${msOrDateTimeComponents|durationFormat}</span>
+```
+
+## duration-format-value-converter (`@deprecated`)
+
+This value converter is `@deprecated`, because the [IntlDurationFormatValueConverter](#intl-duration-format-value-converter) provides a standard interface without *momentjs*.
 
 **Template**
 ```html

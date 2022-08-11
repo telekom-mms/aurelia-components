@@ -13,6 +13,12 @@ formatter.setLocale("en");
 formatter.setUnits("years-only", ["years"]);
 formatter.setUnits("quarters-and-weeks", ["quarter","weeks", "days"]);
 
+formatter.setUnits("day-only", ["day"]);
+formatter.setOptions("day-only", {numeric: "auto"});
+
+formatter.setUnits("days-and-hours", ["day", "hour"]);
+formatter.setOptions("days-and-hours", {numeric: "auto"});
+
 const formatData = [
     {
         input: <DateTimeComponents>{
@@ -36,7 +42,7 @@ const formatData = [
             seconds: 6
         },
         optionId: null,
-        expectedFormat: "in 3 days, 4 hours, 5 minutes, 6 seconds"
+        expectedFormat: "in 3 days, in 4 hours, in 5 minutes, in 6 seconds"
     },
     {
         input: <DateTimeComponents>{
@@ -46,19 +52,55 @@ const formatData = [
             seconds: -1
         },
         optionId: null,
-        expectedFormat: "1 day, 1 hour, 1 minute, 1 second ago"
+        expectedFormat: "1 day ago, 1 hour ago, 1 minute ago, 1 second ago"
     },
     {
         input: <DateTimeComponents>{
             days: 175
         },
         optionId: "quarters-and-weeks",
-        expectedFormat: "in 1 quarter, 7 weeks, 6 days"
+        expectedFormat: "in 1 quarter, in 7 weeks, in 6 days"
+    },
+    {
+        input: <DateTimeComponents>{
+            days: 2,
+        },
+        optionId: "day-only",
+        locale: "es",
+        expectedFormat: "pasado mañana"
+    },
+    {
+        input: <DateTimeComponents>{
+            hours: -100,
+        },
+        optionId: "days-and-hours",
+        locale: "es",
+        expectedFormat: "hace 4 días, hace 4 horas"
+    },
+    {
+        input: <DateTimeComponents>{
+            hours: -100,
+        },
+        optionId: "days-and-hours",
+        locale: "en",
+        expectedFormat: "4 days ago, 4 hours ago"
+    },
+    {
+        input: <DateTimeComponents>{
+            hours: -25,
+        },
+        optionId: "days-and-hours",
+        locale: "en",
+        expectedFormat: "yesterday, 1 hour ago"
     },
 ];
 
 describe.each(formatData)(`durationFormat`, (data) => {
-    it(`toView ${toSeconds(data.input)}s, option: ${data.optionId}`, () => {
+    it(`toView ${toSeconds(data.input)}s, option: ${data.optionId}, locale: ${data.locale}`, () => {
+        if (data.locale) {
+            formatter.setLocale(data.locale);
+        }
+
         const formatted = formatter.toView(data.input, data.optionId);
         expect(formatted).toEqual(data.expectedFormat);
     });
