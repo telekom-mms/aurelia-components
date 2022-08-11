@@ -1,11 +1,5 @@
 import {CacheService} from "../../src/services/cache-service";
-import {toMilliseconds} from "../../src/utils/time";
-
-function sleep(milliseconds) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, milliseconds);
-  });
-}
+import {sleep, toMilliseconds} from "../../src/utils/time";
 
 describe("CacheService", () => {
   test(".getForKeyWithLoadingFunction loading non-existing key creates new Entry", () => {
@@ -110,5 +104,35 @@ describe("CacheService", () => {
 
     //await sleep(loadingTime * 1000)
     // will fail if getForKeyWithLoadingFunction throws
-  }, 1000000) // exaggeratedly high timeout so we can use breakpoints without breaking a sweat
+  })
+
+  test("Zombie key doesn't kill living", async () => {
+    const cacheService = new CacheService()
+    const key = "someKey"
+
+    const shortTtl = {ms: 1};
+    const longTtl = {seconds: 1};
+    const loadingTime = {ms: 30};
+
+    const slowLoadingFunction = async () => {
+      await sleep(toMilliseconds(loadingTime));
+      return Promise.resolve("Schnecke");
+    }
+
+    const fastLoadingFunction = async () => {
+      return Promise.resolve("Hase");
+    }
+
+    const zombie = cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction, shortTtl);
+    await sleep(toMilliseconds(shortTtl)+1);
+
+    const living = cacheService.getForKeyWithLoadingFunction(key, fastLoadingFunction, longTtl);
+    const livingResponse = await living;
+    expect(livingResponse).toBe("Hase");
+
+    const zombieResponse = await zombie;
+    expect(zombieResponse).toBe("Schnecke");
+
+    expect(cacheService.outdatedKeys).not.toContain(key);
+  })
 })

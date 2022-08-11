@@ -91,3 +91,13 @@ export function toMilliseconds(components: TimeComponents) {
 export function toSeconds(components: TimeComponents) {
     return toMilliseconds(components) / 1000;
 }
+
+/**
+ * Sleeps for a several amount of time
+ * @param milliseconds
+ */
+export function sleep(milliseconds: number) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, milliseconds);
+    });
+}

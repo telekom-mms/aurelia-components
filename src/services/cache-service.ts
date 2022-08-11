@@ -33,7 +33,11 @@ export class CacheService {
             validUntil,
             loadingFunction().then(response => {
                 const cachedResponse = Promise.resolve(response);
-                this._cacheContainer[key] = [validUntil, cachedResponse];
+                if (validUntil > Date.now()) {
+                    this._cacheContainer[key] = [validUntil, cachedResponse];
+                } else {
+                    console.warn(`loading function for cache key '${key}' took longer than ttl: ${cacheTtlMs}ms`);
+                }
                 return cachedResponse;
             })
         ];
@@ -76,7 +80,7 @@ export class CacheService {
     get outdatedKeys() {
         const now = Date.now();
         let cacheEntry;
-        const keys = [];
+        const keys:string[] = [];
         for (const key in this._cacheContainer) {
             cacheEntry = this._cacheContainer[key];
             if (cacheEntry[0] < now) {
