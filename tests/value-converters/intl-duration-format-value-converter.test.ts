@@ -59,10 +59,10 @@ const formatData = [
     },
     {
         input: <DateTimeComponents>{
-            days: 175
+            days: 188
         },
         optionId: "quarters-and-weeks",
-        expectedFormat: "in 1 quarter, in 7 weeks, in 6 days"
+        expectedFormat: "in 2 quarters, in 1 week, in 1 day"
     },
     {
         input: <DateTimeComponents>{

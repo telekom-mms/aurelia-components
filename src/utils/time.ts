@@ -72,7 +72,7 @@ export enum Milliseconds {
     DAY=HOUR*24,
     WEEK=DAY*7,
     MONTH=DAY*30,
-    QUARTER=MONTH*4,
+    QUARTER=MONTH*3,
     YEAR=DAY*365,
 }
 
