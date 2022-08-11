@@ -126,18 +126,20 @@ formatter.setOptions("long", { dateStyle: 'full', timeStyle: 'long' });
 
 Formats a duration as milliseconds or DateTimeComponents to relative time units based on [Intl.RelativeTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat).
 
+**Template**
+```html
+<span>${millisecondsOrDateTimeComponents|durationFormat}</span>
+```
+
 **API**
 ```typescript
 const formatter = aurelia.container.get(IntlDurationFormatValueConverter);
-formatter.setUnits("default", ["days", "hours"]);
-formatter.setSeparators("default", " and ");
-formatter.setOptions("default", {numberic: "auto"});
+formatter.setOptions("short", {style: "short"});
+formatter.setSeparators("short", " ");
 ```
 
-**Template**
-```html
-<span>${msOrDateTimeComponents|durationFormat}</span>
-```
+Examples:
+* `${4100000|durationFormat:"short"}` -> `in 1 hr. in 8 min. in 20 sec.`
 
 ## duration-format-value-converter (`@deprecated`)
 
@@ -145,10 +147,10 @@ This value converter is `@deprecated`, because the [IntlDurationFormatValueConve
 
 **Template**
 ```html
-<span>${milliSeconds|durationFormat:"h[h] m[min] s[s]"}</span>
+<span>${milliseconds|durationFormat:"h[h] m[min] s[s]"}</span>
 ```
 Examples:
-* `${4100|durationFormat}` -> `1h 8mins 20s`
+* `${4100000|durationFormat}` -> `1h 8mins 20s`
 
 **API**
 ```typescript

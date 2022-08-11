@@ -76,8 +76,8 @@ export class IntlDurationFormatValueConverter extends AbstractLocaleValueConvert
             value = toMilliseconds(value);
         }
 
-        const units = this._units[!this._units[optionId]?"default":optionId]
-        const separator = this._separators[!this._separators[optionId]?"default":optionId];
+        const units = this._units[this._units[optionId]===undefined?"default":optionId]
+        const separator = this._separators[this._separators[optionId]===undefined?"default":optionId];
 
         const multiplier = value < 0 ? -1 :1;
         value = Math.abs(value);

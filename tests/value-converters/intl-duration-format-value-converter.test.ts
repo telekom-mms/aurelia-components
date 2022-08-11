@@ -19,6 +19,9 @@ formatter.setOptions("day-only", {numeric: "auto"});
 formatter.setUnits("days-and-hours", ["day", "hour"]);
 formatter.setOptions("days-and-hours", {numeric: "auto"});
 
+formatter.setOptions("short", {style: "short"});
+formatter.setSeparators("short", " ");
+
 const formatData = [
     {
         input: <DateTimeComponents>{
@@ -92,6 +95,14 @@ const formatData = [
         optionId: "days-and-hours",
         locale: "en",
         expectedFormat: "yesterday, 1 hour ago"
+    },
+    {
+        input: <DateTimeComponents>{
+            seconds: 4100,
+        },
+        optionId: "short",
+        locale: "en",
+        expectedFormat: "in 1 hr. in 8 min. in 20 sec."
     },
 ];
 
