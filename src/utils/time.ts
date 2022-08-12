@@ -133,3 +133,13 @@ export function calcDuration(startDate:Date, endDate:Date):DateTimeComponents {
 
     return components;
 }
+
+/**
+ * Sleeps for a several amount of time
+ * @param components
+ */
+export function sleep(components: TimeComponents) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, toMilliseconds(components));
+    });
+}
