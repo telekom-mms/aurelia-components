@@ -1,5 +1,5 @@
 import {CacheService} from "../../src/services/cache-service";
-import {sleep, toMilliseconds} from "../../src/utils/time";
+import {sleep} from "../../src/utils/time";
 
 describe("CacheService", () => {
   test(".getForKeyWithLoadingFunction loading non-existing key creates new Entry", () => {
@@ -49,7 +49,7 @@ describe("CacheService", () => {
     expect(callCount).toBe(1);
     expect(cacheService.outdatedKeys.length).toBe(0);
 
-    await sleep(11);
+    await sleep({ms: 11});
     expect(cacheService.outdatedKeys).toContain(key);
 
     result = await cacheService.getForKeyWithLoadingFunction(key, loadingFunction);
@@ -70,12 +70,12 @@ describe("CacheService", () => {
     }
 
     const slowLoadingFunction = async () => {
-      await sleep(10);
+      await sleep({ms: 10});
       return Promise.resolve("Schnecke");
     }
 
     const resultA = cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction);
-    await sleep(1);
+    await sleep({ms: 1});
     const resultB = cacheService.getForKeyWithLoadingFunction(key, fastLoadingFunction);
     expect(resultB).not.toBe(resultA);
 
@@ -92,14 +92,14 @@ describe("CacheService", () => {
     const loadingTime = {ms: 30}
 
     const slowLoadingFunction = async () => {
-      await sleep(toMilliseconds(loadingTime));
+      await sleep(loadingTime);
       return Promise.resolve("Schnecke");
     }
 
     const resultA = cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction, ttl)
     resultA.then(_ => {}) // just consume it
 
-    await sleep(toMilliseconds(cleanupTime))
+    await sleep(cleanupTime)
     cacheService.invalidateOutdated()
 
     //await sleep(loadingTime * 1000)
@@ -115,7 +115,7 @@ describe("CacheService", () => {
     const loadingTime = {ms: 30};
 
     const slowLoadingFunction = async () => {
-      await sleep(toMilliseconds(loadingTime));
+      await sleep(loadingTime);
       return Promise.resolve("Schnecke");
     }
 
@@ -124,7 +124,7 @@ describe("CacheService", () => {
     }
 
     const zombie = cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction, shortTtl);
-    await sleep(toMilliseconds(shortTtl)+1);
+    await sleep(shortTtl);
 
     const living = cacheService.getForKeyWithLoadingFunction(key, fastLoadingFunction, longTtl);
     const livingResponse = await living;
