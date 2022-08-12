@@ -12,7 +12,8 @@
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
     "lib": [
-      "es2017",
+      "es2020",
+      "es2021.intl",
       "dom"
     ],
     /*

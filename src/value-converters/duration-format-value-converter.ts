@@ -5,6 +5,7 @@ import * as moment from "moment";
  * Formats time durations using moment.
  * Usage: ${seconds|durationFormat}
  * @author Mike Reiche <mike@reiche.world>
+ * @deprecated Use {@link IntlDurationFormatValueConverter} instead.
  */
 export class DurationFormatValueConverter {
     private _defaultFormat = "h[h] m[min] s[s]";

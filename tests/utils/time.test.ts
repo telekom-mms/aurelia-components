@@ -1,5 +1,5 @@
 import {
-  addTimedelta,
+  addTimedelta, calcDuration,
   DateTimeComponents,
   normalizeTime, subtractTimedelta,
   TimeComponents,
@@ -36,7 +36,7 @@ test("normalize time", () => {
 })
 
 test("add/substract time", () => {
-  const start = new Date(0);
+  const startDate = new Date(0);
   const components: DateTimeComponents = {
     years: 4,
     months: 14,
@@ -46,9 +46,29 @@ test("add/substract time", () => {
     seconds: 122,
     ms: 4000
   }
-  const later = addTimedelta(start, components);
+  const later = addTimedelta(startDate, components);
   expect(later.toISOString()).toBe("1975-04-07T13:08:06.000Z")
 
   const before = subtractTimedelta(later, components);
-  expect(before.toISOString()).toBe(start.toISOString());
+  expect(before.toISOString()).toBe(startDate.toISOString());
+});
+
+test("calcDuration", () => {
+  const components: DateTimeComponents = {
+    years: 4,
+    months: 14,
+    days: 36,
+    hours: 36,
+    minutes: 66,
+    seconds: 122,
+    ms: 4000
+  }
+
+  const startDate = new Date(0);
+  const endDate = addTimedelta(startDate, components);
+  expect(endDate.toISOString()).toBe("1975-04-07T13:08:06.000Z");
+
+  const duration = calcDuration(startDate, endDate);
+  const newEndDate = addTimedelta(startDate, duration);
+  expect(newEndDate.toISOString()).toBe(endDate.toISOString());
 });

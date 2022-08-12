@@ -12,7 +12,6 @@ export interface DateComponents {
 }
 
 export interface DateTimeComponents extends DateComponents, TimeComponents {
-
 }
 
 export function addTimedelta(date: Date, components: DateTimeComponents) {
@@ -61,33 +60,76 @@ export function normalizeTime(date: Date, components: TimeComponents) {
         newDate.setSeconds(components.seconds > 0 ? Math.floor(newDate.getSeconds() / components.seconds) * components.seconds : components.seconds);
     }
     if (components.ms >= 0) {
-        newDate.setMilliseconds(components.ms > 0 ? Math.floor(newDate.getSeconds() / components.ms) * components.ms : components.ms);
+        newDate.setMilliseconds(components.ms > 0 ? Math.floor(newDate.getMilliseconds() / components.ms) * components.ms : components.ms);
     }
     return newDate
 }
 
-enum Seconds {
-    MINUTE=60,
+export enum Milliseconds {
+    SECOND=1000,
+    MINUTE=SECOND*60,
     HOUR=MINUTE*60,
-    // DAY=HOUR*24,
-    // MONTH=DAY*30,
-    // YEAR=MONTH*12,
+    DAY=HOUR*24,
+    WEEK=DAY*7,
+    MONTH=DAY*30,
+    QUARTER=MONTH*3,
+    YEAR=DAY*365,
 }
 
-export function toMilliseconds(components: TimeComponents) {
+export function toMilliseconds(components: DateTimeComponents) {
     let ms = 0;
 
     ms += (components.ms||0);
-    ms += (components.seconds||0)*1000;
-    ms += (components.minutes||0)*Seconds.MINUTE*1000;
-    ms += (components.hours||0)*Seconds.HOUR*1000;
-    // ms += (components.days||0)*Seconds.DAY*1000;
-    // ms += (components.months||0)*Seconds.MONTH*1000;
-    // ms += (components.years||0)*Seconds.YEAR*1000;
+    ms += (components.seconds||0)*Milliseconds.SECOND;
+    ms += (components.minutes||0)*Milliseconds.MINUTE;
+    ms += (components.hours||0)*Milliseconds.HOUR;
+    ms += (components.days||0)*Milliseconds.DAY;
+    ms += (components.months||0)*Milliseconds.MONTH;
+    ms += (components.years||0)*Milliseconds.YEAR;
 
-    return ms
+    return ms;
 }
 
-export function toSeconds(components: TimeComponents) {
+export function toSeconds(components: DateTimeComponents) {
     return toMilliseconds(components) / 1000;
+}
+
+export function calcDuration(startDate:Date, endDate:Date):DateTimeComponents {
+    const components:DateTimeComponents = {};
+    let value = endDate.getFullYear()-startDate.getFullYear();
+    if (value!==0) {
+        components.years = value;
+    }
+
+    value = endDate.getMonth()-startDate.getMonth();
+    if (value!==0) {
+        components.months = value;
+    }
+
+    value = endDate.getDate()-startDate.getDate();
+    if (value!==0) {
+        components.days = value;
+    }
+
+    value = endDate.getHours()-startDate.getHours();
+    if (value!==0) {
+        components.hours = value;
+    }
+
+    value = endDate.getMinutes()-startDate.getMinutes();
+    if (value!==0) {
+        components.minutes = value;
+    }
+
+    value = endDate.getSeconds()-startDate.getSeconds();
+    if (value!==0) {
+        components.seconds = value;
+    }
+
+    value = endDate.getMilliseconds()-startDate.getMilliseconds();
+    if (value!==0) {
+        components.ms = value;
+    }
+
+    return components;
 }
