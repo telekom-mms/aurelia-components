@@ -1,5 +1,16 @@
 # Utilities
 
+## array/unique
+
+Filters array to unique elements.
+
+```typescript
+import {unique} from "array";
+
+const array = ["a", "a", "b", "b", "c", "c", "d"];
+const uniqueArray = unique(array, (a, b) => a.localeCompare(b));
+```
+
 ## bootstrap4-form-validation-renderer
 ```typescript
 validationController.addRenderer(new Bootstrap4ValidationFormRenderer());
