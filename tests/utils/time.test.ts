@@ -1,7 +1,7 @@
 import {
   addTimedelta, calcDuration,
   DateTimeComponents,
-  normalizeTime, subtractTimedelta,
+  normalizeTime, setComponents, subtractTimedelta,
   TimeComponents,
   toMilliseconds,
   toSeconds
@@ -71,4 +71,9 @@ test("calcDuration", () => {
   const duration = calcDuration(startDate, endDate);
   const newEndDate = addTimedelta(startDate, duration);
   expect(newEndDate.toISOString()).toBe(endDate.toISOString());
+});
+
+test("setComponents", () => {
+  const newDate = setComponents(new Date(0), {hours: 12, minutes: 34, seconds: 56});
+  expect(newDate.toISOString()).toBe("1970-01-01T11:34:56.000Z");
 });
