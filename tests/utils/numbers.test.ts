@@ -1,4 +1,4 @@
-import {bytesMap, getFactor, kiloMap} from "../../src/utils/numbers";
+import {bytesMap, getFactor, kiloMap, round} from "../../src/utils/numbers";
 
 const bytesData = [
   {
@@ -95,3 +95,32 @@ test("formatted kiloMap", () => {
   const formatted = `${(posts/factor).toFixed(1)}${label}`
   expect(formatted).toBe("1.3k");
 })
+
+const roundData = [
+  {
+    input: 13.37,
+    precision: 1,
+    expected: 13.4,
+  },
+  {
+    input: 13.37,
+    precision: 2,
+    expected: 13.37,
+  },
+  {
+    input: 13.37,
+    precision: 3,
+    expected: 13.370,
+  },
+  {
+    input: 13.371337,
+    precision: 5,
+    expected: 13.37134,
+  },
+];
+
+describe.each(roundData)('round', (data) => {
+  it(`round '${data.input}'`, () => {
+    expect(round(data.input, data.precision)).toEqual(data.expected);
+  });
+});
