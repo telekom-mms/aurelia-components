@@ -41,9 +41,9 @@ export function negateTimeComponents(components: DateTimeComponents): TimeCompon
 }
 
 /**
- * Sets the date components of a date inline.
- * @param date
- * @param components
+ * Sets the date components for a given date and returns a new one.
+ * @param date Reference date
+ * @param components Components to set
  */
 export function setComponents(date: Date, components: DateTimeComponents): Date {
     const newDate = new Date(date);
