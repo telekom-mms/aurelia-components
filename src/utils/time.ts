@@ -6,9 +6,9 @@ export interface TimeComponents {
 }
 
 export interface DateComponents {
-    years?:number,
-    months?:number,
-    days?:number,
+    years?: number;
+    months?: number;
+    days?: number;
 }
 
 export interface DateTimeComponents extends DateComponents, TimeComponents {
@@ -27,12 +27,13 @@ export function addTimedelta(date: Date, components: DateTimeComponents): Date {
 }
 
 export function subtractTimedelta(date: Date, components: DateTimeComponents): Date {
-    return addTimedelta(date, negateTimeComponents(components));
+    return addTimedelta(date, negateDateTimeComponents(components));
 }
 
-export function negateTimeComponents(components: DateTimeComponents): TimeComponents {
-    const negComponents:TimeComponents = {}
-    for (const key in components) {
+export function negateDateTimeComponents(components: DateTimeComponents): TimeComponents {
+    const negComponents: DateTimeComponents = {}
+    let key: keyof DateTimeComponents
+    for (key in components) {
         if (components[key]) {
             negComponents[key] = -components[key];
         }

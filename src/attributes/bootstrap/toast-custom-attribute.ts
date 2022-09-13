@@ -12,8 +12,8 @@ export class ToastCustomAttribute {
     constructor(
         private readonly _element: Element,
     ) {
-        this._eventListener = () => {
-            this._element.dispatchEvent(new CustomEvent("toast-hidden", {
+        this._eventListener = (_ev: Event) => {
+            this._element.dispatchEvent(new CustomEvent("toast-hidden",{
                 bubbles: true
             }));
         };

@@ -6,7 +6,6 @@ import {
   toMilliseconds,
   toSeconds
 } from "../../src/utils/time";
-import {bytesMap, getFactor} from "../../src/utils/numbers";
 
 test('test components to ms', () => {
   expect(toMilliseconds({seconds: 12})).toBe(12000);

@@ -17,7 +17,7 @@ export class DateFormatValueConverter {
         return this._defaultFormat;
     }
 
-    toView(value, format:string = this._defaultFormat): string {
+    toView(value: moment.MomentInput, format:string = this._defaultFormat): string {
         return moment(value).format(format);
     }
 }

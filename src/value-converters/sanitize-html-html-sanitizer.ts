@@ -1,7 +1,8 @@
 import sanitize from 'sanitize-html'
 import {HTMLSanitizer} from "aurelia-templating-resources"
 
-type IOptions = sanitize.IOptions
+// adding index signature, but allowing explicit any because there are so many options
+type IOptions = sanitize.IOptions & {[key: string]: any}
 
 /**
  *  Sanitizes HTML tags for use in `innerhtml` attribute.

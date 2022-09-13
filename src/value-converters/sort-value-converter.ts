@@ -5,10 +5,10 @@
  */
 export class SortValueConverter {
     toView(array:any[], propertyName:string, factor:number=1) {
-        if (array instanceof Array === false) {
+        if (!(array instanceof Array)) {
             return [];
         }
-        let propertyPath;
+        let propertyPath: string[];
         if (propertyName) {
             propertyPath = propertyName.split('.');
         } else {
@@ -25,7 +25,7 @@ export class SortValueConverter {
         });
     }
 
-    static getPropertyByPath(object:object, propertyPath:string[]):any {
+    static getPropertyByPath(object: { [index: string]: any }, propertyPath: string[]): any {
         for (const propertyName of propertyPath) {
             if (object[propertyName] !== undefined) {
                 object = object[propertyName];

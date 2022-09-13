@@ -7,10 +7,10 @@ import {recursiveObjectSort} from "./object";
  * Method for generating simple object checksums
  * @author Mike Reiche <mike.reiche@t-systems.com>
  * @param object
- * @param objects
+ * @param _objects
  * @deprecated Use your own checksum library.
  */
-export function createChecksum(object: object | [], objects: any[] = []): string {
+export function createChecksum(object: object | [], _objects: any[] = []): string {
     if (!object) {
         return ""
     }

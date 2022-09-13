@@ -8,10 +8,10 @@ test('test timer', async () => {
   const timer = new Timer({
     tick: {ms: 4},
     duration: duration,
-    onTick: timer => {
+    onTick: _timer => {
       ++ticks
     },
-    onComplete: timer => {
+    onComplete: _timer => {
       completed = true
     }
   })
