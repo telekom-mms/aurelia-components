@@ -1,3 +1,5 @@
+// no type definitions but deprecated anyways, so:
+// @ts-ignore
 import {Md5} from 'ts-md5/dist/md5';
 import {recursiveObjectSort} from "./object";
 
