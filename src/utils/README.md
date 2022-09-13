@@ -59,7 +59,7 @@ Provides some time functions.
 ### Adding/subtracting time
 
 ```typescript
-import {addTimedelta, DateTimeComponents, subtractTimedelta} from "./time";
+import {addTimedelta, DateTimeComponents, subtractTimedelta} from "utils/time";
 
 const now = new Date();
 const timedelta: DateTimeComponents = {
