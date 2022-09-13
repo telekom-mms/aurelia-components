@@ -6,6 +6,7 @@ import {
   toMilliseconds,
   toSeconds
 } from "../../src/utils/time";
+import {bytesMap, getFactor} from "../../src/utils/numbers";
 
 test('test components to ms', () => {
   expect(toMilliseconds({seconds: 12})).toBe(12000);
@@ -73,7 +74,20 @@ test("calcDuration", () => {
   expect(newEndDate.toISOString()).toBe(endDate.toISOString());
 });
 
-test("setComponents", () => {
-  const newDate = setComponents(new Date(0), {hours: 12, minutes: 34, seconds: 56});
-  expect(newDate.toISOString()).toBe("1970-01-01T11:34:56.000Z");
+const componentsData:{input:DateTimeComponents, expectedFormat: string}[] = [
+  {
+    input: {hours: 12, minutes: 34, seconds: 56},
+    expectedFormat: "1970-01-01T11:34:56.000Z"
+  },
+  {
+    input: {months: 2, days: 32},
+    expectedFormat: "1970-04-01T00:00:00.000Z"
+  },
+];
+
+describe.each(componentsData)('setComponents', (data) => {
+  it(`components '${toMilliseconds(data.input)}'`, () => {
+    const newDate = setComponents(new Date(0), data.input);
+    expect(newDate.toISOString()).toBe(data.expectedFormat);
+  });
 });
