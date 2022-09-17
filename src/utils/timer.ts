@@ -13,6 +13,10 @@ export type TimerComponentsParameters = {
   onStart?: (timer: Timer) => void,
 }
 
+/**
+ * Generic timer implementation
+ * @author Mike Reiche <mike@reiche.world>
+ */
 export class Timer {
   private readonly _params: TimerComponentsParameters
   private _tickInterval: number
