@@ -45,7 +45,7 @@ Number handling and formatting.
 ### Factor mapping
 
 ```typescript
-import {bytesMap, getFactor, kiloMap} from "./numbers";
+import {bytesMap, getFactor, kiloMap} from "utils/numbers";
 
 const posts = 1300;
 const kilo = getFactor(posts, kiloMap);
@@ -57,6 +57,8 @@ console.log(`Your wrote ${(posts / kilo.factor).toFixed(1)} ${kilo.unit} posts w
 ### Mathematical round
 
 ```typescript
+import {round} from "utils/numbers";
+
 const value = 0.016
 const round = round(2)
 // round == 0.02
@@ -65,6 +67,8 @@ const round = round(2)
 ### Calc floating point precision
 
 ```typescript
+import {calcFloatingPrecision} from "utils/numbers";
+
 const value = 0.000123
 const precision = calcFloatingPrecision(value, 3)
 // precision == 6
@@ -73,6 +77,8 @@ const precision = calcFloatingPrecision(value, 3)
 Combined example
 
 ```typescript
+import {round, calcFloatingPrecision} from "utils/numbers";
+
 function financialRound(value: number) {
   return round(value, calcFloatingPrecision(value, 3));
 }
