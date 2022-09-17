@@ -97,9 +97,12 @@ import {toMilliseconds} from "./time";
 window.setTimeout(() => console.log("Hello"), toMilliseconds({seconds: 10}));
 ```
 
-## trash-bin
+## trash-bin (`@deprecated`)
 
 Implements the behaviour of a trash bin.
+
+This utiliy is `@deprecated` because it's too specific and hard to reuse generally.
+
 
 **TypeScript**
 ```typescript
