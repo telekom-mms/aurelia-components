@@ -1,4 +1,4 @@
-import {bytesMap, getFactor, kiloMap, round} from "../../src/utils/numbers";
+import {bytesMap, calcFloatingPrecision, getFactor, kiloMap, round} from "../../src/utils/numbers";
 
 const bytesData = [
   {
@@ -124,3 +124,9 @@ describe.each(roundData)('round', (data) => {
     expect(round(data.input, data.precision)).toEqual(data.expected);
   });
 });
+
+test("calcFloatingPointPrecision", () => {
+  const value = 0.000123
+  const precision = calcFloatingPrecision(value, 3)
+  expect(precision).toBe(6)
+})
