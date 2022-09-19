@@ -115,7 +115,9 @@ A circular progress indicator
 
 ## switch (`@deprecated`)
 
-Checkbox based switch. Deprecated since Bootstrap 5 has an own switch component.
+Checkbox based switch.
+
+This component is `@deprecated` because almost every framework already implements switches (https://getbootstrap.com/docs/5.0/forms/checks-radios/#switches).
 
 **Template**
 ```html

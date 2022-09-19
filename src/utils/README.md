@@ -120,9 +120,12 @@ import {sleep} from "./time";
 await sleep({seconds: 10});
 ```
 
-## trash-bin
+## trash-bin (`@deprecated`)
 
 Implements the behaviour of a trash bin.
+
+This utiliy is `@deprecated` because it's too specific and hard to reuse generally.
+
 
 **TypeScript**
 ```typescript
