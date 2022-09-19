@@ -1,17 +1,33 @@
-export interface TimeComponents {
-    hours?:number;
-    minutes?:number;
-    seconds?:number;
-    ms?:number;
+interface ConcreteTimeComponents {
+    hours: number;
+    minutes: number;
+    seconds: number;
+    ms: number;
 }
 
-export interface DateComponents {
-    years?: number;
-    months?: number;
-    days?: number;
+export type TimeComponents = {
+    [Property in keyof ConcreteTimeComponents]?: ConcreteTimeComponents[Property]
 }
 
-export interface DateTimeComponents extends DateComponents, TimeComponents {
+interface ConcreteDateComponents {
+    years: number;
+    months: number;
+    days: number;
+}
+
+export type DateComponents = {
+    [Property in keyof ConcreteDateComponents]?: ConcreteDateComponents[Property]
+}
+
+interface ConcreteDateTimeComponents extends ConcreteTimeComponents, ConcreteDateComponents {
+}
+
+export type DateTimeComponents = {
+    [Property in keyof ConcreteDateTimeComponents]?: ConcreteDateTimeComponents[Property]
+}
+
+const DateTimeComponentsIterable: ConcreteDateTimeComponents = {
+    days: 0, hours: 0, minutes: 0, months: 0, ms: 0, seconds: 0, years: 0
 }
 
 export function addTimedelta(date: Date, components: DateTimeComponents): Date {
@@ -32,10 +48,10 @@ export function subtractTimedelta(date: Date, components: DateTimeComponents): D
 
 export function negateDateTimeComponents(components: DateTimeComponents): TimeComponents {
     const negComponents: DateTimeComponents = {}
-    let key: keyof DateTimeComponents
+    let key: keyof ConcreteDateTimeComponents
     for (key in components) {
         if (components[key]) {
-            negComponents[key] = -components[key];
+            negComponents[key] = DateTimeComponentsIterable.hasOwnProperty(key) ? -components[key] : components[key]
         }
     }
     return negComponents;
