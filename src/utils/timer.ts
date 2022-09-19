@@ -19,8 +19,8 @@ export type TimerComponentsParameters = {
  */
 export class Timer {
   private readonly _params: TimerComponentsParameters
-  private _tickInterval: number
-  private _durationTimeout: number
+  private _tickIntervalHandle: number
+  private _durationTimeoutHandle: number
   private _startDate: Date
   private _durationMs: number
   private _completeDate: Date
@@ -38,12 +38,12 @@ export class Timer {
   start() {
     this.dispose()
     if (this._params.tick && this._params.onTick) {
-      this._tickInterval = window.setInterval(() => this._params.onTick(this), toMilliseconds(this._params.tick))
+      this._tickIntervalHandle = window.setInterval(() => this._params.onTick(this), toMilliseconds(this._params.tick))
     }
     this._startDate = new Date()
     this._completeDate = addTimedelta(this._startDate, this._params.duration)
     this._updateDuration()
-    this._durationTimeout = window.setTimeout(() => this._onComplete(), this._durationMs)
+    this._durationTimeoutHandle = window.setTimeout(() => this._onComplete(), this._durationMs)
   }
 
   private _updateDuration() {
@@ -86,7 +86,7 @@ export class Timer {
   }
 
   private _onComplete() {
-    window.clearInterval(this._tickInterval)
+    window.clearInterval(this._tickIntervalHandle)
 
     this._params.onComplete(this)
 
@@ -99,7 +99,7 @@ export class Timer {
    * Stops the timer and clears all intervals.
    */
   dispose() {
-    window.clearInterval(this._tickInterval)
-    window.clearTimeout(this._durationTimeout)
+    window.clearInterval(this._tickIntervalHandle)
+    window.clearTimeout(this._durationTimeoutHandle)
   }
 }
