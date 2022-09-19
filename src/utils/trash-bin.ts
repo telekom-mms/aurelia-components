@@ -1,6 +1,7 @@
 /**
  * Implementation of a trash bin
  * @author Mike Reiche <mike.reiche@t-systems.com>
+ * @deprecated Implementation is too specific and hard to reuse generally
  */
 export class TrashBin<T> {
     private _trashItems:T[]=[];
