@@ -143,9 +143,12 @@ ${_timer.timeLeft|dateFormat:"hour"}
 // 04:59
 ```
 
-## trash-bin
+## trash-bin (`@deprecated`)
 
 Implements the behaviour of a trash bin.
+
+This utiliy is `@deprecated` because it's too specific and hard to reuse generally.
+
 
 **TypeScript**
 ```typescript
