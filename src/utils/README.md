@@ -97,6 +97,52 @@ import {toMilliseconds} from "./time";
 window.setTimeout(() => console.log("Hello"), toMilliseconds({seconds: 10}));
 ```
 
+## timer
+
+Generic Timer implementation
+
+**ViewModel**
+```typescript
+import {autoinject} from "aurelia-dependency-injection";
+import {Timer} from "utils/timer";
+import {IntlDateFormatValueConverter} from "value-converters/intl-date-format-value-converter";
+
+@autoinject
+export class ViewModel {
+  
+  private readonly _timer: Timer
+  
+  construct(dateFormatter: IntlDateFormatValueConverter) {
+    
+    dateFormatter.setOptions("hour", {
+      minute: "numeric",
+      second: "numeric"
+    })
+    
+    this._timer = new Timer({
+      duration: {minutes: 5},
+      onComplete: timer => {
+        // do something
+      }
+    })
+  }
+  
+  attached() {
+    this._timer.start()
+  }
+  
+  detached() {
+    this._timer.dispose()
+  }
+}
+```
+
+**Template**
+```html
+${_timer.timeLeft|dateFormat:"hour"}
+// 04:59
+```
+
 ## trash-bin (`@deprecated`)
 
 Implements the behaviour of a trash bin.
