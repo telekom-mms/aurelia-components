@@ -42,14 +42,46 @@ clipboard.writeText("hello world").then(() => console.log("Copied"));
 
 Number handling and formatting.
 
+### Factor mapping
+
 ```typescript
-import {bytesMap, getFactor, kiloMap} from "./numbers";
+import {bytesMap, getFactor, kiloMap} from "utils/numbers";
 
 const posts = 1300;
 const kilo = getFactor(posts, kiloMap);
 const bytes = getFactor(posts, bytesMap);
 console.log(`Your wrote ${(posts / kilo.factor).toFixed(1)} ${kilo.unit} posts with a size of ${(posts / bytes.factor).toFixed(0)} ${bytes.unit} `);
 // You wrote 1.3k posts with a size of 1 KiB
+```
+
+### Mathematical round
+
+```typescript
+import {round} from "utils/numbers";
+
+const value = 0.016
+const round = round(2)
+// round == 0.02
+```
+
+### Calc floating point precision
+
+```typescript
+import {calcFloatingPrecision} from "utils/numbers";
+
+const value = 0.000123
+const precision = calcFloatingPrecision(value, 3)
+// precision == 6
+```
+
+Combined example
+
+```typescript
+import {round, calcFloatingPrecision} from "utils/numbers";
+
+function financialRound(value: number) {
+  return round(value, calcFloatingPrecision(value, 3));
+}
 ```
 
 ## time
@@ -118,6 +150,52 @@ window.setTimeout(() => console.log("Hello"), toMilliseconds({seconds: 10}));
 import {sleep} from "./time";
 
 await sleep({seconds: 10});
+```
+
+## timer
+
+Generic Timer implementation
+
+**ViewModel**
+```typescript
+import {autoinject} from "aurelia-dependency-injection";
+import {Timer} from "utils/timer";
+import {IntlDateFormatValueConverter} from "value-converters/intl-date-format-value-converter";
+
+@autoinject
+export class ViewModel {
+  
+  private readonly _timer: Timer
+  
+  construct(dateFormatter: IntlDateFormatValueConverter) {
+    
+    dateFormatter.setOptions("hour", {
+      minute: "numeric",
+      second: "numeric"
+    })
+    
+    this._timer = new Timer({
+      duration: {minutes: 5},
+      onComplete: timer => {
+        // do something
+      }
+    })
+  }
+  
+  attached() {
+    this._timer.start()
+  }
+  
+  detached() {
+    this._timer.dispose()
+  }
+}
+```
+
+**Template**
+```html
+${_timer.timeLeft|dateFormat:"hour"}
+// 04:59
 ```
 
 ## trash-bin (`@deprecated`)
