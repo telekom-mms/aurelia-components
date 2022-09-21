@@ -1,33 +1,28 @@
-interface ConcreteTimeComponents {
-    hours: number;
-    minutes: number;
-    seconds: number;
-    ms: number;
+enum ConcreteTimeComponents {
+    hours = 0,
+    minutes,
+    seconds,
+    ms
 }
 
 export type TimeComponents = {
-    [Property in keyof ConcreteTimeComponents]?: ConcreteTimeComponents[Property]
+    [Property in keyof typeof ConcreteTimeComponents]?: number
 }
 
-interface ConcreteDateComponents {
-    years: number;
-    months: number;
-    days: number;
+enum ConcreteDateComponents {
+    years = 4,
+    months,
+    days
 }
 
 export type DateComponents = {
-    [Property in keyof ConcreteDateComponents]?: ConcreteDateComponents[Property]
+    [Property in keyof typeof ConcreteDateComponents]?: number
 }
 
-interface ConcreteDateTimeComponents extends ConcreteTimeComponents, ConcreteDateComponents {
-}
+const ConcreteDateTimeComponents = {...ConcreteTimeComponents, ...ConcreteDateComponents}
 
 export type DateTimeComponents = {
-    [Property in keyof ConcreteDateTimeComponents]?: ConcreteDateTimeComponents[Property]
-}
-
-const DateTimeComponentsIterable: ConcreteDateTimeComponents = {
-    days: 0, hours: 0, minutes: 0, months: 0, ms: 0, seconds: 0, years: 0
+    [Property in keyof typeof ConcreteDateTimeComponents]?: number
 }
 
 export function addTimedelta(date: Date, components: DateTimeComponents): Date {
@@ -48,11 +43,8 @@ export function subtractTimedelta(date: Date, components: DateTimeComponents): D
 
 export function negateDateTimeComponents(components: DateTimeComponents): TimeComponents {
     const negComponents: DateTimeComponents = {}
-    let key: keyof ConcreteDateTimeComponents
-    for (key in components) {
-        if (components[key]) {
-            negComponents[key] = DateTimeComponentsIterable.hasOwnProperty(key) ? -components[key] : components[key]
-        }
+    for (const key in components) {
+        negComponents[key] = ConcreteDateTimeComponents.hasOwnProperty(key) ? -components[key] : components[key]
     }
     return negComponents;
 }
