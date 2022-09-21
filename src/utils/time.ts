@@ -38,10 +38,17 @@ export function addTimedelta(date: Date, components: DateTimeComponents): Date {
 }
 
 export function subtractTimedelta(date: Date, components: DateTimeComponents): Date {
-    return addTimedelta(date, negateDateTimeComponents(components));
+    return addTimedelta(date, negate(components));
 }
 
-export function negateDateTimeComponents(components: DateTimeComponents): TimeComponents {
+/**
+ * @deprecated Use {@link negate} instead
+ */
+export function negateTimeComponents(components: DateTimeComponents): TimeComponents {
+    return negate(components);
+}
+
+export function negate(components: DateTimeComponents): DateTimeComponents {
     const negComponents: DateTimeComponents = {}
     for (const key in components) {
         negComponents[key] = ConcreteDateTimeComponents.hasOwnProperty(key) ? -components[key] : components[key]

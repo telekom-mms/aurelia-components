@@ -1,6 +1,6 @@
 import {
   addTimedelta, calcDuration,
-  DateTimeComponents, negateDateTimeComponents,
+  DateTimeComponents, negate,
   normalizeTime, setComponents, subtractTimedelta,
   TimeComponents,
   toMilliseconds,
@@ -101,6 +101,6 @@ test('negation of arbitrary properties is handled correctly', () => {
     a: true
   }
 
-  anyObject = negateDateTimeComponents(anyObject)
+  anyObject = negate(anyObject)
   expect(anyObject).toStrictEqual(anyObjectNegated)
 })
