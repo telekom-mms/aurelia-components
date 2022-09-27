@@ -14,7 +14,7 @@ export interface DateComponents {
 export interface DateTimeComponents extends DateComponents, TimeComponents {
 }
 
-export function addTimedelta(date: Date, components: DateTimeComponents) {
+export function addTimedelta(date: Date, components: DateTimeComponents): Date {
     return new Date(
         date.getFullYear()+(components.years||0),
         date.getMonth()+(components.months||0),
@@ -26,11 +26,11 @@ export function addTimedelta(date: Date, components: DateTimeComponents) {
     );
 }
 
-export function subtractTimedelta(date: Date, components: DateTimeComponents) {
+export function subtractTimedelta(date: Date, components: DateTimeComponents): Date {
     return addTimedelta(date, negateTimeComponents(components));
 }
 
-export function negateTimeComponents(components: DateTimeComponents) {
+export function negateTimeComponents(components: DateTimeComponents): TimeComponents {
     const negComponents:TimeComponents = {}
     for (const key in components) {
         if (components[key]) {
@@ -41,6 +41,37 @@ export function negateTimeComponents(components: DateTimeComponents) {
 }
 
 /**
+ * Sets the date components for a given date and returns a new one.
+ * @param date Reference date
+ * @param components Components to set
+ */
+export function setComponents(date: Date, components: DateTimeComponents): Date {
+    const newDate = new Date(date);
+    if (components.years !== undefined) {
+        newDate.setFullYear(components.years);
+    }
+    if (components.months !== undefined) {
+        newDate.setMonth(components.months);
+    }
+    if (components.days !== undefined) {
+        newDate.setDate(components.days);
+    }
+    if (components.hours !== undefined) {
+        newDate.setHours(components.hours);
+    }
+    if (components.minutes !== undefined) {
+        newDate.setMinutes(components.minutes);
+    }
+    if (components.seconds !== undefined) {
+        newDate.setSeconds(components.seconds);
+    }
+    if (components.ms !== undefined) {
+        newDate.setMilliseconds(components.ms);
+    }
+    return newDate;
+}
+
+/**
  * Normalizes the time of a given date to full divisors of the components.
  * Example:
  *  hours: 4 -> 0, 4, 8, 12, 16, 20, 24
@@ -48,7 +79,7 @@ export function negateTimeComponents(components: DateTimeComponents) {
  *  seconds: 0 -> 0
  *  date: 13:44:33 -> 12:40:00
  */
-export function normalizeTime(date: Date, components: TimeComponents) {
+export function normalizeTime(date: Date, components: TimeComponents): Date {
     const newDate = new Date(date);
     if (components.hours >= 0) {
         newDate.setHours(components.hours>0 ? Math.floor(newDate.getHours() / components.hours) * components.hours : components.hours);

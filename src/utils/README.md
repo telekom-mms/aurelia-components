@@ -91,7 +91,7 @@ Provides some time functions.
 ### Adding/subtracting time
 
 ```typescript
-import {addTimedelta, DateTimeComponents, subtractTimedelta} from "./time";
+import {addTimedelta, DateTimeComponents, subtractTimedelta} from "utils/time";
 
 const now = new Date();
 const timedelta: DateTimeComponents = {
@@ -121,12 +121,35 @@ const newDate = normalizeTime(now, timedelta);
 // newDate: 12:40:00
 ```
 
+### Set date or time components
+```typescript
+import {setComponents, TimeComponents} from "./time";
+
+const now = new Date();
+// now: 13:44:33
+
+const timedelta: TimeComponents = {
+  minutes: 5,
+  seconds: 0
+}
+
+const newDate = setComponents(now, timedelta);
+// newDate: 13:05:00
+```
+
 ### Time components to seconds and milliseconds
 
 ```typescript
 import {toMilliseconds} from "./time";
 
 window.setTimeout(() => console.log("Hello"), toMilliseconds({seconds: 10}));
+```
+
+### Sleep an amount of time
+```typescript
+import {sleep} from "./time";
+
+await sleep({seconds: 10});
 ```
 
 ## timer
