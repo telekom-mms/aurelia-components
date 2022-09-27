@@ -9,13 +9,13 @@ import {autoinject} from "aurelia-dependency-injection";
 export class BecomeVisibleCustomAttribute {
 
     private _visible:Boolean = false;
-    private readonly _checkVisibility:EventListener;
+    private readonly _observer: IntersectionObserver
 
     constructor(
         private readonly _element:Element
     ) {
-        this._checkVisibility = (ev:Event) => {
-            let isVisible = BecomeVisibleCustomAttribute.elementInViewport(this._element as HTMLElement);
+        const _checkVisibility: IntersectionObserverCallback = ([entry]: [IntersectionObserverEntry]) => {
+            let isVisible = entry.isIntersecting
             if (this._visible !== isVisible) {
                 this._visible = isVisible;
                 const ev = new CustomEvent('visible', {
@@ -25,38 +25,14 @@ export class BecomeVisibleCustomAttribute {
                 this._element.dispatchEvent(ev);
             }
         }
-    }
-
-    /**
-     * @see https://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
-     */
-    static elementInViewport(el) {
-        let top = el.offsetTop;
-        let left = el.offsetLeft;
-        const width = el.offsetWidth;
-        const height = el.offsetHeight;
-
-        while(el.offsetParent) {
-            el = el.offsetParent;
-            top += el.offsetTop;
-            left += el.offsetLeft;
-        }
-
-        return (
-            top < (window.pageYOffset + window.innerHeight) &&
-            left < (window.pageXOffset + window.innerWidth) &&
-            (top + height) > window.pageYOffset &&
-            (left + width) > window.pageXOffset
-        );
+        this._observer = new window.IntersectionObserver(_checkVisibility)
     }
 
     attached() {
-        this._checkVisibility(null);
-        window.addEventListener("scroll", this._checkVisibility)
+        this._observer.observe(this._element)
     }
 
     detached() {
-        this._checkVisibility(null);
-        window.removeEventListener("scroll", this._checkVisibility)
+        this._observer.unobserve(this._element)
     }
 }
