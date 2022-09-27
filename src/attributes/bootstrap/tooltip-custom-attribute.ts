@@ -1,5 +1,4 @@
-import $ from 'jquery';
-import 'bootstrap/js/src/tooltip';
+import {Tooltip} from "bootstrap"
 import {autoinject} from "aurelia-dependency-injection";
 
 /**
@@ -7,16 +6,16 @@ import {autoinject} from "aurelia-dependency-injection";
  */
 @autoinject()
 export class TooltipCustomAttribute {
-    constructor(
-        private readonly _element:Element,
-    ) {
-    }
+    private tooltip: Tooltip | undefined
 
-    bind() {
-        $(this._element).tooltip();
+    constructor(private readonly element: Element) {}
+
+    attached() {
+        this.tooltip = new Tooltip(this.element)
     }
 
     unbind() {
-        $(this._element).tooltip('dispose');
+        this.tooltip?.dispose()
+        this.tooltip = undefined
     }
 }

@@ -11,9 +11,9 @@ const array = ["a", "a", "b", "b", "c", "c", "d"];
 const uniqueArray = unique(array, (a, b) => a.localeCompare(b));
 ```
 
-## bootstrap4-form-validation-renderer
+## bootstrap5-form-validation-renderer
 ```typescript
-validationController.addRenderer(new Bootstrap4ValidationFormRenderer());
+validationController.addRenderer(new Bootstrap5ValidationFormRenderer());
 ```
 
 ## checksum (`@deprecated`)

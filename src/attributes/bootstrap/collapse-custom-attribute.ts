@@ -1,5 +1,4 @@
-import $ from 'jquery';
-import 'bootstrap/js/src/collapse';
+import {Collapse} from "bootstrap"
 import {autoinject} from "aurelia-dependency-injection";
 
 /**
@@ -7,16 +6,16 @@ import {autoinject} from "aurelia-dependency-injection";
  */
 @autoinject()
 export class CollapseCustomAttribute {
-    constructor(
-        private readonly _element:Element,
-    ) {
-    }
+    private collapse: Collapse | undefined
 
-    bind() {
-        $(this._element).collapse();
+    constructor(private readonly element: Element) {}
+
+    attached() {
+        this.collapse = new Collapse(this.element)
     }
 
     unbind() {
-        $(this._element).collapse('dispose');
+        this.collapse?.dispose()
+        this.collapse = undefined
     }
 }

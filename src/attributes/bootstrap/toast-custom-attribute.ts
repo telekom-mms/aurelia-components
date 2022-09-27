@@ -1,5 +1,4 @@
-import $ from 'jquery';
-import 'bootstrap/js/src/toast';
+import {Toast} from "bootstrap";
 import {autoinject} from "aurelia-dependency-injection";
 
 /**
@@ -7,27 +6,28 @@ import {autoinject} from "aurelia-dependency-injection";
  */
 @autoinject()
 export class ToastCustomAttribute {
-    private readonly _eventListener:EventListener;
+    private readonly _eventListener: EventListener;
+    private toast: Toast | undefined
 
     constructor(
-        private readonly _element:Element,
+        private readonly _element: Element,
     ) {
-        this._eventListener = (ev:Event) => {
-            this._element.dispatchEvent(new CustomEvent("toast-hidden",{
+        this._eventListener = () => {
+            this._element.dispatchEvent(new CustomEvent("toast-hidden", {
                 bubbles: true
             }));
         };
     }
 
-    bind() {
-        const $element = $(this._element);
-        $element.toast('show');
-        $element.on("hidden.bs.toast", this._eventListener);
+    attached() {
+        this.toast = new Toast(this._element)
+        this.toast.show()
+        this._element.addEventListener('hidden.bs.toast', this._eventListener)
     }
 
     unbind() {
-        const $element = $(this._element);
-        $element.off("hidden.bs.toast", this._eventListener);
-        $element.toast('dispose');
+        this._element.removeEventListener('hidden.bs.toast', this._eventListener)
+        this.toast?.dispose()
+        this.toast = undefined
     }
 }

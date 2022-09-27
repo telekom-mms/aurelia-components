@@ -4,11 +4,11 @@ import {
 } from "aurelia-validation";
 
 /**
- * Form validation renderer for bootstrap 4
+ * Form validation renderer for bootstrap 5 (works for 4)
  * @see https://aurelia.io/docs/plugins/validation#custom-renderers
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-export class Bootstrap4FormValidationRenderer {
+export class Bootstrap5FormValidationRenderer {
     render(instruction: RenderInstruction) {
         for (const { result, elements } of instruction.unrender) {
             for (const element of elements) {

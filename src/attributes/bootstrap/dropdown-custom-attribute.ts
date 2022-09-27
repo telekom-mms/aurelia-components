@@ -1,5 +1,4 @@
-import $ from 'jquery';
-import 'bootstrap/js/src/dropdown';
+import {Dropdown} from "bootstrap"
 import {autoinject} from "aurelia-dependency-injection";
 
 /**
@@ -7,16 +6,16 @@ import {autoinject} from "aurelia-dependency-injection";
  */
 @autoinject()
 export class DropdownCustomAttribute {
-    constructor(
-        private readonly _element:Element,
-    ) {
-    }
+    private dropdown: Dropdown | undefined
 
-    bind() {
-        $(this._element).dropdown();
+    constructor(private readonly element: Element) {}
+
+    attached() {
+        this.dropdown = new Dropdown(this.element)
     }
 
     unbind() {
-        $(this._element).dropdown('dispose');
+        this.dropdown?.dispose()
+        this.dropdown = undefined
     }
 }
