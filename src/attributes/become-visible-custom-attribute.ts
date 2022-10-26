@@ -8,22 +8,19 @@ import {autoinject} from "aurelia-dependency-injection";
 @autoinject()
 export class BecomeVisibleCustomAttribute {
 
-    private _visible:Boolean = false;
     private readonly _observer: IntersectionObserver
 
     constructor(
         private readonly _element:Element
     ) {
-        const _checkVisibility: IntersectionObserverCallback = ([entry]: [IntersectionObserverEntry]) => {
-            let isVisible = entry.isIntersecting
-            if (this._visible !== isVisible) {
-                this._visible = isVisible;
+        const _checkVisibility: IntersectionObserverCallback = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach(entry => {
                 const ev = new CustomEvent('visible', {
-                    detail: this._visible,
+                    detail: entry.isIntersecting,
                     bubbles: true
                 });
                 this._element.dispatchEvent(ev);
-            }
+            })
         }
         this._observer = new window.IntersectionObserver(_checkVisibility)
     }
