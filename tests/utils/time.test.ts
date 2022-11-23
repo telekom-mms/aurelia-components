@@ -1,12 +1,11 @@
 import {
   addTimedelta, calcDuration,
-  DateTimeComponents,
+  DateTimeComponents, negate,
   normalizeTime, setComponents, subtractTimedelta,
   TimeComponents,
   toMilliseconds,
   toSeconds
 } from "../../src/utils/time";
-import {bytesMap, getFactor} from "../../src/utils/numbers";
 
 test('test components to ms', () => {
   expect(toMilliseconds({seconds: 12})).toBe(12000);
@@ -91,3 +90,17 @@ describe.each(componentsData)('setComponents', (data) => {
     expect(newDate.toISOString()).toBe(data.expectedFormat);
   });
 });
+
+test('negation of arbitrary properties is handled correctly', () => {
+  let anyObject: any = {
+    minutes: 3,
+    a: true
+  }
+  const anyObjectNegated = {
+    minutes: -3,
+    a: true
+  }
+
+  anyObject = negate(anyObject)
+  expect(anyObject).toStrictEqual(anyObjectNegated)
+})

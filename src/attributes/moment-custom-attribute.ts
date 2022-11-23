@@ -11,7 +11,7 @@ import {DateFormatValueConverter} from "../value-converters/date-format-value-co
  */
 @autoinject()
 export class MomentCustomAttribute {
-    private value;
+    private value: moment.MomentInput;
     private _subscriber: Subscription;
 
     constructor(
@@ -23,7 +23,7 @@ export class MomentCustomAttribute {
 
     bind(): void {
         this.relativeTimeFormat();
-        this._subscriber = this._eventAggregator.subscribe(UiUpdateEvent.NAME, (event) => this.relativeTimeFormat());
+        this._subscriber = this._eventAggregator.subscribe(UiUpdateEvent.NAME, (_ev: UiUpdateEvent) => this.relativeTimeFormat());
     }
 
     unbind(): void {

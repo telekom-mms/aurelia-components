@@ -16,7 +16,7 @@ export class HighlightTextValueConverter {
     ) {
     }
 
-    toView(value, text) {
+    toView(value: string, text: string | RegExp) {
         if (!value) {
             return value;
         } else {

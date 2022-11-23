@@ -1,6 +1,5 @@
 import 'aurelia-polyfills';
 import {Container} from "aurelia-dependency-injection";
-import {ByteFormatValueConverter} from "../../src/value-converters/byte-format-value-converter";
 import {PercentValueConverter} from "../../src/value-converters/percent-value-converter";
 
 const container = new Container();

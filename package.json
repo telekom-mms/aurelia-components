@@ -36,8 +36,8 @@
 		"echarts": "^5.3.2",
 		"moment": "^2.29.1",
 		"moment-duration-format": "^2.3.2",
-		"ts-md5": "^1.2.7",
-		"sanitize-html": "^2.7.0"
+		"sanitize-html": "^2.7.0",
+		"ts-md5": "^1.2.7"
 	},
 	"peerDependenciesMeta": {
 		"apexcharts": {

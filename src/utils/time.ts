@@ -1,17 +1,29 @@
-export interface TimeComponents {
-    hours?:number;
-    minutes?:number;
-    seconds?:number;
-    ms?:number;
+enum ConcreteTimeComponents {
+    hours = 0,
+    minutes,
+    seconds,
+    ms
+    // update ConcreteDateComponents.years if adding here
 }
 
-export interface DateComponents {
-    years?:number,
-    months?:number,
-    days?:number,
+export type TimeComponents = {
+    [Property in keyof typeof ConcreteTimeComponents]?: number
 }
 
-export interface DateTimeComponents extends DateComponents, TimeComponents {
+enum ConcreteDateComponents {
+    years = ConcreteTimeComponents.ms + 1,
+    months,
+    days
+}
+
+export type DateComponents = {
+    [Property in keyof typeof ConcreteDateComponents]?: number
+}
+
+const ConcreteDateTimeComponents = {...ConcreteTimeComponents, ...ConcreteDateComponents}
+
+export type DateTimeComponents = {
+    [Property in keyof typeof ConcreteDateTimeComponents]?: number
 }
 
 export function addTimedelta(date: Date, components: DateTimeComponents): Date {
@@ -27,15 +39,20 @@ export function addTimedelta(date: Date, components: DateTimeComponents): Date {
 }
 
 export function subtractTimedelta(date: Date, components: DateTimeComponents): Date {
-    return addTimedelta(date, negateTimeComponents(components));
+    return addTimedelta(date, negate(components));
 }
 
+/**
+ * @deprecated Use {@link negate} instead
+ */
 export function negateTimeComponents(components: DateTimeComponents): TimeComponents {
-    const negComponents:TimeComponents = {}
+    return negate(components);
+}
+
+export function negate(components: DateTimeComponents): DateTimeComponents {
+    const negComponents: DateTimeComponents = {}
     for (const key in components) {
-        if (components[key]) {
-            negComponents[key] = -components[key];
-        }
+        negComponents[key] = ConcreteDateTimeComponents.hasOwnProperty(key) ? -components[key] : components[key]
     }
     return negComponents;
 }

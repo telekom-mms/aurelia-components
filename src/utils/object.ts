@@ -4,9 +4,9 @@
  * @author Andreas Geyer <andreas.geyer@t-systems.com>
  * @param object
  */
-export function recursiveObjectSort(object: object): object {
-    const sorted_object: object = {};
-    const sorted_objects: object[] = [];
+export function recursiveObjectSort(object: Record<any, any>): object {
+    const sorted_object: Record<any, any> = {};
+    const sorted_objects: Record<any, any>[] = [];
 
     if (Array.isArray(object)) {
         object.forEach(obj => {

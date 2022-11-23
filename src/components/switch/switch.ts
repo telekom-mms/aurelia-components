@@ -11,7 +11,7 @@ export class Switch {
     @bindable({
         defaultBindingMode: bindingMode.twoWay,
     })
-    switched;
+    switched: boolean;
 
     @bindable()
     disabled=false;

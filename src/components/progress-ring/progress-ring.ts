@@ -32,11 +32,11 @@ export class ProgressRing {
         this._circumference = this._normalizedRadius * 2 * Math.PI;
     }
 
-    radiusChanged(radius:number) {
+    radiusChanged(_radius: number) {
         this.updateSize();
     }
 
-    private strokeChanged(stroke:number) {
+    strokeChanged(_stroke: number) {
         this.updateSize();
     }
 
