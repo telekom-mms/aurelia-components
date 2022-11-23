@@ -3,6 +3,7 @@ enum ConcreteTimeComponents {
     minutes,
     seconds,
     ms
+    // update ConcreteDateComponents.years if adding here
 }
 
 export type TimeComponents = {
@@ -10,7 +11,7 @@ export type TimeComponents = {
 }
 
 enum ConcreteDateComponents {
-    years = 4,
+    years = ConcreteTimeComponents.ms + 1,
     months,
     days
 }
