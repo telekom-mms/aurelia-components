@@ -62,4 +62,5 @@ npm install bootstrap@5.1.3
    data-popover
 >Tooltip</a>
 ```
-Note that for a "dismissable" popover using the attribute `data-trigger="focus"`, the element having the popover attached must be able to receive focus. (See this [StackOverflow answer](https://stackoverflow.com/a/1600194) on which elements can receive focus)
+Note that for a "dismissable" popover using the attribute `data-trigger="focus"`, the element having the popover attached must be able to receive focus. (See this [StackOverflow answer](https://stackoverflow.com/a/1600194) on which elements can receive focus).\
+The attribute name 'popover' may also be used, but is deprecated and will be removed when the official popover-API is supported by browsers. See [Chrome implementation status](https://chromestatus.com/feature/5463833265045504).
