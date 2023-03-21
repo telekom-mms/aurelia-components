@@ -1,10 +1,14 @@
 import {Popover} from "bootstrap"
 import {autoinject} from "aurelia-dependency-injection";
+import {customAttribute} from "aurelia-templating";
+import {bindingMode} from "aurelia-binding";
 
 /**
  * @author Christoph Reinsch <christoph.reinsch@t-systems.com>
+ * @example See {@link import('./README.md') README.md/popover-custom-attribute}.
  */
 @autoinject()
+@customAttribute('data-popover', bindingMode.twoWay, ['popover'])
 export class PopoverCustomAttribute {
     private popover: Popover | undefined
 
