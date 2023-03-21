@@ -2,3 +2,6 @@ dist
 node_modules
 .idea
 *.iml
+/jest_html_reporters.html
+/jest-html-reporters-attach/
+/coverage/
