@@ -4,9 +4,9 @@ import {sleep, TimeComponents} from "../../src/utils/time";
 test('test timer', async () => {
   let ticks = 0
   let completed = false
-  const duration: TimeComponents = {ms: 10}
+  const duration: TimeComponents = {ms: 500}
   const timer = new Timer({
-    tick: {ms: 4},
+    tick: {ms: 110},
     duration: duration,
     onTick: _timer => {
       ++ticks
@@ -20,7 +20,10 @@ test('test timer', async () => {
 
   await sleep(duration)
 
-  expect(timer.progress).toBe(1)
+  // The correct calculation of timer.progress is given in 1 = 100%.
+  // It's depend on test execution environment how much time is gone between the end of Timer, sleep() and this check.
+  expect(timer.progress).toBeGreaterThanOrEqual(1)
+  expect(timer.progress).toBeLessThanOrEqual(1.05)
   expect(completed).toBe(true)
-  expect(ticks).toBe(2)
+  expect(ticks).toBe(4)
 });
