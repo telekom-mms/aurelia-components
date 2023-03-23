@@ -1,4 +1,7 @@
 # Aurelia components
+
+![npm](https://img.shields.io/npm/v/t-systems-aurelia-components)
+
 Common useful components for the Aurelia Framework (https://aurelia.io)
 
 ## Documentation
