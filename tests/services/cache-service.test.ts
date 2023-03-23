@@ -70,12 +70,12 @@ describe("CacheService", () => {
     }
 
     const slowLoadingFunction = async () => {
-      await sleep({ms: 10});
+      await sleep({ms: 100});
       return Promise.resolve("Schnecke");
     }
 
     const resultA = cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction);
-    await sleep({ms: 1});
+    await sleep({ms: 10});
     const resultB = cacheService.getForKeyWithLoadingFunction(key, fastLoadingFunction);
     expect(resultB).not.toBe(resultA);
 
