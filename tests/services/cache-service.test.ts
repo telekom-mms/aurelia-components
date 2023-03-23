@@ -39,17 +39,17 @@ describe("CacheService", () => {
       return Promise.resolve("Katze");
     }
 
-    let result = await cacheService.getForKeyWithLoadingFunction(key, loadingFunction, {ms: 10});
+    let result = await cacheService.getForKeyWithLoadingFunction(key, loadingFunction, {ms: 20});
     expect(result).toBe("Katze");
     expect(callCount).toBe(1);
     expect(cacheService.outdatedKeys.length).toBe(0);
 
-    result = await cacheService.getForKeyWithLoadingFunction(key, loadingFunction, {ms: 10});
+    result = await cacheService.getForKeyWithLoadingFunction(key, loadingFunction, {ms: 20});
     expect(result).toBe("Katze");
     expect(callCount).toBe(1);
     expect(cacheService.outdatedKeys.length).toBe(0);
 
-    await sleep({ms: 11});
+    await sleep({ms: 20});
     expect(cacheService.outdatedKeys).toContain(key);
 
     result = await cacheService.getForKeyWithLoadingFunction(key, loadingFunction);
@@ -70,12 +70,12 @@ describe("CacheService", () => {
     }
 
     const slowLoadingFunction = async () => {
-      await sleep({ms: 10});
+      await sleep({ms: 100});
       return Promise.resolve("Schnecke");
     }
 
     const resultA = cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction);
-    await sleep({ms: 1});
+    await sleep({ms: 10});
     const resultB = cacheService.getForKeyWithLoadingFunction(key, fastLoadingFunction);
     expect(resultB).not.toBe(resultA);
 
