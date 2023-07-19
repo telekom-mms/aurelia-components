@@ -5,6 +5,7 @@
   "assignees": ["Zsar"],
   "automergeStrategy": "merge-commit",
   "automergeSchedule": ["on saturday"],
+  "bumpVersion": "prerelease",
   "configMigration": true,
   "rangeStrategy": "update-lockfile",
   "reviewers": ["Zsar"],
@@ -19,7 +20,8 @@
     },
     {
       "groupName": "minor",
-      "matchUpdateTypes": ["minor"]
+      "matchUpdateTypes": ["minor"],
+      "automerge": true
     },
     {
       "groupName": "major",
