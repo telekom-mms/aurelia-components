@@ -1,31 +1,51 @@
 {
   "extends": [
-    "config:base"
+    "config:recommended"
   ],
-  "assignees": ["Zsar"],
+  "assignees": [
+    "Zsar"
+  ],
   "automergeStrategy": "merge-commit",
-  "automergeSchedule": ["on saturday"],
+  "automergeSchedule": [
+    "on saturday"
+  ],
   "bumpVersion": "prerelease",
   "configMigration": true,
   "rangeStrategy": "update-lockfile",
-  "reviewers": ["Zsar"],
+  "reviewers": [
+    "Zsar"
+  ],
   "rollbackPrs": true,
-  "schedule": ["on sunday"],
-  "stabilityDays": 5,
+  "schedule": [
+    "on sunday"
+  ],
+  "minimumReleaseAge": "5 days",
   "packageRules": [
     {
       "groupName": "trivial",
-      "matchUpdateTypes": ["bump", "digest", "lockFileMaintenance", "patch", "pin", "pinDigest", "rollback"],
+      "matchUpdateTypes": [
+        "bump",
+        "digest",
+        "lockFileMaintenance",
+        "patch",
+        "pin",
+        "pinDigest",
+        "rollback"
+      ],
       "automerge": true
     },
     {
       "groupName": "minor",
-      "matchUpdateTypes": ["minor"],
+      "matchUpdateTypes": [
+        "minor"
+      ],
       "automerge": true
     },
     {
       "groupName": "major",
-      "matchUpdateTypes": ["major"],
+      "matchUpdateTypes": [
+        "major"
+      ],
       "dependencyDashboardApproval": true
     }
   ]
