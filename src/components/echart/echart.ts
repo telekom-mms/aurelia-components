@@ -1,6 +1,6 @@
 import {bindable} from "aurelia-templating";
 import {bindingMode} from "aurelia-binding";
-import * as echarts from "echarts/core";
+import * as echarts from "echarts";
 import {ECBasicOption} from "echarts/types/dist/shared";
 
 /**
