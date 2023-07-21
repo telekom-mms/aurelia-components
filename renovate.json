@@ -3,7 +3,7 @@
     "config:recommended"
   ],
   "assignees": [
-    "Zsar"
+    "martingrossmann"
   ],
   "automergeStrategy": "merge-commit",
   "automergeSchedule": [
@@ -13,7 +13,7 @@
   "configMigration": true,
   "rangeStrategy": "update-lockfile",
   "reviewers": [
-    "Zsar"
+    "martingrossmann"
   ],
   "rollbackPrs": true,
   "schedule": [
