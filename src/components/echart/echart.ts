@@ -20,38 +20,42 @@ export class Echart {
     class:string;
 
     private readonly onResize= () => {
-        this.chart?.resize();
+        this.chart.resize()
+    }
+
+    bind() {
+        this._createChart()
     }
 
     attached() {
         if (this.options) {
-            this._createChart();
+            this.chart.setOption(this.options)
+            this.chart.resize()
         }
-        window.addEventListener("resize", this.onResize);
+        window.addEventListener("resize", this.onResize)
     }
 
     detached() {
-        if (this.chart) {
-            this.chart.dispose();
-            this.chart = null;
-        }
-        window.removeEventListener("resize", this.onResize);
+        window.removeEventListener("resize", this.onResize)
+    }
+
+    unbind() {
+        this.chart.dispose()
+        this.chart = null
     }
 
     optionsChanged(newOptions:ECBasicOption) {
-        if (this.chart) {
-            this.chart.setOption(newOptions, true);
-        } else {
-            this._createChart();
+        if (!this.chart) {
+            this._createChart()
         }
+        this.chart.setOption(newOptions, true)
+        this.chart.resize()
     }
 
     private _createChart() {
         if (!this._container) {
             return;
         }
-
-        this.chart = echarts.init(this._container);
-        this.chart.setOption(this.options);
+        this.chart = echarts.init(this._container)
     }
 }
