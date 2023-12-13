@@ -19,10 +19,6 @@ export class Echart {
     @bindable({ defaultBindingMode: bindingMode.toView })
     class:string;
 
-    private readonly onResize= () => {
-        this.chart.resize()
-    }
-
     bind() {
         this._createChart()
     }
@@ -30,13 +26,8 @@ export class Echart {
     attached() {
         if (this.options) {
             this.chart.setOption(this.options)
-            this.chart.resize()
+            this._resizeChart()
         }
-        window.addEventListener("resize", this.onResize)
-    }
-
-    detached() {
-        window.removeEventListener("resize", this.onResize)
     }
 
     unbind() {
@@ -49,7 +40,6 @@ export class Echart {
             this._createChart()
         }
         this.chart.setOption(newOptions, true)
-        this.chart.resize()
     }
 
     private _createChart() {
@@ -57,5 +47,9 @@ export class Echart {
             return;
         }
         this.chart = echarts.init(this._container)
+    }
+
+    private _resizeChart(){
+        this.chart.resize()
     }
 }

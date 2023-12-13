@@ -68,5 +68,8 @@
 		"sanitize-html": {
 			"optional": true
 		}
+	},
+	"dependencies": {
+		"aurelia-resize": "^1.1.2"
 	}
 }
