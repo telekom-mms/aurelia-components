@@ -82,6 +82,9 @@ export function round(value:number, precision:number) {
  * @return Fitting precision
  */
 export function calcFloatingPrecision(value:number, precision:number) {
+    if (precision <= 0) {
+        return 0
+    }
     let realPrecision = precision;
     const absValue = Math.abs(value);
     while (absValue > 0 && absValue < 1/Math.pow(10, realPrecision)) {
