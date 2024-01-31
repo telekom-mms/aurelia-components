@@ -117,10 +117,15 @@ const roundData = [
     precision: 5,
     expected: 13.37134,
   },
+  {
+    input: 13.37,
+    precision: 0,
+    expected: 13,
+  },
 ];
 
 describe.each(roundData)('round', (data) => {
-  it(`round '${data.input}'`, () => {
+  it(`round '${data.input}/${data.precision}'`, () => {
     expect(round(data.input, data.precision)).toEqual(data.expected);
   });
 });
