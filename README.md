@@ -77,7 +77,8 @@ npm install sanitize-html --save
     npm login
     ```
 3. Change version in `package.json`
-4. Run 
+4. Set new version tag
+5. Run 
     ```shell
     npm publish
     ```
