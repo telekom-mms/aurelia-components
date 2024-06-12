@@ -1,10 +1,10 @@
 import {Dropdown} from "bootstrap"
-import {autoinject} from "aurelia-dependency-injection";
+import {inject} from "aurelia";
 
 /**
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-@autoinject()
+@inject(Element)
 export class DropdownCustomAttribute {
     private dropdown: Dropdown | undefined
 
@@ -14,7 +14,7 @@ export class DropdownCustomAttribute {
         this.dropdown = new Dropdown(this.element)
     }
 
-    unbind() {
+    dispose() {
         this.dropdown?.dispose()
         this.dropdown = undefined
     }

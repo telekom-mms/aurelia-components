@@ -1,10 +1,10 @@
 import {Collapse} from "bootstrap"
-import {autoinject} from "aurelia-dependency-injection";
+import {inject} from "aurelia";
 
 /**
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-@autoinject()
+@inject(Element)
 export class CollapseCustomAttribute {
     private collapse: Collapse | undefined
 
@@ -14,7 +14,7 @@ export class CollapseCustomAttribute {
         this.collapse = new Collapse(this.element)
     }
 
-    unbind() {
+    dispose() {
         this.collapse?.dispose()
         this.collapse = undefined
     }

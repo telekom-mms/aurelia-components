@@ -1,10 +1,10 @@
 import {Tooltip} from "bootstrap"
-import {autoinject} from "aurelia-dependency-injection";
+import {inject} from "aurelia";
 
 /**
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-@autoinject()
+@inject(Element)
 export class TooltipCustomAttribute {
     private tooltip: Tooltip | undefined
 
@@ -14,7 +14,7 @@ export class TooltipCustomAttribute {
         this.tooltip = new Tooltip(this.element)
     }
 
-    unbind() {
+    dispose() {
         this.tooltip?.dispose()
         this.tooltip = undefined
     }

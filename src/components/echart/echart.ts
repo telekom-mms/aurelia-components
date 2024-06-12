@@ -1,5 +1,4 @@
-import {bindable} from "aurelia-templating";
-import {bindingMode} from "aurelia-binding";
+import {bindable, BindingMode} from "aurelia";
 import * as echarts from "echarts";
 import {ECBasicOption} from "echarts/types/dist/shared";
 
@@ -10,21 +9,26 @@ import {ECBasicOption} from "echarts/types/dist/shared";
 export class Echart {
     private _container: HTMLDivElement;
 
-    @bindable({ defaultBindingMode: bindingMode.fromView })
+    @bindable({ mode: BindingMode.fromView })
     chart: echarts.ECharts|null;
 
-    @bindable({ defaultBindingMode: bindingMode.toView })
+    @bindable({ mode: BindingMode.toView })
     options: ECBasicOption;
 
-    @bindable({ defaultBindingMode: bindingMode.toView })
+    @bindable({ mode: BindingMode.toView })
     class:string;
 
     private readonly onResize= () => {
         this.chart.resize()
     }
 
-    bind() {
+    bound() {
         this._createChart()
+    }
+
+    unbinding() {
+        this.chart.dispose()
+        this.chart = null
     }
 
     attached() {
@@ -35,13 +39,8 @@ export class Echart {
         window.addEventListener("resize", this.onResize)
     }
 
-    detached() {
+    dispose() {
         window.removeEventListener("resize", this.onResize)
-    }
-
-    unbind() {
-        this.chart.dispose()
-        this.chart = null
     }
 
     optionsChanged(newOptions:ECBasicOption) {

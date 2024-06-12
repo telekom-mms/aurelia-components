@@ -2,7 +2,7 @@
 
 ![npm](https://img.shields.io/npm/v/t-systems-aurelia-components)
 
-Common useful components for the Aurelia Framework (https://aurelia.io)
+Common useful components for the Aurelia 2 Framework (https://docs.aurelia.io/)
 
 ## Documentation
 
@@ -25,32 +25,31 @@ npm install t-systems-aurelia-components --save
 
 Since this library doesn't provide any precompiled `dist/` files, you need to reference the source code in your project.
 
-### Aurelia features
-Open `main.ts`
-```typescript
-aurelia.use
-    .globalResources([
-        PLATFORM.moduleName('t-systems-aurelia-components/src/value-converters/date-format-value-converter'),
-    ])
-```
+TODO: Test with Aurelia 2 (https://docs.aurelia.io/templates/value-converters)
 
-### Direct imports
+```html
+<import from="t-systems-aurelia-components/src/value-converters/date-format-value-converter" />
+${date|dateValueFormatter}
+
+```
+Direct imports
 ```typescript
 import {CacheService} from "t-systems-aurelia-components/src/service/cache-service";
 ```
 
 ## Locale related features
 
+TODO: Test with Aurelia 2: https://docs.aurelia.io/aurelia-packages/internationalization
+
 Some extensions like `date-format-value-converter` or `currency-value-converter` support localization. To change their internal locale, use the `aurelia-i18n` library.
 
 ```typescript
 import {I18N} from 'aurelia-i18n';
-import {autoinject} from 'aurelia-framework';
+import {resolve} from 'aurelia-framework';
 
-@autoinject()
 export class App {
     constructor(
-        private readonly _i18n:I18N
+        private readonly _i18n = resolve(I18N)
     ) {
         this._i18n.setLocale("en");
     }
