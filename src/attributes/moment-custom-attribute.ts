@@ -1,6 +1,5 @@
-import {autoinject} from 'aurelia-dependency-injection';
 import moment from "moment";
-import {EventAggregator, Subscription} from 'aurelia-event-aggregator';
+import {IEventAggregator, IDisposable, inject} from 'aurelia';
 import {UiUpdateEvent} from "../events/ui-update-event";
 import {DateFormatValueConverter} from "../value-converters/date-format-value-converter";
 
@@ -9,14 +8,14 @@ import {DateFormatValueConverter} from "../value-converters/date-format-value-co
  * Usage: <span moment.bind="timeProperty">&nbsp;</span>
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-@autoinject()
+@inject(Element, IEventAggregator, DateFormatValueConverter)
 export class MomentCustomAttribute {
     private value: moment.MomentInput;
-    private _subscriber: Subscription;
+    private _subscriber: IDisposable;
 
     constructor(
         private readonly _element: Element,
-        private readonly _eventAggregator: EventAggregator,
+        private readonly _eventAggregator: IEventAggregator,
         private readonly _dateFormatValueConverter: DateFormatValueConverter,
     ) {
     }

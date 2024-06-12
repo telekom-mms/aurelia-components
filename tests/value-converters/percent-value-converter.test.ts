@@ -1,9 +1,7 @@
-import 'aurelia-polyfills';
-import {Container} from "aurelia-dependency-injection";
 import {PercentValueConverter} from "../../src/value-converters/percent-value-converter";
+import {DI} from "aurelia";
 
-const container = new Container();
-container.makeGlobal();
+const container = DI.createContainer()
 
 const percentValueConverter = container.get(PercentValueConverter);
 percentValueConverter.setLocale("en");

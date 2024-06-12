@@ -1,14 +1,14 @@
-import 'aurelia-polyfills'
-import {Container} from "aurelia-dependency-injection"
-import {HTMLSanitizer} from "aurelia-templating-resources";
 import {HighlightTextValueConverter} from "../../src/value-converters/highlight-text-value-converter"
 import {SanitizeHtmlHtmlSanitizer} from "../../src/value-converters/sanitize-html-html-sanitizer"
+import {HTMLSanitizer} from "../../src/value-converters/html-sanitizer"
 import escapeStringRegexp from "escape-string-regexp";
+import {DI, Registration} from "aurelia";
 
-const container = new Container()
-container.makeGlobal()
+const container = DI.createContainer()
+container.register(
+    Registration.singleton(HTMLSanitizer, SanitizeHtmlHtmlSanitizer)
+)
 
-container.registerSingleton(HTMLSanitizer, SanitizeHtmlHtmlSanitizer)
 const htmlSanitizer = container.get(HTMLSanitizer) as SanitizeHtmlHtmlSanitizer
 const highlightTextValueConverter = container.get(HighlightTextValueConverter)
 

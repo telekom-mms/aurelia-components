@@ -1,10 +1,7 @@
-import 'aurelia-polyfills';
-import {Container} from "aurelia-dependency-injection";
+import {DI} from "aurelia";
 import {ByteFormatValueConverter} from "../../src/value-converters/byte-format-value-converter";
 
-const container = new Container();
-container.makeGlobal();
-
+const container = DI.createContainer()
 const bytesFormatValueConverter = container.get(ByteFormatValueConverter);
 bytesFormatValueConverter.setLocale("en");
 

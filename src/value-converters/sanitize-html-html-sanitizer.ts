@@ -1,5 +1,5 @@
 import sanitize from 'sanitize-html'
-import {HTMLSanitizer} from "aurelia-templating-resources"
+import {HTMLSanitizer} from "./html-sanitizer";
 
 // adding index signature, but allowing explicit any because there are so many options
 type IOptions = sanitize.IOptions & {[key: string]: any}
