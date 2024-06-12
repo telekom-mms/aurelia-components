@@ -23,16 +23,17 @@ npm install t-systems-aurelia-components --save
 
 ## Use in your Aurelia project
 
-Since this library doesn't provide any precompiled `dist/` files, you need to reference the source code in your project.
-
 TODO: Test with Aurelia 2 (https://docs.aurelia.io/templates/value-converters)
+
+Since this library doesn't provide any precompiled `dist/` files, you need to reference the source code in your view code.
 
 ```html
 <import from="t-systems-aurelia-components/src/value-converters/date-format-value-converter" />
 ${date|dateValueFormatter}
-
 ```
-Direct imports
+
+or import them directly
+
 ```typescript
 import {CacheService} from "t-systems-aurelia-components/src/service/cache-service";
 ```
@@ -44,8 +45,8 @@ TODO: Test with Aurelia 2: https://docs.aurelia.io/aurelia-packages/internationa
 Some extensions like `date-format-value-converter` or `currency-value-converter` support localization. To change their internal locale, use the `aurelia-i18n` library.
 
 ```typescript
-import {I18N} from 'aurelia-i18n';
-import {resolve} from 'aurelia-framework';
+import {I18N} from '@aurelia/i18n';
+import {resolve} from 'aurelia';
 
 export class App {
     constructor(
