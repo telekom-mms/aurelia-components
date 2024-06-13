@@ -1,11 +1,16 @@
-import {bindable, BindingMode} from "aurelia";
+import {bindable, BindingMode, customElement} from "aurelia";
 import * as echarts from "echarts";
 import {ECBasicOption} from "echarts/types/dist/shared";
+import template from "./echart.html"
 
 /**
  * Component for Apache ECharts
  * @author Mike Reiche <mike@reiche.world>
  */
+// @customElement({
+//     name: 'echart',
+//     template
+// })
 export class Echart {
     private _container: HTMLDivElement;
 

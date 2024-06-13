@@ -42,12 +42,14 @@ Fires an event when an element became visible in the viewport.
 
 **Template**
 ```html
-<div visible.delegate="_elementVisibility($event)" become-visible>
+<div visible.trigger="_elementVisibility($event)" become-visible>
 ```
 
 **ViewModel**
 ```typescript
-private _elementVisiblity($event:CustomEvent) {
-    console.log("element visible:", $event.detail);
+class ViewModel {
+    private _elementVisibility($event: CustomEvent) {
+        console.log("element visible:", $event.detail);
+    }
 }
 ```

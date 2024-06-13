@@ -1,4 +1,4 @@
-import {inject} from "aurelia";
+import {customAttribute, inject} from "aurelia";
 /**
  * Custom attribute for detection of element visibility
  * Usage: <div visible.delegate="_elementVisibility($event)" become-visible>
@@ -6,6 +6,7 @@ import {inject} from "aurelia";
  */
 
 @inject(Element)
+@customAttribute('become-visible')
 export class BecomeVisibleCustomAttribute {
     private readonly _observer: IntersectionObserver
 
@@ -28,7 +29,7 @@ export class BecomeVisibleCustomAttribute {
         this._observer.observe(this._element)
     }
 
-    detached() {
+    dispose() {
         this._observer.unobserve(this._element)
     }
 }
