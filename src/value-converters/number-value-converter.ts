@@ -5,7 +5,9 @@
  */
 import {AbstractLocaleValueConverter} from "./abstract-locale-value-converter";
 import {calcFloatingPrecision} from "../utils/numbers";
+import {valueConverter} from "aurelia";
 
+@valueConverter('number')
 export class NumberValueConverter extends AbstractLocaleValueConverter {
 
     toView(value:number, precision:number=2, fixedPrecision:boolean = true): string {
