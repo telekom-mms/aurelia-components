@@ -6,11 +6,13 @@ describe('number-value-converter', () => {
     let testContext
     beforeAll(() => {
         bootstrapTestEnvironment();
+    });
 
+    beforeEach(() => {
         testContext = TestContext.create();
         const numberValueFormatter = testContext.container.get(NumberValueConverter);
         numberValueFormatter.setLocale("de")
-    });
+    })
 
     // Integration Test
     it('works within a view', async () => {
