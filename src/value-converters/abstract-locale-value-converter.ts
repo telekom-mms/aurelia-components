@@ -1,12 +1,10 @@
-import {IEventAggregator, inject} from "aurelia";
+import {IEventAggregator, resolve} from "aurelia";
 
-@inject(IEventAggregator)
 export abstract class AbstractLocaleValueConverter {
     private _locale:string;
+    private readonly _eventAggregator = resolve(IEventAggregator)
 
-    constructor(
-        private readonly _eventAggregator: IEventAggregator,
-    ) {
+    constructor() {
         this._eventAggregator.subscribe('i18n:locale:changed', (payload: { newValue: string; }) => {
             this.localeChanged(payload.newValue);
         });

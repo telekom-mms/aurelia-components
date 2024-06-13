@@ -2,8 +2,6 @@
   "compilerOptions": {
     "target": "ES2017",
     "module": "esnext",
-    //"experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "stripInternal": true,
     "preserveConstEnums": true,

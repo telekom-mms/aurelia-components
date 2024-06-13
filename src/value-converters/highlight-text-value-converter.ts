@@ -1,5 +1,5 @@
 import escapeStringRegexp from "escape-string-regexp";
-import {inject} from "aurelia";
+import {resolve} from "aurelia";
 import {HTMLSanitizer} from "./html-sanitizer";
 
 /**
@@ -8,13 +8,8 @@ import {HTMLSanitizer} from "./html-sanitizer";
  * Usage: <span innerhtml="${property|highlightText:regexpOrString}">&nbsp;</span>
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-@inject(HTMLSanitizer)
 export class HighlightTextValueConverter {
-
-    constructor(
-        private readonly _htmlSanitizer:HTMLSanitizer
-    ) {
-    }
+    private readonly _htmlSanitizer = resolve(HTMLSanitizer)
 
     toView(value: string, text: string | RegExp) {
         if (!value) {

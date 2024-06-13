@@ -1,5 +1,5 @@
 import moment from "moment";
-import {IEventAggregator, IDisposable, inject, customAttribute} from 'aurelia';
+import {IEventAggregator, IDisposable, customAttribute, resolve} from 'aurelia';
 import {UiUpdateEvent} from "../events/ui-update-event";
 import {DateFormatValueConverter} from "../value-converters/date-format-value-converter";
 
@@ -9,18 +9,13 @@ import {DateFormatValueConverter} from "../value-converters/date-format-value-co
  * @author Mike Reiche <mike.reiche@t-systems.com>
  * @deprecated Use {@link IntlDateFormatValueConverter} instead
  */
-@inject(Element, IEventAggregator, DateFormatValueConverter)
 @customAttribute('moment')
 export class MomentCustomAttribute {
     private value: moment.MomentInput;
     private _subscriber: IDisposable;
-
-    constructor(
-        private readonly _element: Element,
-        private readonly _eventAggregator: IEventAggregator,
-        private readonly _dateFormatValueConverter: DateFormatValueConverter,
-    ) {
-    }
+    private readonly _element = resolve(HTMLElement)
+    private readonly _eventAggregator: IEventAggregator = resolve(IEventAggregator)
+    private readonly _dateFormatValueConverter= resolve(DateFormatValueConverter)
 
     bound(): void {
         this.relativeTimeFormat();

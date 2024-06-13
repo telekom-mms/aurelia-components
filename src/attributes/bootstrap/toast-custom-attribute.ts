@@ -1,17 +1,15 @@
 import {Toast} from "bootstrap";
-import {inject} from "aurelia";
+import {resolve} from "aurelia";
 
 /**
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-@inject(Element)
 export class ToastCustomAttribute {
     private readonly _eventListener: EventListener;
     private toast: Toast | undefined
+    private readonly _element = resolve(Element)
 
-    constructor(
-        private readonly _element: Element,
-    ) {
+    constructor() {
         this._eventListener = (_ev: Event) => {
             this._element.dispatchEvent(new CustomEvent("toast-hidden",{
                 bubbles: true

@@ -1,17 +1,15 @@
 import {Dropdown} from "bootstrap"
-import {inject} from "aurelia";
+import {resolve} from "aurelia";
 
 /**
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-@inject(Element)
 export class DropdownCustomAttribute {
+    private readonly _element = resolve(Element)
     private dropdown: Dropdown | undefined
 
-    constructor(private readonly element: Element) {}
-
     attached() {
-        this.dropdown = new Dropdown(this.element)
+        this.dropdown = new Dropdown(this._element)
     }
 
     dispose() {
