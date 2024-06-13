@@ -1,5 +1,5 @@
 import sanitize from 'sanitize-html'
-import {HTMLSanitizer} from "./html-sanitizer";
+import {ISanitizer} from "@aurelia/runtime-html"
 
 // adding index signature, but allowing explicit any because there are so many options
 type IOptions = sanitize.IOptions & {[key: string]: any}
@@ -10,7 +10,7 @@ type IOptions = sanitize.IOptions & {[key: string]: any}
  *  <p>Usage: <code><span innerhtml.bind="insecureValue|sanitizeHTML"></span></code></p>
  * @author Simon Beyer <Simon.Beyer@t-systems.com>
  */
-export class SanitizeHtmlHtmlSanitizer implements HTMLSanitizer {
+export class SanitizeHtmlHtmlSanitizer implements ISanitizer {
     private _options: IOptions = { ...sanitize.defaults }
 
     /**

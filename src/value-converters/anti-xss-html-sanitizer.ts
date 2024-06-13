@@ -1,4 +1,4 @@
-import {HTMLSanitizer} from "./html-sanitizer";
+import {ISanitizer} from "@aurelia/runtime-html"
 
 /**
  * Sanitizes HTML tags for use in `innerhtml` attribute.
@@ -7,12 +7,11 @@ import {HTMLSanitizer} from "./html-sanitizer";
  * @author Mike Reiche <mike.reiche@t-systems.com>
  * @deprecated Use {@link SanitizeHtmlHtmlSanitizer} instead
  */
-export class AntiXssHtmlSanitizer extends HTMLSanitizer {
+export class AntiXssHtmlSanitizer implements ISanitizer {
 
     private _regex:RegExp;
 
     constructor() {
-        super()
         this.setUntrustedTags(["img","script"]);
     }
 

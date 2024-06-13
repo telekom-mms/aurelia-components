@@ -1,15 +1,15 @@
 import {HighlightTextValueConverter} from "../../src/value-converters/highlight-text-value-converter"
 import {SanitizeHtmlHtmlSanitizer} from "../../src/value-converters/sanitize-html-html-sanitizer"
-import {HTMLSanitizer} from "../../src/value-converters/html-sanitizer"
 import escapeStringRegexp from "escape-string-regexp";
 import {DI, Registration} from "aurelia";
+import {ISanitizer} from "@aurelia/runtime-html"
 
 const container = DI.createContainer()
 container.register(
-    Registration.singleton(HTMLSanitizer, SanitizeHtmlHtmlSanitizer)
+    Registration.singleton(ISanitizer, SanitizeHtmlHtmlSanitizer)
 )
 
-const htmlSanitizer = container.get(HTMLSanitizer) as SanitizeHtmlHtmlSanitizer
+const htmlSanitizer = container.get(ISanitizer) as SanitizeHtmlHtmlSanitizer
 const highlightTextValueConverter = container.get(HighlightTextValueConverter)
 
 let highlightingData: { inputString: string; inputRegExp: RegExp; outputString: string }[] = [

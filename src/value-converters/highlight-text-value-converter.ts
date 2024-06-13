@@ -1,6 +1,6 @@
 import escapeStringRegexp from "escape-string-regexp";
 import {resolve} from "aurelia";
-import {HTMLSanitizer} from "./html-sanitizer";
+import {ISanitizer} from "@aurelia/runtime-html"
 
 /**
  * Highlights text by given text or precompiled regular expression.
@@ -9,7 +9,7 @@ import {HTMLSanitizer} from "./html-sanitizer";
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
 export class HighlightTextValueConverter {
-    private readonly _htmlSanitizer = resolve(HTMLSanitizer)
+    private readonly _htmlSanitizer = resolve(ISanitizer)
 
     toView(value: string, text: string | RegExp) {
         if (!value) {
