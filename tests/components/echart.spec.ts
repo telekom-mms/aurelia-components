@@ -1,6 +1,5 @@
 import { createFixture } from '@aurelia/testing';
 import { bootstrapTestEnvironment } from '../bootstrap-tests';
-import {Empty} from "../../src/components/empty/empty";
 import {Echart} from "../../src/components/echart/echart";
 
 describe('EChart component', () => {
@@ -36,7 +35,8 @@ describe('EChart component', () => {
         await startPromise;
         const viewModel = appHost as unknown as ViewModel
 
-        //expect(viewModel._chart).not.toBe(undefined);
+        //expect(viewModel._chart).not.toBe(undefined)
+        throw new Error("EChart component constructor not called: https://discourse.aurelia.io/t/constructor-not-called-in-aurelia-2-components-tests/5454")
 
         await tearDown();
     });
