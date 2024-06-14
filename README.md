@@ -46,9 +46,9 @@ import {resolve} from 'aurelia';
 
 export class App {
     constructor(
-        private readonly _i18n = resolve(I18N)
+        i18n = resolve(I18N)
     ) {
-        this._i18n.setLocale("en");
+        i18n.setLocale("en");
     }
 }
 ```
