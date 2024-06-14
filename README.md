@@ -110,7 +110,3 @@ If tests are finished an HTML report is opened automatically.
 * Build and publish: https://medium.com/cameron-nokes/the-30-second-guide-to-publishing-a-typescript-package-to-npm-89d93ff7bccd
 * https://lerna.js.org/
 * Typescript unit testing: https://www.testim.io/blog/typescript-unit-testing-101/
-
-
-## Todos
-Add example to documentation: https://discourse.aurelia.io/t/how-to-get-or-create-global-di-container-for-testing/5443/5

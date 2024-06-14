@@ -27,20 +27,14 @@ for (let i = 0; i < 256; i++) {
 
 describe.each(highlightingData)(`toView with string`, (data) => {
     it(`string '${data.inputString}' is surrounded by mark tags`, () => {
-        console.log(data.inputString)
         const highlightedText = highlightTextValueConverter.toView(data.inputString, data.inputString)
-        console.log(highlightedText)
-        console.log(highlightedText === data.outputString)
         expect(highlightedText).toMatch(data.outputString)
     });
 });
 
 describe.each(highlightingData)(`toView with precompiled RegExp`, (data) => {
     it(`regExp '${data.inputString}' result is surrounded by mark tags`, () => {
-        console.log(data.inputString)
         const highlightedText = highlightTextValueConverter.toView(data.inputString, data.inputRegExp)
-        console.log(highlightedText)
-        console.log(highlightedText === data.outputString)
         expect(highlightedText).toMatch(data.outputString)
     });
 });

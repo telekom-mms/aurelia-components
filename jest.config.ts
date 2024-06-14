@@ -100,11 +100,7 @@ export default {
 
   // Use this configuration option to add custom reporters to Jest
   reporters: [
-    "default",
-    ["jest-html-reporters", {
-      "pageTitle": "Aurelia components - Test report",
-      "openReport": true
-    }]
+    "default"
   ],
 
   // Automatically reset mock state before every test

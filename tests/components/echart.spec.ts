@@ -9,34 +9,20 @@ describe('EChart component', () => {
 
     it('Renders the element', async () => {
         class ViewModel {
-            _chart: echarts.ECharts
-            _options = {
-                xAxis: {
-                    type: 'category',
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-                },
-                yAxis: {
-                    type: 'value'
-                },
-                series: [
-                    {
-                        data: [150, 230, 224, 218, 135, 147, 260],
-                        type: 'line'
-                    }
-                ]
-            }
+            _chart: HTMLElement;
+            _options = [];
         }
         const { appHost, component, startPromise, tearDown } = createFixture(
-            '<echart options.bind="_options" chart.bind="_chart"></echart>',
+            '<echart chart.bind="_chart"></echart>',
             ViewModel,
             [Echart]
         );
 
         await startPromise;
-        const viewModel = appHost as unknown as ViewModel
 
-        //expect(viewModel._chart).not.toBe(undefined)
-        throw new Error("EChart component constructor not called: https://discourse.aurelia.io/t/constructor-not-called-in-aurelia-2-components-tests/5454")
+        expect(component._options).not.toBe(undefined)
+        expect(component._chart).toBeInstanceOf(HTMLElement)
+        //throw new Error("EChart component constructor not called: https://discourse.aurelia.io/t/constructor-not-called-in-aurelia-2-components-tests/5454")
 
         await tearDown();
     });
