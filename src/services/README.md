@@ -10,34 +10,34 @@ Note: This services doesn't invalidate cached items on its own.
 
 ```typescript
 import {CacheService} from "cache-service";
-import {autoinject} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-fetch-client';
+import {resolve} from 'aurelia';
+import {HttpClient} from '@aurelia/fetch-client';
 import {toMilliseconds} from "./time";
 
-@autoinject()
+@inject()
 export class ViewModel {
-  constructor(
-      private readonly _cacheService: CacheService,
-      private readonly _httpClient: HttpClient
-  ) {
-    const defaultCacheTttl = {seconds: 60};
-    this._cacheService.setDefaultCacheTtl(defaultCacheTttl);
+    private readonly _cacheService = resolve(CacheService)
+    private readonly _httpClient = resolve(HttpClient)
     
-    // Invalidate outdated keys periodically
-    window.setInterval(() => {
-      this._cacheService.invalidateOutdated();
-    }, toMilliseconds(defaultCacheTttl))
-  }
+    constructor() {
+        const defaultCacheTttl = {seconds: 60};
+        this._cacheService.setDefaultCacheTtl(defaultCacheTttl);
+        
+        // Invalidate outdated keys periodically
+        window.setInterval(() => {
+            this._cacheService.invalidateOutdated();
+        }, toMilliseconds(defaultCacheTttl))
+    }
 
-  loadSomething() {
-    const loadingLambda = () => {
-      return this._httpClient.fetch('http://example.com/anything.json');
-    };
+    loadSomething() {
+        const loadingLambda = () => {
+            return this._httpClient.fetch('http://example.com/anything.json');
+        };
 
-    this._cacheService.getForKeyWithLoadingFunction('cache-id', loadingLambda)
-        .then(response => {
-          console.log(response);
-        });
-  }
+        this._cacheService.getForKeyWithLoadingFunction('cache-id', loadingLambda)
+            .then(response => {
+                console.log(response);
+            });
+    }
 }
 ```

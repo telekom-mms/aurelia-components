@@ -4,14 +4,6 @@
 
 Wrapper for [ApexCharts](https://apexcharts.com/).
 
-**Config**
-```typescript
-aurelia.use
-    .globalResources([
-        PLATFORM.moduleName('t-systems-aurelia-components/src/components/apex-chart/apex-chart'),
-    ]);
-```
-
 **View**
 ```html
 <apex-chart options.bind="_options" series.bind="_series" class="myChart"></apex-chart>
@@ -35,14 +27,6 @@ export class ViewModel {
 ## echart
 
 Wrapper for [Apache ECharts](https://echarts.apache.org/) with resize support.
-
-**Config**
-```typescript
-aurelia.use
-    .globalResources([
-        PLATFORM.moduleName('t-systems-aurelia-components/src/components/echart/echart'),
-    ]);
-```
 
 **myChart.css**
 ```css
@@ -86,20 +70,3 @@ export class ViewModel {
 ## empty
 
 Is just an empty view. You may need it for empty default routes.
-
-**ViewModel**
-```typescript
-import {Router, RouterConfiguration} from "aurelia-router";
-import {PLATFORM} from 'aurelia-framework';
-
-export class ViewModel {
-    configureRouter(config:RouterConfiguration, router:Router) {
-        config.map([
-            {
-                route: '',
-                moduleId: PLATFORM.moduleName('t-systems-aurelia-components/src/components/empty/empty'),
-            },
-        ]);
-    }
-}
-```

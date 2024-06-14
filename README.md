@@ -100,7 +100,6 @@ Run jest tests with
 ```shell
 npm test
 ```
-If tests are finished an HTML report is opened automatically.
 
 ## References
 * Build and publish: https://medium.com/cameron-nokes/the-30-second-guide-to-publishing-a-typescript-package-to-npm-89d93ff7bccd

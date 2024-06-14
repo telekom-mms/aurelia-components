@@ -13,18 +13,12 @@ You have to trigger the update loop by publishing the `UiUpdateEvent` on your on
 **ViewModel**
 ```typescript
 import {UiUpdateEvent} from '../events/ui-update-event'
-import {EventAggregator} from 'aurelia-event-aggregator';
-import {autoinject} from 'aurelia-framework';
+import {resolve, IEventAggregator} from 'aurelia';
 
-@autoinject()
 export class App {
     private _uiUpdateInterval:any;
-    constructor(
-        private _eventAggregator:EventAggregator
-    ) {
-        
-    }
-    
+    private _eventAggregator = resolve(IEventAggregator)
+
     bind() {
          this._uiUpdateInterval = window.setInterval(()=>{
             this._eventAggregator.publish(UiUpdateEvent.NAME, new UiUpdateEvent());

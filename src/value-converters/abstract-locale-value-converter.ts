@@ -9,6 +9,7 @@ export class AbstractLocaleValueConverter {
     private readonly _eventAggregator = resolve(IEventAggregator)
 
     constructor() {
+        console.log("New Instance")
         this._eventAggregator.subscribe('i18n:locale:changed', (payload: { newValue: string; }) => {
             this.localeChanged(payload.newValue);
         });
