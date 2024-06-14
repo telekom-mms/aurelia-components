@@ -1,6 +1,7 @@
 /**
  * Allows storage of objects into storage interface
  * @author Mike Reiche <mike.reiche@t-systems.com>
+ * @deprecated Use {@link https://github.com/nanostores/nanostores} instead
  */
 export class ObjectStorage {
     private _storage:Storage;

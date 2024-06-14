@@ -200,7 +200,7 @@ ${_timer.timeLeft|dateFormat:"hour"}
 
 Implements the behaviour of a trash bin.
 
-This utiliy is `@deprecated` because it's too specific and hard to reuse generally.
+This utility is `@deprecated` because it's too specific and hard to reuse generally.
 
 
 **TypeScript**
@@ -253,8 +253,10 @@ const myObject = {
 const sorted = recursiveObjectSort(myObject);
 ```
 
-## object-storage
+## object-storage (`@deprecated`)
 Allows setting objects to an implementation of a Storage interface
+This utility is deprecated, use https://github.com/nanostores/nanostores instead
+
 ```typescript
 import {ObjectStorage} from "object-storage";
 
