@@ -110,9 +110,10 @@ describe("CacheService", () => {
     const cacheService = new CacheService()
     const key = "someKey"
 
-    const shortTtl = {ms: 1};
+    const shortTtl = {ms: 10};
     const longTtl = {seconds: 1};
     const loadingTime = {ms: 30};
+    const waitingTime = {ms: 20}
 
     const slowLoadingFunction = async () => {
       await sleep(loadingTime);
@@ -124,7 +125,7 @@ describe("CacheService", () => {
     }
 
     const zombie = cacheService.getForKeyWithLoadingFunction(key, slowLoadingFunction, shortTtl);
-    await sleep(shortTtl);
+    await sleep(waitingTime);
 
     const living = cacheService.getForKeyWithLoadingFunction(key, fastLoadingFunction, longTtl);
     const livingResponse = await living;
