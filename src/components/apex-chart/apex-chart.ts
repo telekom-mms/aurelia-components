@@ -35,7 +35,11 @@ export class ApexChart {
 
     dispose() {
         if (this.chart) {
-            this.chart.destroy();
+            try {
+                this.chart.destroy();
+            } catch (e) {
+                console.error("Unable to destroy chart", e)
+            }
             this.chart = null;
         }
     }
@@ -79,8 +83,12 @@ export class ApexChart {
                 this.options.series = [];
             }
         }
+        try {
+            this.chart = new ApexCharts(this._container, this.options);
+            this.chart.render();
+        } catch (e) {
+            console.error("Unable to create chart", e)
+        }
 
-        this.chart = new ApexCharts(this._container, this.options);
-        this.chart.render();
     }
 }

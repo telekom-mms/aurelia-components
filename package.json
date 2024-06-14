@@ -17,6 +17,7 @@
 		"@types/bootstrap": "^5.1.12",
 		"@types/jest": "^27.4.1",
 		"@types/sanitize-html": "^2.6.2",
+		"apexcharts": "^3.49.1",
 		"aurelia": "^2.0.0-beta.19",
 		"echarts": "^5.5.0",
 		"jest-environment-jsdom": "^29.7.0",
