@@ -1,7 +1,7 @@
 import {customAttribute, resolve} from "aurelia";
 /**
  * Custom attribute for detection of element visibility
- * Usage: <div visible.delegate="_elementVisibility($event)" become-visible>
+ * Usage: <div visible.trigger="_elementVisibility($event)" become-visible>
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
 
