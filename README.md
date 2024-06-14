@@ -23,19 +23,15 @@ npm install t-systems-aurelia-components --save
 
 ## Use in your Aurelia project
 
-TODO: Test with Aurelia 2 (https://docs.aurelia.io/templates/value-converters)
-
-Since this library doesn't provide any precompiled `dist/` files, you need to reference the source code in your view code.
-
-```html
-<import from="t-systems-aurelia-components/src/value-converters/date-format-value-converter" />
-${date|dateValueFormatter}
-```
-
-or import them directly
+Since this library doesn't provide any precompiled `dist/` files, you need to reference the source code `main.ts` like.
 
 ```typescript
-import {CacheService} from "t-systems-aurelia-components/src/service/cache-service";
+import {NumberValueConverter} from "../../t-systems-aurelia-components/src/value-converters/number-value-converter";
+
+Aurelia
+    // ...
+    .register(NumberValueConverter)
+    // ...
 ```
 
 ## Locale related features
