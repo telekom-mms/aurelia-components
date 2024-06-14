@@ -7,6 +7,6 @@ import {valueConverter} from "aurelia";
 @valueConverter("objectValues")
 export class ObjectValuesValueConverter {
     toView(obj: object) {
-        if (obj) return Object.values(obj);
+        return Object.values(obj);
     }
 }
