@@ -1,5 +1,5 @@
-import {createFixture, TestContext} from '@aurelia/testing';
-import { bootstrapTestEnvironment } from '../bootstrap-tests';
+import {createFixture} from '@aurelia/testing';
+import {bootstrapTestEnvironment} from '../bootstrap-tests';
 import {SortValueConverter} from "../../src/value-converters/sort-value-converter";
 
 type Animal = {
@@ -21,14 +21,11 @@ describe(SortValueConverter, () => {
                 {name: {shortName: "Affe"}},
                 {name: {shortName: "Kuh"}}
             ]
-            numberUnderTest = 13.37;
         }
         const { appHost, startPromise, tearDown } = createFixture(
             '<span repeat.for="animal of list | sort:\'name.shortName\':-1">${animal.name.shortName}</span>',
             ViewModel,
-            [SortValueConverter],
-            true,
-            testContext
+            [SortValueConverter]
         );
 
         await startPromise;
