@@ -19,6 +19,7 @@
 		"@types/sanitize-html": "^2.6.2",
 		"aurelia": "^2.0.0-beta.19",
 		"jest-environment-jsdom": "^29.7.0",
+		"jest-transform-stub": "^2.0.0",
 		"moment": "^2.30.1",
 		"momentjs": "^2.0.0",
 		"sanitize-html": "^2.13.0",
@@ -62,6 +63,23 @@
 		},
 		"sanitize-html": {
 			"optional": true
+		}
+	},
+	"jest": {
+		"testEnvironment": "jsdom",
+		"transform": {
+			"\\.(css|less|sass|scss|styl|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "jest-transform-stub",
+			"\\.(ts|html)$": "@aurelia/ts-jest"
+		},
+		"collectCoverage": true,
+		"collectCoverageFrom": [
+			"src/**/*.ts",
+			"!src/**/*.d.ts"
+		],
+		"globals": {
+			"ts-jest": {
+				"isolatedModules": true
+			}
 		}
 	}
 }

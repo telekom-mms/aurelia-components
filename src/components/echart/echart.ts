@@ -1,65 +1,29 @@
-import {bindable, BindingMode, customElement} from "aurelia";
-import * as echarts from "echarts";
-import {ECBasicOption} from "echarts/types/dist/shared";
-import template from "./echart.html"
+import { bindable, BindingMode, customElement } from 'aurelia';
 
-/**
- * Component for Apache ECharts
- * @author Mike Reiche <mike@reiche.world>
- */
-// @customElement({
-//     name: 'echart',
-//     template
-// })
+@customElement("echart")
 export class Echart {
     private _container: HTMLDivElement;
 
     @bindable({ mode: BindingMode.fromView })
-    chart: echarts.ECharts|null;
+    chart: HTMLElement;
 
     @bindable({ mode: BindingMode.toView })
-    options: ECBasicOption;
-
-    @bindable({ mode: BindingMode.toView })
-    class:string;
-
-    private readonly onResize= () => {
-        this.chart.resize()
-    }
+    class: string;
 
     bound() {
-        this._createChart()
+        console.log('bound() called');
+        this._createChart();
     }
 
     unbinding() {
-        this.chart.dispose()
-        this.chart = null
-    }
-
-    attached() {
-        if (this.options) {
-            this.chart.setOption(this.options)
-            this.chart.resize()
-        }
-        window.addEventListener("resize", this.onResize)
-    }
-
-    dispose() {
-        window.removeEventListener("resize", this.onResize)
-    }
-
-    optionsChanged(newOptions:ECBasicOption) {
-        if (!this.chart) {
-            this._createChart()
-        }
-        this.chart.setOption(newOptions, true)
-        this.chart.resize()
+        this.chart = null;
     }
 
     private _createChart() {
         if (!this._container) {
             return;
         }
-        this.chart = echarts.init(this._container)
+        this.chart = this._container;
+        console.log(this.chart);
     }
 }
