@@ -12,7 +12,7 @@ Tries to escape all elements / discards nothing.
 
 **main.ts**
 ```typescript
-import {Registration, resolve} from "aurelia"
+import {Registration} from "aurelia"
 import {ISanitizer} from "@aurelia/runtime-html"
 
 Aurelia.register(Registration.singleton(ISanitizer, AntiXssHtmlSanitizer))
@@ -20,6 +20,9 @@ Aurelia.register(Registration.singleton(ISanitizer, AntiXssHtmlSanitizer))
 
 **Configuration**
 ```typescript
+import {resolve} from "aurelia"
+import {AntiXssHtmlSanitizer} from "value-converters/anti-xss-html-sanitizer";
+
 const htmlSanitizer = resolve(HTMLSanitizer) as AntiXssHtmlSanitizer;
 htmlSanitizer.setUntrustedTags(["script", "img", "iframe"])
 ```
@@ -39,14 +42,18 @@ Inherits options from sanitize-html library.
 **main.ts**
 ```typescript
 import sanitize from 'sanitize-html'
-import {Registration, resolve} from "aurelia"
+import {Registration} from "aurelia"
 import {ISanitizer} from "@aurelia/runtime-html"
+import {SanitizeHtmlHtmlSanitizer} from "value-converters/sanitize-html-html-sanitizer";
 
 Aurelia.register(Registration.singleton(ISanitizer, SanitizeHtmlHtmlSanitizer))
 ```
 
 **Configuration**
 ```typescript
+import {resolve} from "aurelia"
+import {SanitizeHtmlHtmlSanitizer} from "value-converters/sanitize-html-html-sanitizer";
+
 const htmlSanitizer = resolve(ISanitizer) as SanitizeHtmlHtmlSanitizer
 htmlSanitizer.withOptions(SanitizeHtmlHtmlSanitizer.paranoidOptions) // shortcut to allow nothing
 

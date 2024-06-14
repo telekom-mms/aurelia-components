@@ -14,7 +14,6 @@ import {resolve} from 'aurelia';
 import {HttpClient} from '@aurelia/fetch-client';
 import {toMilliseconds} from "./time";
 
-@inject()
 export class ViewModel {
     private readonly _cacheService = resolve(CacheService)
     private readonly _httpClient = resolve(HttpClient)
