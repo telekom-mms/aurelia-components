@@ -1,6 +1,10 @@
 import {IEventAggregator, resolve} from "aurelia";
 
-export abstract class AbstractLocaleValueConverter {
+/**
+ * @inject() and @valueConverter() wont work with abstract classes
+ * @see https://discourse.aurelia.io/t/error-injecting-singletons-in-aurelia-2/5444/12
+ */
+export class AbstractLocaleValueConverter {
     private _locale:string;
     private readonly _eventAggregator = resolve(IEventAggregator)
 
