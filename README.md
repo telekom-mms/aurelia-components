@@ -36,9 +36,7 @@ Aurelia
 
 ## Locale related features
 
-TODO: Test with Aurelia 2: https://docs.aurelia.io/aurelia-packages/internationalization
-
-Some extensions like `date-format-value-converter` or `currency-value-converter` support localization. To change their internal locale, use the `aurelia-i18n` library.
+Some extensions like `date-format-value-converter` or `currency-value-converter` support localization. To change their internal locale, use the `@aurelia/i18n` library.
 
 ```typescript
 import {I18N} from '@aurelia/i18n';

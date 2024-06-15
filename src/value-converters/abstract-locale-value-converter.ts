@@ -1,16 +1,26 @@
-import {IEventAggregator, resolve} from "aurelia";
+import {bindable, BindingMode, IEventAggregator, resolve} from "aurelia";
+
+type LocaleChangedEventPayload = {
+    oldLocale: string
+    newLocale: string
+}
 
 /**
  * @inject() and @valueConverter() wont work with abstract classes
  * @see https://discourse.aurelia.io/t/error-injecting-singletons-in-aurelia-2/5444/12
  */
 export class AbstractLocaleValueConverter {
-    private _locale:string;
+    @bindable({mode: BindingMode.toView})
+    private locale: string
+    private _fixedLocale: boolean = false
     private readonly _eventAggregator = resolve(IEventAggregator)
 
     constructor() {
-        this._eventAggregator.subscribe('i18n:locale:changed', (payload: { newValue: string; }) => {
-            this.localeChanged(payload.newValue);
+        this._eventAggregator.subscribe('i18n:locale:changed', (payload: LocaleChangedEventPayload) => {
+            if (!this._fixedLocale) {
+                this.setLocale(payload.newLocale)
+                this._fixedLocale = false
+            }
         });
     }
 
@@ -26,20 +36,21 @@ export class AbstractLocaleValueConverter {
      * Returns the instance or system locale
      */
     getLocale() {
-        return this._locale ? this._locale : AbstractLocaleValueConverter.getSystemLocale();
+        if (!this.locale) {
+            this.setLocale(AbstractLocaleValueConverter.getSystemLocale())
+        }
+        return this.locale
     }
 
     /**
      * Changes the instance locale
      */
-    setLocale(locale:string) {
-        this._locale = locale;
-        this.localeChanged(locale);
+    setLocale(locale: string) {
+        this.locale = locale
+        this._fixedLocale = true
     }
 
-    /**
-     * Called when the instance or system locale has changed
-     */
-    protected localeChanged(_locale: string) {
+    public localeChanged(newValue: string, oldValue: string) {
+
     }
 }
