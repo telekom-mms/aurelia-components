@@ -2,7 +2,7 @@
 
 ![npm](https://img.shields.io/npm/v/t-systems-aurelia-components)
 
-Common useful components for the Aurelia Framework (https://aurelia.io)
+Common useful components for the Aurelia 2 Framework (https://docs.aurelia.io/)
 
 ## Documentation
 
@@ -23,36 +23,30 @@ npm install t-systems-aurelia-components --save
 
 ## Use in your Aurelia project
 
-Since this library doesn't provide any precompiled `dist/` files, you need to reference the source code in your project.
+Since this library doesn't provide any precompiled `dist/` files, you need to reference the source code `main.ts` like.
 
-### Aurelia features
-Open `main.ts`
 ```typescript
-aurelia.use
-    .globalResources([
-        PLATFORM.moduleName('t-systems-aurelia-components/src/value-converters/date-format-value-converter'),
-    ])
-```
+import {NumberValueConverter} from "../../t-systems-aurelia-components/src/value-converters/number-value-converter";
 
-### Direct imports
-```typescript
-import {CacheService} from "t-systems-aurelia-components/src/service/cache-service";
+Aurelia
+    // ...
+    .register(NumberValueConverter)
+    // ...
 ```
 
 ## Locale related features
 
-Some extensions like `date-format-value-converter` or `currency-value-converter` support localization. To change their internal locale, use the `aurelia-i18n` library.
+Some extensions like `date-format-value-converter` or `currency-value-converter` support localization. To change their internal locale, use the `@aurelia/i18n` library.
 
 ```typescript
-import {I18N} from 'aurelia-i18n';
-import {autoinject} from 'aurelia-framework';
+import {I18N} from '@aurelia/i18n';
+import {resolve} from 'aurelia';
 
-@autoinject()
 export class App {
     constructor(
-        private readonly _i18n:I18N
+        i18n = resolve(I18N)
     ) {
-        this._i18n.setLocale("en");
+        i18n.setLocale("en");
     }
 }
 ```
@@ -104,7 +98,6 @@ Run jest tests with
 ```shell
 npm test
 ```
-If tests are finished an HTML report is opened automatically.
 
 ## References
 * Build and publish: https://medium.com/cameron-nokes/the-30-second-guide-to-publishing-a-typescript-package-to-npm-89d93ff7bccd

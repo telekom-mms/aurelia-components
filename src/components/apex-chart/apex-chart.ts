@@ -1,5 +1,4 @@
-import {bindable} from "aurelia-templating";
-import {bindingMode} from "aurelia-binding";
+import {bindable, BindingMode} from "aurelia";
 import ApexCharts, {ApexOptions} from 'apexcharts';
 
 export interface ISelection {
@@ -12,19 +11,19 @@ export type ApexSeries = ApexAxisChartSeries | ApexNonAxisChartSeries
 export class ApexChart {
     private _container: HTMLDivElement;
 
-    @bindable({ defaultBindingMode: bindingMode.fromView })
+    @bindable({ mode: BindingMode.fromView })
     chart: ApexCharts|null;
 
-    @bindable({ defaultBindingMode: bindingMode.toView })
+    @bindable({ mode: BindingMode.toView })
     options: ApexOptions;
 
-    @bindable({ defaultBindingMode: bindingMode.toView })
+    @bindable({ mode: BindingMode.toView })
     series: ApexSeries;
 
-    @bindable({ defaultBindingMode: bindingMode.toView })
+    @bindable({ mode: BindingMode.toView })
     selection: ISelection;
 
-    @bindable({ defaultBindingMode: bindingMode.toView })
+    @bindable({ mode: BindingMode.toView })
     class:string;
 
     attached() {
@@ -34,9 +33,13 @@ export class ApexChart {
 
     }
 
-    detached() {
+    dispose() {
         if (this.chart) {
-            this.chart.destroy();
+            try {
+                this.chart.destroy();
+            } catch (e) {
+                console.error("Unable to destroy chart", e)
+            }
             this.chart = null;
         }
     }
@@ -80,8 +83,12 @@ export class ApexChart {
                 this.options.series = [];
             }
         }
+        try {
+            this.chart = new ApexCharts(this._container, this.options);
+            this.chart.render();
+        } catch (e) {
+            console.error("Unable to create chart", e)
+        }
 
-        this.chart = new ApexCharts(this._container, this.options);
-        this.chart.render();
     }
 }

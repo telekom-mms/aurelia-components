@@ -1,4 +1,4 @@
-import {valueConverter} from 'aurelia-binding'
+import {valueConverter} from 'aurelia'
 import {AbstractLocaleValueConverter} from "./abstract-locale-value-converter";
 import {DateTimeComponents, Milliseconds, toMilliseconds} from "../utils/time";
 

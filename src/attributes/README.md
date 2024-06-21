@@ -13,18 +13,12 @@ You have to trigger the update loop by publishing the `UiUpdateEvent` on your on
 **ViewModel**
 ```typescript
 import {UiUpdateEvent} from '../events/ui-update-event'
-import {EventAggregator} from 'aurelia-event-aggregator';
-import {autoinject} from 'aurelia-framework';
+import {resolve, IEventAggregator} from 'aurelia';
 
-@autoinject()
 export class App {
     private _uiUpdateInterval:any;
-    constructor(
-        private _eventAggregator:EventAggregator
-    ) {
-        
-    }
-    
+    private _eventAggregator = resolve(IEventAggregator)
+
     bind() {
          this._uiUpdateInterval = window.setInterval(()=>{
             this._eventAggregator.publish(UiUpdateEvent.NAME, new UiUpdateEvent());
@@ -42,12 +36,14 @@ Fires an event when an element became visible in the viewport.
 
 **Template**
 ```html
-<div visible.delegate="_elementVisibility($event)" become-visible>
+<div visible.trigger="_elementVisibility($event)" become-visible>
 ```
 
 **ViewModel**
 ```typescript
-private _elementVisiblity($event:CustomEvent) {
-    console.log("element visible:", $event.detail);
+class ViewModel {
+    private _elementVisibility($event: CustomEvent) {
+        console.log("element visible:", $event.detail);
+    }
 }
 ```

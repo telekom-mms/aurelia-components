@@ -1,9 +1,7 @@
-import 'aurelia-polyfills';
-import {Container} from "aurelia-dependency-injection";
 import {IntlDateFormatValueConverter} from "../../src/value-converters/intl-date-format-value-converter";
+import {DI} from "aurelia";
 
-const container = new Container();
-container.makeGlobal();
+const container = DI.createContainer()
 
 const dateFormatter = container.get(IntlDateFormatValueConverter);
 dateFormatter.setLocale("en");

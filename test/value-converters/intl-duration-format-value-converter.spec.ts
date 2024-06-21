@@ -1,12 +1,10 @@
-import 'aurelia-polyfills';
-import {Container} from "aurelia-dependency-injection";
 import {
     IntlDurationFormatValueConverter
 } from "../../src/value-converters/intl-duration-format-value-converter";
 import {DateTimeComponents, toSeconds} from "../../src/utils/time";
+import {DI} from "aurelia";
 
-const container = new Container();
-container.makeGlobal();
+const container = DI.createContainer()
 
 const formatter = container.get(IntlDurationFormatValueConverter);
 formatter.setLocale("en");

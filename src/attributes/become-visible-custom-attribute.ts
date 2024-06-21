@@ -1,18 +1,16 @@
-import {autoinject} from "aurelia-dependency-injection";
-
+import {customAttribute, resolve} from "aurelia";
 /**
  * Custom attribute for detection of element visibility
- * Usage: <div visible.delegate="_elementVisibility($event)" become-visible>
+ * Usage: <div visible.trigger="_elementVisibility($event)" become-visible>
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-@autoinject()
-export class BecomeVisibleCustomAttribute {
 
+@customAttribute('become-visible')
+export class BecomeVisibleCustomAttribute {
+    private readonly _element = resolve(Element)
     private readonly _observer: IntersectionObserver
 
-    constructor(
-        private readonly _element:Element
-    ) {
+    constructor() {
         const _checkVisibility: IntersectionObserverCallback = (entries: IntersectionObserverEntry[]) => {
             entries.forEach(entry => {
                 const ev = new CustomEvent('visible', {
@@ -29,7 +27,7 @@ export class BecomeVisibleCustomAttribute {
         this._observer.observe(this._element)
     }
 
-    detached() {
+    dispose() {
         this._observer.unobserve(this._element)
     }
 }

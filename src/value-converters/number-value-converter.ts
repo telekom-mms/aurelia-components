@@ -3,11 +3,11 @@
  * Usage: ${number|number:precision}
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-import {autoinject} from "aurelia-dependency-injection";
 import {AbstractLocaleValueConverter} from "./abstract-locale-value-converter";
 import {calcFloatingPrecision} from "../utils/numbers";
+import {valueConverter} from "aurelia";
 
-@autoinject()
+@valueConverter('number')
 export class NumberValueConverter extends AbstractLocaleValueConverter {
 
     toView(value:number, precision:number=2, fixedPrecision:boolean = true): string {

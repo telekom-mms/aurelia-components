@@ -10,13 +10,20 @@ Tries to escape all elements / discards nothing.
 <span innerhtml.bind="insecureValue|sanitizeHTML"></span>
 ```
 
+**main.ts**
+```typescript
+import {Registration} from "aurelia"
+import {ISanitizer} from "@aurelia/runtime-html"
+
+Aurelia.register(Registration.singleton(ISanitizer, AntiXssHtmlSanitizer))
+```
+
 **Configuration**
 ```typescript
-import {HTMLSanitizer} from "aurelia-templating-resources";
+import {resolve} from "aurelia"
+import {AntiXssHtmlSanitizer} from "value-converters/anti-xss-html-sanitizer";
 
-aurelia.use.singleton(HTMLSanitizer, AntiXssHtmlSanitizer);
-
-const htmlSanitizer = aurelia.container.get(HTMLSanitizer) as AntiXssHtmlSanitizer;
+const htmlSanitizer = resolve(HTMLSanitizer) as AntiXssHtmlSanitizer;
 htmlSanitizer.setUntrustedTags(["script", "img", "iframe"])
 ```
 
@@ -32,14 +39,22 @@ Inherits options from sanitize-html library.
 <span innerhtml.bind="insecureValue|sanitizeHTML"></span>
 ```
 
-**Configuration**
+**main.ts**
 ```typescript
 import sanitize from 'sanitize-html'
-import {HTMLSanitizer} from "aurelia-templating-resources"
+import {Registration} from "aurelia"
+import {ISanitizer} from "@aurelia/runtime-html"
+import {SanitizeHtmlHtmlSanitizer} from "value-converters/sanitize-html-html-sanitizer";
 
-aurelia.use.singleton(HTMLSanitizer, SanitizeHtmlHtmlSanitizer)
+Aurelia.register(Registration.singleton(ISanitizer, SanitizeHtmlHtmlSanitizer))
+```
 
-const htmlSanitizer = aurelia.container.get(HTMLSanitizer) as SanitizeHtmlHtmlSanitizer
+**Configuration**
+```typescript
+import {resolve} from "aurelia"
+import {SanitizeHtmlHtmlSanitizer} from "value-converters/sanitize-html-html-sanitizer";
+
+const htmlSanitizer = resolve(ISanitizer) as SanitizeHtmlHtmlSanitizer
 htmlSanitizer.withOptions(SanitizeHtmlHtmlSanitizer.paranoidOptions) // shortcut to allow nothing
 
 const options: sanitize.IOptions = { ...sanitize.defaults } // get copy of library defaults for customization
@@ -97,7 +112,7 @@ You may need to update your `tsconfig.json`.
 
 **API**
 ```typescript
-const formatter = aurelia.container.get(DateFormatValueConverter);
+const formatter = resolve(DateFormatValueConverter);
 formatter.setDefaultFormat("LLL");
 ```
 
@@ -111,7 +126,7 @@ Formats a unix timestamp as milliseconds or formatted date string to a localized
 
 **API**
 ```typescript
-const formatter = aurelia.container.get(IntlDateFormatValueConverter);
+const formatter = resolve(IntlDateFormatValueConverter);
 formatter.setOptions("default", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 formatter.setOptions("long", { dateStyle: 'full', timeStyle: 'long' });
 ```
@@ -133,7 +148,7 @@ Formats a duration as milliseconds or DateTimeComponents to relative time units 
 
 **API**
 ```typescript
-const formatter = aurelia.container.get(IntlDurationFormatValueConverter);
+const formatter = resolve(IntlDurationFormatValueConverter);
 formatter.setOptions("short", {style: "short"});
 formatter.setSeparators("short", " ");
 ```
@@ -154,7 +169,7 @@ Examples:
 
 **API**
 ```typescript
-const formatter = aurelia.container.get(DurationFormatValueConverter);
+const formatter = resolve(DurationFormatValueConverter);
 formatter.setDefaultFormat("h[h] m[min] s[s]");
 ```
 

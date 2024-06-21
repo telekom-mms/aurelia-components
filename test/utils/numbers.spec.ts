@@ -38,34 +38,6 @@ const bytesData = [
   },
 ];
 
-const kiloData = [
-  {
-    input: 0,
-    expectedFactor: 1,
-    expectedLabel: ''
-  },
-  {
-    input: 1,
-    expectedFactor: 1,
-    expectedLabel: ''
-  },
-  {
-    input: 999,
-    expectedFactor: 1,
-    expectedLabel: ''
-  },
-  {
-    input: 1000,
-    expectedFactor: 1000,
-    expectedLabel: 'k'
-  },
-  {
-    input: Math.pow(1000,2),
-    expectedFactor: Math.pow(1000,2),
-    expectedLabel: 'M'
-  },
-];
-
 describe.each(bytesData)('getFactorLabel on bytesMap', (data) => {
   it(`bytes '${data.input}'`, () => {
     const {factor: factor, unit: label} = getFactor(data.input, bytesMap);
@@ -81,20 +53,46 @@ test("formatted bytesMap", () => {
   expect(formatted).toBe("1.3 KiB");
 })
 
-describe.each(kiloData)('getFactorLabel on kiloMap', (data) => {
+const kiloData = [
+  {
+    input: 0,
+    precision: 0,
+    expectedFormat: "0"
+  },
+  {
+    input: 1,
+    precision: 0,
+    expectedFormat: "1",
+  },
+  {
+    input: 999,
+    precision: 0,
+    expectedFormat: "999",
+  },
+  {
+    input: 1000,
+    precision: 0,
+    expectedFormat: "1k",
+  },
+  {
+    input: 1300,
+    precision: 1,
+    expectedFormat: "1.3k",
+  },
+  {
+    input: Math.pow(1000,2),
+    precision: 0,
+    expectedFormat: "1M"
+  },
+];
+
+describe.each(kiloData)('kiloMap', (data) => {
   it(`number '${data.input}'`, () => {
     const {factor: factor, unit: label} = getFactor(data.input, kiloMap);
-    expect(factor).toEqual(data.expectedFactor);
-    expect(label).toEqual(data.expectedLabel);
+    const formatted = `${(data.input/factor).toFixed(data.precision)}${label}`
+    expect(formatted).toBe(data.expectedFormat);
   });
 });
-
-test("formatted kiloMap", () => {
-  const posts = 1300;
-  const {factor: factor, unit: label} = getFactor(posts, kiloMap);
-  const formatted = `${(posts/factor).toFixed(1)}${label}`
-  expect(formatted).toBe("1.3k");
-})
 
 const roundData = [
   {

@@ -1,9 +1,7 @@
-import 'aurelia-polyfills';
-import {Container} from "aurelia-dependency-injection";
 import {CurrencyValueConverter} from "../../src/value-converters/currency-value-converter";
+import {DI} from "aurelia";
 
-const container = new Container();
-container.makeGlobal();
+const container = DI.createContainer()
 
 const currencyValueConverter = container.get(CurrencyValueConverter);
 currencyValueConverter.setLocale("en");

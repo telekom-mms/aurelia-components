@@ -1,20 +1,18 @@
 import {Tooltip} from "bootstrap"
-import {autoinject} from "aurelia-dependency-injection";
+import {resolve} from "aurelia";
 
 /**
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-@autoinject()
 export class TooltipCustomAttribute {
     private tooltip: Tooltip | undefined
-
-    constructor(private readonly element: Element) {}
+    private readonly _element = resolve(Element)
 
     attached() {
-        this.tooltip = new Tooltip(this.element)
+        this.tooltip = new Tooltip(this._element)
     }
 
-    unbind() {
+    dispose() {
         this.tooltip?.dispose()
         this.tooltip = undefined
     }

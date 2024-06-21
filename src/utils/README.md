@@ -158,37 +158,35 @@ Generic Timer implementation
 
 **ViewModel**
 ```typescript
-import {autoinject} from "aurelia-dependency-injection";
+import {inject} from "aurelia";
 import {Timer} from "utils/timer";
 import {IntlDateFormatValueConverter} from "value-converters/intl-date-format-value-converter";
 
-@autoinject
+@inject(IntlDateFormatValueConverter)
 export class ViewModel {
-  
-  private readonly _timer: Timer
-  
-  construct(dateFormatter: IntlDateFormatValueConverter) {
-    
-    dateFormatter.setOptions("hour", {
-      minute: "numeric",
-      second: "numeric"
-    })
-    
-    this._timer = new Timer({
-      duration: {minutes: 5},
-      onComplete: timer => {
-        // do something
-      }
-    })
-  }
-  
-  attached() {
-    this._timer.start()
-  }
-  
-  detached() {
-    this._timer.dispose()
-  }
+    private readonly _timer: Timer
+
+    construct(dateFormatter: IntlDateFormatValueConverter) {
+        dateFormatter.setOptions("hour", {
+            minute: "numeric",
+            second: "numeric"
+        })
+
+        this._timer = new Timer({
+            duration: {minutes: 5},
+            onComplete: timer => {
+                // do something
+            }
+        })
+    }
+
+    attached() {
+        this._timer.start()
+    }
+
+    detached() {
+        this._timer.dispose()
+    }
 }
 ```
 
@@ -202,7 +200,7 @@ ${_timer.timeLeft|dateFormat:"hour"}
 
 Implements the behaviour of a trash bin.
 
-This utiliy is `@deprecated` because it's too specific and hard to reuse generally.
+This utility is `@deprecated` because it's too specific and hard to reuse generally.
 
 
 **TypeScript**
@@ -255,8 +253,10 @@ const myObject = {
 const sorted = recursiveObjectSort(myObject);
 ```
 
-## object-storage
+## object-storage (`@deprecated`)
 Allows setting objects to an implementation of a Storage interface
+This utility is deprecated, use https://github.com/nanostores/nanostores instead
+
 ```typescript
 import {ObjectStorage} from "object-storage";
 

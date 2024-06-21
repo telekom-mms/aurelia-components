@@ -1,20 +1,18 @@
 import {Collapse} from "bootstrap"
-import {autoinject} from "aurelia-dependency-injection";
+import {resolve} from "aurelia";
 
 /**
  * @author Mike Reiche <mike.reiche@t-systems.com>
  */
-@autoinject()
 export class CollapseCustomAttribute {
+    private readonly _element = resolve(Element)
     private collapse: Collapse | undefined
 
-    constructor(private readonly element: Element) {}
-
     attached() {
-        this.collapse = new Collapse(this.element)
+        this.collapse = new Collapse(this._element)
     }
 
-    unbind() {
+    dispose() {
         this.collapse?.dispose()
         this.collapse = undefined
     }

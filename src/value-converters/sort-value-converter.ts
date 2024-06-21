@@ -3,6 +3,9 @@
  * @author Mike Reiche <mike.reiche@t-systems.com>
  * Usage: ${list|sort:'property.otherproperty':-1}
  */
+import {valueConverter} from "aurelia";
+
+@valueConverter("sort")
 export class SortValueConverter {
     toView(array:any[], propertyName:string, factor:number=1) {
         if (!(array instanceof Array)) {

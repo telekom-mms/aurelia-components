@@ -1,10 +1,13 @@
+import {ISanitizer} from "@aurelia/runtime-html"
+
 /**
  * Sanitizes HTML tags for use in `innerhtml` attribute.
  * You have to configure Aurelia DI to use this implementation on configuration stage.
  * Usage: <span innerhtml.bind="insecureValue|sanitizeHTML"></span>
  * @author Mike Reiche <mike.reiche@t-systems.com>
+ * @deprecated Use {@link SanitizeHtmlHtmlSanitizer} instead
  */
-export class AntiXssHtmlSanitizer {
+export class AntiXssHtmlSanitizer implements ISanitizer {
 
     private _regex:RegExp;
 
