@@ -78,20 +78,20 @@ export function round(value:number, precision:number) {
 /**
  * Calculates a floating precision if the value is smaller than the requested precision
  * @param value The given value
- * @param precision Target precision
+ * @param minPrecision Minimal precision value
  * @return Fitting precision
  */
-export function calcFloatingPrecision(value:number, precision:number) {
-    if (precision <= 0) {
+export function calcFloatingPrecision(value:number, minPrecision:number) {
+    if (minPrecision <= 0) {
         return 0
     }
-    let realPrecision = precision;
+    let realPrecision = minPrecision;
     const absValue = Math.abs(value);
-    while (absValue > 0 && absValue < 1/Math.pow(10, realPrecision)) {
-        realPrecision += precision;
+    while (absValue > 0 && absValue < 1/Math.pow(10, Math.max(realPrecision-1, 1))) {
+        realPrecision++
     }
-    if (realPrecision < precision) {
-        realPrecision = precision;
+    if (realPrecision < minPrecision) {
+        realPrecision = minPrecision;
     }
     return realPrecision;
 }

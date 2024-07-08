@@ -125,13 +125,36 @@ const roundData = [
 ];
 
 describe.each(roundData)('round', (data) => {
-  it(`round '${data.input}/${data.precision}'`, () => {
+  it(`'${data.input}/${data.precision}'`, () => {
     expect(round(data.input, data.precision)).toEqual(data.expected);
   });
 });
 
-test("calcFloatingPointPrecision", () => {
-  const value = 0.000123
-  const precision = calcFloatingPrecision(value, 3)
-  expect(precision).toBe(6)
-})
+
+const precisionData = [
+  {
+    input: 0.000123,
+    expected: 5,
+  },
+  {
+    input: 0.0137,
+    expected: 3,
+  },
+  {
+    input: 0.137,
+    expected: 2,
+  },
+];
+
+describe.each(precisionData)('calcFloatingPointPrecision', (data) => {
+  it(`'${data.input}'`, () => {
+    expect(calcFloatingPrecision(data.input, 2)).toEqual(data.expected);
+  });
+});
+
+//
+// test("calcFloatingPointPrecision", () => {
+//   const value = 0.000123
+//   const precision = calcFloatingPrecision(value, 3)
+//   expect(precision).toBe(6)
+// })
