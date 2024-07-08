@@ -151,10 +151,3 @@ describe.each(precisionData)('calcFloatingPointPrecision', (data) => {
     expect(calcFloatingPrecision(data.input, 2)).toEqual(data.expected);
   });
 });
-
-//
-// test("calcFloatingPointPrecision", () => {
-//   const value = 0.000123
-//   const precision = calcFloatingPrecision(value, 3)
-//   expect(precision).toBe(6)
-// })
