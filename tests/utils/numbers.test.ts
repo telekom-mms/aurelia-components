@@ -1,4 +1,4 @@
-import {bytesMap, calcFloatingPrecision, getFactor, kiloMap, round} from "../../src/utils/numbers";
+import {bytesMap, calcDecimalPlace, getFactor, kiloMap, round} from "../../src/utils/numbers";
 
 const bytesData = [
   {
@@ -134,20 +134,38 @@ describe.each(roundData)('round', (data) => {
 const precisionData = [
   {
     input: 0.000123,
+    precision: 2,
     expected: 5,
   },
   {
     input: 0.0137,
+    precision: 2,
     expected: 3,
   },
   {
     input: 0.137,
+    precision: 2,
     expected: 2,
+  },
+  {
+    input: 0.000123,
+    precision: 3,
+    expected: 6,
+  },
+  {
+    input: 0.0137,
+    precision: 1,
+    expected: 2,
+  },
+  {
+    input: 0.137,
+    precision: 1,
+    expected: 1,
   },
 ];
 
 describe.each(precisionData)('calcFloatingPointPrecision', (data) => {
   it(`'${data.input}'`, () => {
-    expect(calcFloatingPrecision(data.input, 2)).toEqual(data.expected);
+    expect(calcDecimalPlace(data.input, data.precision)).toEqual(data.expected);
   });
 });

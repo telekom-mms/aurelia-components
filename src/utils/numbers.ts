@@ -75,23 +75,38 @@ export function round(value:number, precision:number) {
     return Math.round(value * factorOfTen) / factorOfTen;
 }
 
+
+/**
+ * @deprecated Use {@link calcDecimalPlace()} instead
+ * @param value
+ * @param minPrecision
+ */
+export function calcFloatingPrecision(value:number, minPrecision:number) {
+    return calcDecimalPlace(value, minPrecision)
+}
+
 /**
  * Calculates a floating precision if the value is smaller than the requested precision
  * @param value The given value
  * @param minPrecision Minimal precision value
  * @return Fitting precision
  */
-export function calcFloatingPrecision(value:number, minPrecision:number) {
+export function calcDecimalPlace(value: number, minPrecision: number) {
     if (minPrecision <= 0) {
         return 0
     }
-    let realPrecision = minPrecision;
+    let realPrecision = 1;
     const absValue = Math.abs(value);
-    while (absValue > 0 && absValue < 1/Math.pow(10, Math.max(realPrecision-1, 1))) {
-        realPrecision++
+
+    if (absValue < 1/Math.pow(10, realPrecision)) {
+        do {
+            realPrecision++;
+        } while (absValue < 1/Math.pow(10, realPrecision))
+
+        realPrecision += minPrecision - 1
+    } else {
+        realPrecision = minPrecision
     }
-    if (realPrecision < minPrecision) {
-        realPrecision = minPrecision;
-    }
+
     return realPrecision;
 }

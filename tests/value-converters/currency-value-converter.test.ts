@@ -37,7 +37,7 @@ const testData = [
         value: 0.0137,
         precision: 2,
         currency: "usd",
-        expected: '$0.013'
+        expected: '$0.014'
     },
 ];
 
