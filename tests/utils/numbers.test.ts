@@ -162,6 +162,11 @@ const precisionData = [
     precision: 1,
     expected: 1,
   },
+  {
+    input: 0,
+    precision: 2,
+    expected: 2,
+  },
 ];
 
 describe.each(precisionData)('calcFloatingPointPrecision', (data) => {

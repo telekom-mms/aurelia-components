@@ -98,7 +98,7 @@ export function calcDecimalPlace(value: number, minPrecision: number) {
     let realPrecision = 1;
     const absValue = Math.abs(value);
 
-    if (absValue < 1/Math.pow(10, realPrecision)) {
+    if (absValue > 0 && absValue < 1/Math.pow(10, realPrecision)) {
         do {
             realPrecision++;
         } while (absValue < 1/Math.pow(10, realPrecision))
