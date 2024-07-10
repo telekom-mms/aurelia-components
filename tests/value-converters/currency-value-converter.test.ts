@@ -33,6 +33,12 @@ const testData = [
         currency: "usd",
         expected: '$0.0037'
     },
+    {
+        value: 0.0137,
+        precision: 2,
+        currency: "usd",
+        expected: '$0.014'
+    },
 ];
 
 describe.each(testData)(`toView`, (data) => {
