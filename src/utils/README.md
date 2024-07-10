@@ -67,20 +67,20 @@ const round = round(2)
 ### Calc floating point precision
 
 ```typescript
-import {calcFloatingPrecision} from "utils/numbers";
+import {calcDecimalPlace} from "utils/numbers";
 
 const value = 0.000123
-const precision = calcFloatingPrecision(value, 3)
+const precision = calcDecimalPlace(value, 3)
 // precision == 6
 ```
 
 Combined example
 
 ```typescript
-import {round, calcFloatingPrecision} from "utils/numbers";
+import {round, calcDecimalPlace} from "utils/numbers";
 
 function financialRound(value: number) {
-  return round(value, calcFloatingPrecision(value, 3));
+  return round(value, calcDecimalPlace(value, 3));
 }
 ```
 

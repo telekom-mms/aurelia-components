@@ -83,11 +83,12 @@ Formats a number to a given currency and a precision. If the number is smaller a
 
 **Template**
 ```html
-<span>${amount|currency:'EUR':3}</span>
+<span>${yourNumber|currency[:currency[:precision[:fixedPrecision]]]}</span>
 ```
 Examples:
 * `${0.0055|currency:"EUR":2}` -> `0,0055 €`
 * `${0.036|currency:"USD":2}` -> `$ 0,04`
+* `${0.0036|currency:"USD":2:true}` -> `$ 0,00`
 
 ## date-format-value-converter (`@deprecated`)
 
@@ -202,7 +203,7 @@ export class ViewModel {
 
 ## percent-value-converter
 ```html
-<span>${number|percent}</span>
+<span>${yourNumber|percent}</span>
 ```
 
 ## repeat-string-value-converter
@@ -234,5 +235,5 @@ Reverse an array
 
 ## number-value-converter
 ```html
-<span>${number|number:2}</span>
+<span>${yourNumber|number[:precision[:fixedPrecision]]}</span>
 ```
