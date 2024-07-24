@@ -9,9 +9,9 @@ const sortValueConverter = container.get(SortValueConverter);
 
 const sortData = [
     {
-        input: [3, undefined, 7, "string", -5, null, {}, 1],
-        slice: 6,
-        expected: [-5, {}, 1, 3, 7, "string"]
+        input: [3, undefined, 7, false, "string", -5, null, {}, true, 1],
+        slice: 8,
+        expected: [-5, {}, true, 1, 3, 7, false, "string"]
     },
 ];
 

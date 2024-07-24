@@ -21,6 +21,18 @@ export class SortValueConverter {
                 bVal = SortValueConverter.getPropertyByPath(bVal, propertyPath);
             }
 
+            if (aVal === true) {
+                aVal = 1
+            } else if (aVal === false) {
+                aVal = Number.MAX_SAFE_INTEGER
+            }
+
+            if (bVal === true) {
+                bVal = 1
+            } else if (bVal === false) {
+                bVal = Number.MAX_SAFE_INTEGER
+            }
+
             if (typeof aVal === 'number' && typeof bVal == 'number') {
                 return (aVal - bVal) * factor;
             } else if (!aVal) {
