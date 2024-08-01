@@ -1,6 +1,7 @@
 import {createFixture} from '@aurelia/testing';
 import {bootstrapTestEnvironment} from '../bootstrap-tests';
 import {SortValueConverter} from "../../src/value-converters/sort-value-converter";
+import {DI} from "aurelia";
 
 type Animal = {
     name: {
@@ -16,6 +17,9 @@ const sortData = [
     },
 ];
 
+const container = DI.createContainer()
+const sortValueConverter = container.get(SortValueConverter)
+
 describe.each(sortData)(`toView`, (data) => {
     it(`sort '${data.input}'`, () => {
         const formatted = sortValueConverter.toView(data.input);
@@ -24,7 +28,6 @@ describe.each(sortData)(`toView`, (data) => {
 });
 
 describe(SortValueConverter, () => {
-    let testContext
     beforeAll(() => {
         bootstrapTestEnvironment();
     });
