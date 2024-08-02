@@ -7,23 +7,31 @@ import {valueConverter} from "aurelia";
 
 @valueConverter("sort")
 export class SortValueConverter {
-    toView(array:any[], propertyName:string, factor:number=1) {
+    toView(array: any[], propertyName: string = null, factor: number = 1) {
         if (!(array instanceof Array)) {
             return [];
         }
+
         let propertyPath: string[];
         if (propertyName) {
             propertyPath = propertyName.split('.');
         } else {
             propertyPath = [];
         }
-        return array.slice(0).sort((a, b) => {
-            const aVal = SortValueConverter.getPropertyByPath(a, propertyPath);
-            const bVal = SortValueConverter.getPropertyByPath(b, propertyPath);
-            if (typeof aVal === 'number') {
+        return array.slice(0).sort((aVal, bVal) => {
+            if (propertyPath.length > 0) {
+                aVal = SortValueConverter.getPropertyByPath(aVal, propertyPath);
+                bVal = SortValueConverter.getPropertyByPath(bVal, propertyPath);
+            }
+
+            if (typeof aVal === 'number' && typeof bVal == 'number') {
                 return (aVal - bVal) * factor;
-            } else if (typeof aVal === 'string') {
-                return aVal.localeCompare(bVal) * factor;
+            } else if (aVal === null || aVal === undefined) {
+                return 1
+            } else if (bVal === null || bVal === undefined) {
+                return -1
+            } else {
+                return aVal.toString().localeCompare(bVal) * factor;
             }
         });
     }
