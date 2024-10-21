@@ -68,5 +68,8 @@
 		"sanitize-html": {
 			"optional": true
 		}
+	},
+	"dependencies": {
+		"ts-replace-all": "^1.0.0"
 	}
 }
