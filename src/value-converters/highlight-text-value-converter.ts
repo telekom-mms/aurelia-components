@@ -1,7 +1,6 @@
 import {HTMLSanitizer} from "aurelia-templating-resources";
 import {autoinject} from "aurelia-dependency-injection";
 import escapeStringRegexp from "escape-string-regexp";
-import 'ts-replace-all'
 
 /**
  * Highlights text by given text or precompiled regular expression.
