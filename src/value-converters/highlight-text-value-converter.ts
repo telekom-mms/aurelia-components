@@ -12,7 +12,7 @@ import escapeStringRegexp from "escape-string-regexp";
 export class HighlightTextValueConverter {
 
     constructor(
-        private readonly _htmlSanitizer:HTMLSanitizer
+        private readonly _htmlSanitizer: HTMLSanitizer
     ) {
     }
 
@@ -32,8 +32,16 @@ export class HighlightTextValueConverter {
 
         if (regExp) {
             // value is sanitized, so the RegExp has to be sanitized as well to match the results
-            // this fixes the issue with &, <, >, "
-            regExp = new RegExp(this._htmlSanitizer.sanitize(regExp.source), regExp.flags);
+            // note: through use of htmlEscape (in testerra) &, <, >, " are escaped and will not be found if regExp searches for their regular form.
+            // That is why we need to escape the search string as well to match the text
+
+            regExp = new RegExp(this._htmlSanitizer.sanitize(
+                regExp.source
+                    .replaceAll('<', '&lt')
+                    .replaceAll('>', '&gt;')
+                    .replaceAll('"', '&quot;')
+            ), regExp.flags);
+
             const match = value.match(regExp);
             if (match && match.length) {
                 value = value.replace(regExp, '<mark>$&</mark>');
