@@ -36,7 +36,7 @@ export class HighlightTextValueConverter {
             // That is why we need to escape the search string as well to match the text
 
             regExp = new RegExp(this._htmlSanitizer.sanitize(
-                regExp.source.replaceAll('&', '&amp;')
+                regExp.source
                     .replaceAll('<', '&lt')
                     .replaceAll('>', '&gt;')
                     .replaceAll('"', '&quot;')

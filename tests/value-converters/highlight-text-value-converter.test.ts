@@ -44,3 +44,18 @@ describe.each(highlightingData)(`toView with precompiled RegExp`, (data) => {
         expect(highlightedText).toMatch(data.outputString)
     });
 });
+
+let highlightingData2: { inputString2: string; inputRegExp2: RegExp; outputString2: string }[] = [
+    {inputString2: "&lt;", inputRegExp2: new RegExp("<"), outputString2: "<mark>&lt;</mark>"},
+    {inputString2: "&gt;", inputRegExp2: new RegExp(">"), outputString2: "<mark>&gt;</mark>"},
+
+    // note: this does not work because the htmlSanitizer seems to be converting '&quot;' to '"' although this behavior can not be confirmed when testing it in an application
+    // {inputString2: "&quot;", inputRegExp2: new RegExp('"'), outputString2: "<mark>&quot;</mark>"}
+];
+
+describe.each(highlightingData2)(``, (data) => {
+    it(`string '${data.inputString2}' is in its escaped form surrounded by mark tags although the regExp is unescaped`, () => {
+        const highlightedText = highlightTextValueConverter.toView(data.inputString2, data.inputRegExp2)
+        expect(highlightedText).toMatch(data.outputString2)
+    });
+});
