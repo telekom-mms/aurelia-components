@@ -20,14 +20,8 @@
       "es2021.intl",
       "dom"
     ],
-    /*
-      Required for moment()
-      import moment = require('moment');
-      @see https://momentjscom.readthedocs.io/en/latest/moment/00-use-it/09-typescript/
-    */
-    "moduleResolution": "node",
-    "outDir": "dist",
-    "baseUrl": "src"
+    "rootDir": ".",
+    "outDir": "dist"
   },
   "exclude": [
     "node_modules",

@@ -5,3 +5,5 @@ node_modules
 /jest_html_reporters.html
 /jest-html-reporters-attach/
 /coverage/
+.claude
+.junie

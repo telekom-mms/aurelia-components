@@ -1,4 +1,4 @@
-import sanitize from 'sanitize-html'
+import sanitize from "sanitize-html";
 import {ISanitizer} from "@aurelia/runtime-html"
 
 // adding index signature, but allowing explicit any because there are so many options
