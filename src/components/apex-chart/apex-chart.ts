@@ -1,5 +1,5 @@
 import {bindable, BindingMode} from "aurelia";
-import ApexCharts, {ApexOptions} from 'apexcharts';
+import ApexCharts, {ApexAxisChartSeries, ApexNonAxisChartSeries, ApexOptions} from 'apexcharts';
 
 export interface ISelection {
     series?:number;

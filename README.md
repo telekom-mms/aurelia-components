@@ -18,7 +18,7 @@ You can find the documentation within the source.
 ## Install
 
 ```bash
-npm install t-systems-aurelia-components --save
+npm install mreiche-aurelia-components --save
 ```
 
 ## Use in your Aurelia project
@@ -63,34 +63,38 @@ If you want to use the sanitize-html-html-sanitizer [value-converter](src/value-
 npm install sanitize-html --save
 ```
 
-## Publish this library to NPM
+### Develop against a local branch
 
-1. Enable 2FA in your account
-2. Login as user (not as organisation)
-    ```shell
-    npm login
-    ```
-3. Change version in `package.json`
-4. Set new version tag
-5. Run 
-    ```shell
-    npm publish
-    ```
-  
-## Developing with this library
-You can develop and bundling with this library directly by adding the library repository as dependency:
-```shell
-git clone https://github.com/telekom-mms/aurelia-components.git t-system-aurelia-components
+This library publishes its compiled output (`main`/`types` point into `dist/`), so the
+library has to be built before it can be linked — a linked source checkout alone does not
+resolve.
 
-cd your-project
-npm install ../t-systems-aurelia-components
-```
+1. Build the library:
 
-In this case you may need to install the library's dependencies first:
-```shell
-cd t-systems-aurelia-components
-npm install bootstrap@4.4.1
-```
+        pnpm install
+        pnpm build
+
+2. Link it into this project:
+
+        cd ../your-project
+        pnpm install ../mreiche-aurelia-components
+
+   This adds `"mreiche-aurelia-components": "link:../mreiche-aurelia-components"` to `dependencies` and symlinks
+   `node_modules/mreiche-aurelia-components` to the sibling checkout.
+
+3. Verify and run:
+
+        pnpm start
+        pnpm test
+
+Rebuild the library after every change. For a tight loop, keep a compiler running in the
+library checkout — webpack follows the symlink to the real files and reloads on rebuild:
+
+    cd ../mreiche-aurelia-components && npx tsc --watch
+
+To switch back to the published package:
+
+    pnpm install mreiche-aurelia-components
 
 ## Unit tests
 

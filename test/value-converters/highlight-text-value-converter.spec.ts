@@ -9,7 +9,7 @@ container.register(
     Registration.singleton(ISanitizer, SanitizeHtmlHtmlSanitizer)
 )
 
-const htmlSanitizer = container.get(ISanitizer) as SanitizeHtmlHtmlSanitizer
+const htmlSanitizer = container.get(ISanitizer)
 const highlightTextValueConverter = container.get(HighlightTextValueConverter)
 
 let highlightingData: { inputString: string; inputRegExp: RegExp; outputString: string }[] = [

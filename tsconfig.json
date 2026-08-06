@@ -7,6 +7,16 @@
     "preserveConstEnums": true,
     "skipLibCheck": true,
     "declaration": true,
+    // TypeScript 6 no longer auto-includes node_modules/@types; anything global
+    // has to be requested here. "src" needs neither entry -- both are kept so
+    // that a test-side type check can extend this config unchanged.
+    "types": [
+      "jest",
+      "node"
+    ],
+    // TypeScript 6 turns "strict" on by default. The explicit strict* flags
+    // below stay in effect; this only keeps the pre-6 baseline for the rest.
+    "strict": false,
     "removeComments": true,
     "allowSyntheticDefaultImports": true,
     "noPropertyAccessFromIndexSignature":  true,
@@ -23,6 +33,9 @@
     "rootDir": ".",
     "outDir": "dist"
   },
+  "include": [
+    "src"
+  ],
   "exclude": [
     "node_modules",
     "dist"

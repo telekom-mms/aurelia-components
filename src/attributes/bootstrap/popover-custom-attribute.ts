@@ -5,8 +5,7 @@ import {customAttribute, BindingMode, resolve} from "aurelia";
  * @author Christoph Reinsch <christoph.reinsch@t-systems.com>
  * @example See {@link import('./README.md') README.md/popover-custom-attribute}.
  */
-@customAttribute({name: 'data-popover', defaultBindingMode: BindingMode.twoWay})
-// Aurelia 1: @customAttribute('data-popover', bindingMode.twoWay, ['popover'])
+@customAttribute({name: 'data-popover'})
 export class PopoverCustomAttribute {
     private readonly _element = resolve(Element)
     private popover: Popover | undefined
