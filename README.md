@@ -26,7 +26,7 @@ npm install mreiche-aurelia-components --save
 Since this library doesn't provide any precompiled `dist/` files, you need to reference the source code `main.ts` like.
 
 ```typescript
-import {NumberValueConverter} from "../../t-systems-aurelia-components/src/value-converters/number-value-converter";
+import {NumberValueConverter} from "mreiche-aurelia-components/src/value-converters/number-value-converter";
 
 Aurelia
     // ...

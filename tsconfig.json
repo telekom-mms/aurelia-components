@@ -8,11 +8,11 @@
     "skipLibCheck": true,
     "declaration": true,
     // TypeScript 6 no longer auto-includes node_modules/@types; anything global
-    // has to be requested here. "src" needs neither entry -- both are kept so
-    // that a test-side type check can extend this config unchanged.
+    // has to be requested here. "src" itself needs no global types -- "jest" is
+    // kept so a test-side type check can extend this config. A test check also
+    // needs "node" (for `global`), which requires adding @types/node first.
     "types": [
-      "jest",
-      "node"
+      "jest"
     ],
     // TypeScript 6 turns "strict" on by default. The explicit strict* flags
     // below stay in effect; this only keeps the pre-6 baseline for the rest.
@@ -30,7 +30,7 @@
       "es2021.intl",
       "dom"
     ],
-    "rootDir": ".",
+    "rootDir": "src",
     "outDir": "dist"
   },
   "include": [
